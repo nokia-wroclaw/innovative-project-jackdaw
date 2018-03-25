@@ -1,0 +1,39 @@
+# MacOS junk files
+[Tt]humbs.db
+*.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IntelliJ configuration
+.idea/
+out/
+*.iml
+*.iws
+.pr
+
+# Generated files
+bin/
+gen/
+
+
+# Java class files
+*.class
+
+
+# Eclipse Metadata
+.metadata/
+.project
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+/target/
+/.idea/
+/KafkaProducer.iml
+/.DS_Store
+/src/.DS_Store
+KafkaProducer.iml
