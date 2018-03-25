@@ -1,4 +1,3 @@
-docker build -t kafczix-producer .
+docker build -t kafka-producer .
 
-docker run -it --name kafczix-producer-container kafczix-producer
-
+docker run -it --name kafka-producer-container kafka-producer

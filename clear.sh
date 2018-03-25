@@ -1,5 +1,3 @@
-docker rm kafczix-producer-container
+docker rm kafka-producer-container
 
-docker rmi kafczix-producer
-
-
+docker rmi kafka-producer

@@ -9,7 +9,7 @@ class DemoCallBack implements Callback {
     private String key;
     private String message;
 
-    public DemoCallBack(long startTime, String key, String message) {
+    DemoCallBack(long startTime, String key, String message) {
         this.startTime = startTime;
         this.key = key;
         this.message = message;
@@ -29,11 +29,13 @@ class DemoCallBack implements Callback {
     public void onCompletion(RecordMetadata metadata, Exception exception) {
         long elapsedTime = System.currentTimeMillis() - startTime;
         if (metadata != null) {
+            //FIXME use logger
             System.out.println("message(" + key + ", " + message
                     + ") sent to partition(" + metadata.partition() + "), "
                     + "offset(" + metadata.offset() + ") in " + elapsedTime
                     + " ms");
         } else {
+            //FIXME handle this exception
             exception.printStackTrace();
         }
     }

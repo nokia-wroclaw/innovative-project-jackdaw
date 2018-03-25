@@ -5,24 +5,30 @@
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+.localized
 
 # IntelliJ configuration
-.idea/
-out/
-*.iml
-*.iws
-.pr
+/.idea/*
+!/.idea/codeStyleSettings.xml
+!/.idea/inspectionProfiles/
+!/.idea/compiler.xml
+!/.idea/vcs.xml
+!/.idea/misc.xml
+!/.idea/KafkaProducer.iml
+!/.idea/modules.xml
+!/.idea/encodings.xml
+/out/
 
 # Generated files
 bin/
 gen/
 
-
 # Java class files
 *.class
 
-
-# Eclipse Metadata
+# Eclipse
+.classpath
+.settings/
 .metadata/
 .project
 
@@ -31,9 +37,6 @@ gen/
 *.war
 *.ear
 
-/target/
-/.idea/
-/KafkaProducer.iml
-/.DS_Store
-/src/.DS_Store
-KafkaProducer.iml
+# Maven
+log/
+target/
