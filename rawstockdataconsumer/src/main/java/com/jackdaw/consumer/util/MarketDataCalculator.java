@@ -6,11 +6,11 @@ import java.util.List;
 
 public class MarketDataCalculator {
 
-    public static double calculateMovingAverage(List<StockData> list){
+    public static double calculateSimpleMovingAverage(List<StockData> stockDataList){
         double movingAverage=0;
-        for(StockData sd : list){
+        for(StockData sd : stockDataList){
             movingAverage+=sd.getAverage();
         }
-        return movingAverage/list.size();
+        return movingAverage/stockDataList.size();
     }
 }
