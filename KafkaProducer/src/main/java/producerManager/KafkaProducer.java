@@ -89,7 +89,6 @@ public class KafkaProducer extends Thread {
     public static void main(String[] args) {
         KafkaProducer kafkaProducer = new KafkaProducer(topicName, false);
         kafkaProducer.sendToKafka();
-
     }
 }
 
