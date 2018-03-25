@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.StringJoiner;
 
-import static java.lang.Thread.sleep;
 
 public class StockdataFileWriter implements Runnable {
 
@@ -29,13 +28,14 @@ public class StockdataFileWriter implements Runnable {
     public void run() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputPath, true))) {
             while (running) {
-                //TODO change this for synchronized block
-                sleep(100);
-                StringJoiner stringJoiner = new StringJoiner(",");
-                stringJoiner.add(stockDataList.get(stockDataList.size() - 1).getDate())
-                        .add(Double.toString(MarketDataCalculator.calculateSimpleMovingAverage(stockDataList)));
-                bufferedWriter.append(stringJoiner.toString());
-                bufferedWriter.newLine();
+                synchronized (stockDataList) {
+                    stockDataList.wait();
+                    StringJoiner stringJoiner = new StringJoiner(",");
+                    stringJoiner.add(stockDataList.get(stockDataList.size() - 1).getDate())
+                            .add(Double.toString(MarketDataCalculator.calculateSimpleMovingAverage(stockDataList)));
+                    bufferedWriter.append(stringJoiner.toString());
+                    bufferedWriter.newLine();
+                }
             }
         } catch (InterruptedException | IOException e) {
             //TODO add exception handling

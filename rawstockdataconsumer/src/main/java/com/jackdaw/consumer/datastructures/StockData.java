@@ -9,7 +9,7 @@ public class StockData {
     double close;
     double average;
 
-    public StockData(String date, double low, double high, double open, double close) {
+    public StockData(String date, double open, double high, double low, double close) {
         this.date = date;
         this.low = low;
         this.high = high;
