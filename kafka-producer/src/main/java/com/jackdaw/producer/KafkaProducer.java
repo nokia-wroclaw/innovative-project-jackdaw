@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaProducer extends Thread {
+public class KafkaProducer {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaProducer.class);
 
@@ -21,8 +21,7 @@ public class KafkaProducer extends Thread {
     private final org.apache.kafka.clients.producer.KafkaProducer<String, String> producer;
     private final Boolean isAsync;
 
-    //FIXME why topic is unused?
-    public KafkaProducer(String topic, Boolean isAsync) {
+    public KafkaProducer(Boolean isAsync) {
         Properties props = new Properties();
         props.put("bootstrap.servers", HOST_NAME);
         props.put("client.id", "DemoProducer");
@@ -48,7 +47,6 @@ public class KafkaProducer extends Thread {
             producer.send(new ProducerRecord<>(TOPIC_NAME, key, value)).get();
             LOG.info("Sent message: ({}, {})", key, value);
         } catch (InterruptedException | ExecutionException e) {
-            //FIXME handle this exception
             LOG.error("", e);
         }
     }
@@ -74,20 +72,14 @@ public class KafkaProducer extends Thread {
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
-            //FIXME handle this exception
             LOG.error("", e);
         }
     }
 
     public static void main(String[] args) {
-        KafkaProducer kafkaProducer = new KafkaProducer(TOPIC_NAME, false);
+        KafkaProducer kafkaProducer = new KafkaProducer(false);
         kafkaProducer.sendToKafka();
     }
 
-    @Override
-    public void run() {
-        //FIXME override this method or don't extend thread
-        super.run();
-    }
 }
 

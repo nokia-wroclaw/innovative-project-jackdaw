@@ -37,7 +37,6 @@ class DemoCallBack implements Callback {
                     key, message, metadata.partition(), metadata.offset(), elapsedTime));
 
         } else {
-            //FIXME handle this exception
             LOG.error("", exception);
         }
     }
