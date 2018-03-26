@@ -22,7 +22,7 @@ public class StockDataConsumer {
         runConsumer(stockDataList, topic, stockdataFileWriter);
     }
 
-    static void runConsumer(List<StockData> stockDataList, String topic, StockdataFileWriter stockdataFileWriter) throws InterruptedException {
+    static void runConsumer(List<StockData> stockDataList, String topic, StockdataFileWriter stockdataFileWriter) {
         final Consumer<Long, String> consumer = RawStockDataConsumerBuilder.createConsumer(topic);
 
         final int giveUp = 100;

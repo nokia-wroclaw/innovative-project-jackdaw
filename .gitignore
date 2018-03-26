@@ -7,8 +7,8 @@
 ehthumbs.db
 
 # IntelliJ configuration
+target/
 .idea/
-out/
 *.iml
 *.iws
 .pr
@@ -27,7 +27,7 @@ gen/
 .project
 
 # Package Files
-*.jar
+#*.jar
 *.war
 *.ear
 
