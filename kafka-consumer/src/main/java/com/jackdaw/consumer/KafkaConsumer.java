@@ -9,15 +9,16 @@ import java.util.List;
 
 public class KafkaConsumer {
 
+    private static final int MAX_SIZE = 10;
+    private static final String TOPIC = "test";
+    private static final String OUTPUT_PATH = "output.txt";
+
     public static void main(String[] args) throws InterruptedException {
-        int maxSize = Integer.parseInt(args[0]);
-        String topic = args[1];
-        String outputPath = args[2];
-        final ShiftingList<StockData> stockDataList = new ShiftingList<>(maxSize);
-        DataFileWriter dataFileWriter = new DataFileWriter(stockDataList, outputPath);
+        final ShiftingList<StockData> stockDataList = new ShiftingList<>(MAX_SIZE);
+        DataFileWriter dataFileWriter = new DataFileWriter(stockDataList, OUTPUT_PATH);
         Thread thread = new Thread(dataFileWriter);
         thread.start();
-        runConsumer(stockDataList, topic, dataFileWriter);
+        runConsumer(stockDataList, TOPIC, dataFileWriter);
         thread.join();
     }
 
@@ -47,7 +48,6 @@ public class KafkaConsumer {
                         Double.parseDouble(splitMessage[4])));
                 ((ShiftingList) stockDataList).eventHappened();
             });
-
 
             consumer.commitAsync();
         }
