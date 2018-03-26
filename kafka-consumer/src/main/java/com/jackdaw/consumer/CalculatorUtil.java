@@ -4,7 +4,7 @@ import com.jackdaw.consumer.model.StockData;
 
 import java.util.List;
 
-public class CalculatorUtil {
+public final class CalculatorUtil {
 
     private CalculatorUtil() {
         throw new IllegalStateException("Utility class");

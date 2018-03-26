@@ -1,5 +1,7 @@
 package com.jackdaw.consumer.model;
 
+import java.util.Objects;
+
 public class StockData {
 
     private String date;
@@ -40,5 +42,24 @@ public class StockData {
 
     public double getClose() {
         return close;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StockData)) return false;
+        StockData stockData = (StockData) o;
+        return Double.compare(stockData.getLow(), getLow()) == 0 &&
+                Double.compare(stockData.getHigh(), getHigh()) == 0 &&
+                Double.compare(stockData.getOpen(), getOpen()) == 0 &&
+                Double.compare(stockData.getClose(), getClose()) == 0 &&
+                Double.compare(stockData.getAverage(), getAverage()) == 0 &&
+                Objects.equals(getDate(), stockData.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getDate(), getLow(), getHigh(), getOpen(), getClose(), getAverage());
     }
 }
