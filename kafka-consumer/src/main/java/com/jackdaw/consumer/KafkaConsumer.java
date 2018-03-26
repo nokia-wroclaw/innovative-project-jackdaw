@@ -9,15 +9,16 @@ import java.util.List;
 
 public class KafkaConsumer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int maxSize = Integer.parseInt(args[0]);
         String topic = args[1];
         String outputPath = args[2];
-        ShiftingList<StockData> stockDataList = new ShiftingList<>(maxSize);
+        final ShiftingList<StockData> stockDataList = new ShiftingList<>(maxSize);
         DataFileWriter dataFileWriter = new DataFileWriter(stockDataList, outputPath, true);
         Thread thread = new Thread(dataFileWriter);
         thread.start();
         runConsumer(stockDataList, topic, dataFileWriter);
+        thread.join();
     }
 
     private static void runConsumer(List<StockData> stockDataList, String topic, DataFileWriter dataFileWriter) {
@@ -26,7 +27,6 @@ public class KafkaConsumer {
         final int giveUp = 100;
         int noRecordsCount = 0;
 
-        //FIXME add break to this loop
         while (true) {
             final ConsumerRecords<Long, String> consumerRecords = consumer.poll(1000);
             if (consumerRecords.count() == 0) {
@@ -35,29 +35,25 @@ public class KafkaConsumer {
                 else continue;
             }
 
-            //FIXME blocks should be synchronized on "private final" fields
-            synchronized (stockDataList) {
-                consumerRecords.forEach(record -> {
+            consumerRecords.forEach(record -> {
                 /*
                 message-format: Date,Open,High,Low,Close,Volume,OpenInt
                  */
-                    String[] splittedMessage = record.value().split(",");
-                    stockDataList.add(new StockData(splittedMessage[0],
-                            Double.parseDouble(splittedMessage[1]),
-                            Double.parseDouble(splittedMessage[2]),
-                            Double.parseDouble(splittedMessage[3]),
-                            Double.parseDouble(splittedMessage[4])));
-                    stockDataList.notify(); //FIXME use notifyAll
-                });
-            }
+                String[] splitMessage = record.value().split(",");
+                stockDataList.add(new StockData(splitMessage[0],
+                        Double.parseDouble(splitMessage[1]),
+                        Double.parseDouble(splitMessage[2]),
+                        Double.parseDouble(splitMessage[3]),
+                        Double.parseDouble(splitMessage[4])));
+                ((ShiftingList) stockDataList).eventHappened();
+            });
+
 
             consumer.commitAsync();
         }
         consumer.close();
         dataFileWriter.setRunning(false);
-        //TODO remove after making sure everything works
-        //FIXME use logger or delete
-        System.out.println("DONE");
+        ((ShiftingList) stockDataList).eventHappened();
     }
 }
 

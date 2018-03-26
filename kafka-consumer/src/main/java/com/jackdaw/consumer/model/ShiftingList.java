@@ -40,4 +40,10 @@ public class ShiftingList<E> extends ArrayList<E> {
         result = 31 * result + maxSize;
         return result;
     }
+
+    public void eventHappened(){
+        synchronized (this){
+            this.notifyAll();
+        }
+    }
 }
