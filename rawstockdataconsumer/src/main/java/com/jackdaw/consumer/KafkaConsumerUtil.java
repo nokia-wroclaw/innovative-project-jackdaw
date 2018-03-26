@@ -8,11 +8,14 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import java.util.Collections;
 import java.util.Properties;
 
-
-public class RawStockDataConsumerBuilder {
+public class KafkaConsumerUtil {
 
     //TODO check why it won't let me use kafka:9092
-    private final static String BOOTSTRAP_SERVERS = "192.168.99.100:9092";
+    private static final String BOOTSTRAP_SERVERS = "192.168.99.100:9092";
+
+    private KafkaConsumerUtil() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static Consumer<Long, String> createConsumer(String topic) {
 
@@ -20,7 +23,7 @@ public class RawStockDataConsumerBuilder {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "RawStockDataConsumerBuilder");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "KafkaConsumerUtil");
 
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
@@ -35,6 +38,5 @@ public class RawStockDataConsumerBuilder {
         consumer.subscribe(Collections.singletonList(topic));
 
         return consumer;
-
     }
 }

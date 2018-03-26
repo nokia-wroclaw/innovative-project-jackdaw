@@ -1,13 +1,13 @@
-package com.jackdaw.consumer.datastructures;
+package com.jackdaw.consumer.model;
 
 public class StockData {
 
-    String date;
-    double low;
-    double high;
-    double open;
-    double close;
-    double average;
+    private String date;
+    private double low;
+    private double high;
+    private double open;
+    private double close;
+    private double average;
 
     public StockData(String date, double open, double high, double low, double close) {
         this.date = date;
