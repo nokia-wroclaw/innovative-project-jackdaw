@@ -14,7 +14,7 @@ public class KafkaConsumer {
         String topic = args[1];
         String outputPath = args[2];
         final ShiftingList<StockData> stockDataList = new ShiftingList<>(maxSize);
-        DataFileWriter dataFileWriter = new DataFileWriter(stockDataList, outputPath, true);
+        DataFileWriter dataFileWriter = new DataFileWriter(stockDataList, outputPath);
         Thread thread = new Thread(dataFileWriter);
         thread.start();
         runConsumer(stockDataList, topic, dataFileWriter);

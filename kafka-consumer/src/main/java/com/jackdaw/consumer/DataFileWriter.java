@@ -18,10 +18,10 @@ public class DataFileWriter implements Runnable {
     private final String outputPath;
     private volatile boolean running;
 
-    DataFileWriter(List<StockData> stockDataList, String outputPath, boolean running) {
+    DataFileWriter(List<StockData> stockDataList, String outputPath) {
         this.stockDataList = stockDataList;
-        this.running = running;
         this.outputPath = outputPath;
+        this.running = true;
     }
 
     @Override
