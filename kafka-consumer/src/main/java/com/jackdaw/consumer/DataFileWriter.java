@@ -34,6 +34,7 @@ public class DataFileWriter implements Runnable {
                         StringJoiner stringJoiner = new StringJoiner(",");
                         stringJoiner.add(stockDataList.get(stockDataList.size() - 1).getDate())
                                 .add(Double.toString(CalculatorUtil.calculateSimpleMovingAverage(stockDataList)));
+                        LOG.info("{}", stringJoiner.toString());
                         bufferedWriter.append(stringJoiner.toString());
                         bufferedWriter.newLine();
                     }

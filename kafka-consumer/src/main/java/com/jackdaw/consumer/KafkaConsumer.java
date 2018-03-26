@@ -23,18 +23,21 @@ public class KafkaConsumer {
     }
 
     private static void runConsumer(List<StockData> stockDataList, String topic, DataFileWriter dataFileWriter) {
-        final Consumer<Long, String> consumer = KafkaConsumerUtil.createConsumer(topic);
+        final Consumer<String, String> consumer = KafkaConsumerUtil.createConsumer(topic);
 
         final int giveUp = 100;
         int noRecordsCount = 0;
+        int readRecords = 0;
 
-        while (true) {
-            final ConsumerRecords<Long, String> consumerRecords = consumer.poll(1000);
+        while (readRecords<252) {
+            final ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
             if (consumerRecords.count() == 0) {
                 noRecordsCount++;
                 if (noRecordsCount > giveUp) break;
                 else continue;
             }
+
+            ++readRecords;
 
             consumerRecords.forEach(record -> {
                 /*
@@ -56,4 +59,3 @@ public class KafkaConsumer {
         ((ShiftingList) stockDataList).eventHappened();
     }
 }
-

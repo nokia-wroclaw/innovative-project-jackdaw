@@ -1,11 +1,9 @@
 FROM jamesdbloom/docker-java8-maven
 
-WORKDIR workdir/
+WORKDIR /workdir/
 
 COPY . .
-#COPY ./pom.xml /tmp/pom.xml
 
-#RUN mvn -B -f /tmp/pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
 RUN apt-get update
 RUN apt-get install -y netcat
 

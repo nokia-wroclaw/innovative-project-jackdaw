@@ -5,35 +5,37 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-    networks:
-      - kafka-net   
+    # networks:
+    #   - kafka-net   
   kafka:
     image: wurstmeister/kafka
     ports:
       - "9092:9092"
-    networks:
-      - kafka-net
+    depends_on:
+      - zookeeper
+    # networks:
+    #   - kafka-net
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ADVERTISED_LISTENERS: 192.168.99.100
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "producer:1:1"
+      KAFKA_CREATE_TOPICS: "test:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   kafka-producer:
     build: ./kafka-producer/.
-    networks:
-      - kafka-net
-    links:
-      - kafka
+    # networks:
+    #   - kafka-net
+    # links:
+    #   - kafka
   kafka-consumer:
     build: ./kafka-consumer/.
-    networks:
-      - kafka-net
-    links:
-      - kafka
     volumes:
-      - ./kafka-consumer/output.txt
+        - ./kafka-consumer/:/workdir/
+  #   networks:
+  #     - kafka-net
+  #   links:
+  #     - kafka
 
-networks: 
-  kafka-net: 
-    driver: bridge
+# networks: 
+#   kafka-net: 
+#     driver: bridge
