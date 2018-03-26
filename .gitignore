@@ -14,7 +14,7 @@ ehthumbs.db
 !/.idea/compiler.xml
 !/.idea/vcs.xml
 !/.idea/misc.xml
-!/.idea/KafkaProducer.iml
+!/.idea/kafka-consumer.iml
 !/.idea/modules.xml
 !/.idea/encodings.xml
 /out/

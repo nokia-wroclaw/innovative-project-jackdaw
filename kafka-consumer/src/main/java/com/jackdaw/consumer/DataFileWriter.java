@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.StringJoiner;
 
-
 public class DataFileWriter implements Runnable {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataFileWriter.class);
