@@ -1,7 +1,6 @@
-package com.jackdaw.consumer.thread;
+package com.jackdaw.consumer;
 
-import com.jackdaw.consumer.datastructures.StockData;
-import com.jackdaw.consumer.util.MarketDataCalculator;
+import com.jackdaw.consumer.model.StockData;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,20 +8,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.StringJoiner;
 
+public class DataFileWriter implements Runnable {
 
-public class StockdataFileWriter implements Runnable {
-
-    private List<StockData> stockDataList;
+    private final List<StockData> stockDataList;
     private String outputPath;
     private volatile boolean running;
 
-
-    public StockdataFileWriter(List<StockData> stockDataList, String outputPath, boolean running) {
+    DataFileWriter(List<StockData> stockDataList, String outputPath, boolean running) {
         this.stockDataList = stockDataList;
         this.running = running;
         this.outputPath = outputPath;
     }
-
 
     @Override
     public void run() {
@@ -32,7 +28,7 @@ public class StockdataFileWriter implements Runnable {
                     stockDataList.wait();
                     StringJoiner stringJoiner = new StringJoiner(",");
                     stringJoiner.add(stockDataList.get(stockDataList.size() - 1).getDate())
-                            .add(Double.toString(MarketDataCalculator.calculateSimpleMovingAverage(stockDataList)));
+                            .add(Double.toString(CalculatorUtil.calculateSimpleMovingAverage(stockDataList)));
                     bufferedWriter.append(stringJoiner.toString());
                     bufferedWriter.newLine();
                 }
@@ -41,7 +37,6 @@ public class StockdataFileWriter implements Runnable {
             //TODO add exception handling
         }
     }
-
 
     public void setRunning(boolean running) {
         this.running = running;
