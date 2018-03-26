@@ -1,9 +1,13 @@
-package producerManager;
+package com.jackdaw.producer;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class DemoCallBack implements Callback {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Callback.class);
 
     private long startTime;
     private String key;
@@ -29,14 +33,12 @@ class DemoCallBack implements Callback {
     public void onCompletion(RecordMetadata metadata, Exception exception) {
         long elapsedTime = System.currentTimeMillis() - startTime;
         if (metadata != null) {
-            //FIXME use logger
-            System.out.println("message(" + key + ", " + message
-                    + ") sent to partition(" + metadata.partition() + "), "
-                    + "offset(" + metadata.offset() + ") in " + elapsedTime
-                    + " ms");
+            LOG.info(String.format("message(%s, %s) sent to partition(%d), offset(%d) in %d ms%n",
+                    key, message, metadata.partition(), metadata.offset(), elapsedTime));
+
         } else {
             //FIXME handle this exception
-            exception.printStackTrace();
+            LOG.error("", exception);
         }
     }
 }

@@ -1,6 +1,8 @@
-package producerManager;
+package com.jackdaw.producer;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -10,8 +12,10 @@ import java.util.concurrent.ExecutionException;
 
 public class KafkaProducer extends Thread {
 
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaProducer.class);
+
     private static final String TOPIC_NAME = "test";
-    private static final String FILE_NAME = "resources/a.us.txt";
+    private static final String FILE_NAME = "src/main/resources/a.us.txt";
     private static final String HOST_NAME = "192.168.99.100:9092";
 
     private final org.apache.kafka.clients.producer.KafkaProducer<String, String> producer;
@@ -42,11 +46,10 @@ public class KafkaProducer extends Thread {
     private void sendMessageSynchronously(String key, String value) {
         try {
             producer.send(new ProducerRecord<>(TOPIC_NAME, key, value)).get();
-            //FIXME use logger
-            System.out.println("Sent message: (" + key + ", " + value + ")");
+            LOG.info("Sent message: ({}, {})", key, value);
         } catch (InterruptedException | ExecutionException e) {
             //FIXME handle this exception
-            e.printStackTrace();
+            LOG.error("", e);
         }
     }
 
@@ -72,7 +75,7 @@ public class KafkaProducer extends Thread {
             }
         } catch (Exception e) {
             //FIXME handle this exception
-            e.printStackTrace();
+            LOG.error("", e);
         }
     }
 

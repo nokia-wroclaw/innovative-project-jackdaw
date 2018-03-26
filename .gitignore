@@ -8,15 +8,15 @@ ehthumbs.db
 .localized
 
 # IntelliJ configuration
-/.idea/*
-!/.idea/codeStyleSettings.xml
-!/.idea/inspectionProfiles/
-!/.idea/compiler.xml
-!/.idea/vcs.xml
-!/.idea/misc.xml
-!/.idea/KafkaProducer.iml
-!/.idea/modules.xml
-!/.idea/encodings.xml
+.idea/*
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles/
+!.idea/compiler.xml
+!.idea/vcs.xml
+!.idea/misc.xml
+!.idea/kafka-producer.iml
+!.idea/modules.xml
+!.idea/encodings.xml
 /out/
 
 # Generated files
