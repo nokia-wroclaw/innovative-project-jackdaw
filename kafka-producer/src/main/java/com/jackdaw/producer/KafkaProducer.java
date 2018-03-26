@@ -16,7 +16,7 @@ public class KafkaProducer {
 
     private static final String TOPIC_NAME = "test";
     private static final String FILE_NAME = "src/main/resources/a.us.txt";
-    private static final String HOST_NAME = "192.168.99.100:9092";
+    private static final String HOST_NAME = "kafka:9092";
 
     private final org.apache.kafka.clients.producer.KafkaProducer<String, String> producer;
     private final Boolean isAsync;
