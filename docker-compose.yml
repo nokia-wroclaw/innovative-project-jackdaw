@@ -21,3 +21,11 @@ services:
       build: ./kafka-consumer/
       volumes:
         - ./kafka-consumer/:/workdir/
+  schema-registry:
+      image: confluent/schema-registry
+      ports:
+       - 8081:8081
+      links:
+       - zookeeper
+       - kafka
+
