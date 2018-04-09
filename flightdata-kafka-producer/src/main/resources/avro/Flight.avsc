@@ -1,0 +1,111 @@
+{
+    "type": "record",
+    "namespace": "com.jackdaw.avro.flights",
+    "name": "Flight",
+    "doc": "Avro Schema for Flight",
+    "fields": [{
+            "name": "flight_Symbol",
+            "type": "string",
+            "doc": "Symbol of flight"
+        },
+        {
+            "name": "airline",
+            "type": "string",
+            "doc": "Name of airline"
+        },
+        {
+            "name": "flightType",
+			"type": {
+			"name": "FlightType",
+            "type": "enum",
+            "doc": "Type of flight",
+            "symbols" : ["International", "National", "Regional"]
+			}
+        },
+        {
+            "name": "departureEstimate",
+            "type": "string",
+            "doc": "Estimated time of departure"
+        },
+        {
+            "name": "departureReal",
+            "type": "string",
+            "doc": "Real time of departure"
+        },
+        {
+            "name": "arrivalEstimate",
+            "type": "string",
+            "doc": "Estimated time of arrival"
+        },
+        {
+            "name": "arrivalReal",
+            "type": "string",
+            "doc": "Real time of arrival"
+        },
+        {
+		    "name": "flightSituation",
+			"type": {
+            "name": "FlightSituation",
+            "type": "enum",
+            "doc": "Indicator of whether this flight was cancelled, or completed",
+            "symbols" : ["Realizado", "Cancelado"]
+			}
+        },
+         {
+            "name": "codeJustification",
+            "type": "string",
+            "doc": "Justification code"
+        },
+         {
+            "name": "originArport",
+            "type": "string",
+            "doc": "Airport of departure"
+        },
+         {
+            "name": "originState",
+            "type": "string",
+            "doc": "State of departure"
+        },
+        {
+            "name": "destinationAirport",
+            "type": "string",
+            "doc": "Airport of arrival"
+        },
+        {
+            "name": "destinationCity",
+            "type": "string",
+            "doc": "City of departure"
+        },
+        {
+            "name": "destinationState",
+            "type": "string",
+            "doc": "State of departure"
+        },
+        {
+            "name": "destinationCountry",
+            "type": "string",
+            "doc": "Country of departure"
+        },
+        {
+            "name": "destinationLongitude",
+            "type": "float",
+            "doc": "Longitude coordinate of destination point"
+        },
+        {
+            "name": "destinationLatitude",
+            "type": "float",
+            "doc": "Latitude coordinate of destination point"
+        },
+        {
+            "name": "originLongitude",
+            "type": "float",
+            "doc": "Longitude coordinate of origin point"
+        },
+        {
+            "name": "originAtitude",
+            "type": "float",
+            "doc": "Latitude coordinate of origin point"
+        }
+
+    ]
+}
