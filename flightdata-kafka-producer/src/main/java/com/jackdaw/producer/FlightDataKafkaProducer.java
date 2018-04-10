@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class FlightDataKafkaProducer implements Runnable {
+public class FlightDataKafkaProducer  {
 
     private static final Logger LOG = LoggerFactory.getLogger(FlightDataKafkaProducer.class);
 
@@ -29,11 +29,10 @@ public class FlightDataKafkaProducer implements Runnable {
         this.topicName=topicName;
     }
 
-    @Override
-    public void run() {
+    public void runProducer() {
         long lineCount = 0;
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/workdir/"+fileName)))) {
 
             br.readLine();
 
@@ -44,8 +43,10 @@ public class FlightDataKafkaProducer implements Runnable {
                 Thread.sleep(1000);
             }
 
-        } catch (InterruptedException | IOException e) {
+        } catch (IOException e) {
             LOG.error("Failed to open file {}", fileName, e);
+        } catch (InterruptedException e1){
+            LOG.error("",e1);
         }
     }
 
