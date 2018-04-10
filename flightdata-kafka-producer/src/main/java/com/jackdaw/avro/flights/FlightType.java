@@ -8,7 +8,7 @@ package com.jackdaw.avro.flights;
 /** Type of flight */
 @org.apache.avro.specific.AvroGenerated
 public enum FlightType {
-  International, National, Regional  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"FlightType\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Type of flight\",\"symbols\":[\"International\",\"National\",\"Regional\"]}");
+  Internacional, Nacional, Regional  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"FlightType\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Type of flight\",\"symbols\":[\"Internacional\",\"Nacional\",\"Regional\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 }
