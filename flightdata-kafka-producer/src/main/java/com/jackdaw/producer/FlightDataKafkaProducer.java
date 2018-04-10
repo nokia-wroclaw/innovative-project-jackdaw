@@ -20,11 +20,11 @@ public class FlightDataKafkaProducer implements Runnable {
     private final KafkaProducer<Long, Flight> producer;
     private final String fileName;
 
-    FlightDataKafkaProducer(String fileName, String topicName) throws IOException {
+    public FlightDataKafkaProducer(String fileName, String topicName) throws IOException {
         InputStream input = new FileInputStream("/workdir/flightdata-kafka-producer.properties");
         Properties props = new Properties();
         props.load(input);
-        producer = new KafkaProducer<Long, Flight>(props);
+        producer = new KafkaProducer<>(props);
         this.fileName = fileName;
         this.topicName=topicName;
     }
