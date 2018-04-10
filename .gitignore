@@ -14,12 +14,11 @@ ehthumbs.db
 !.idea/compiler.xml
 !.idea/vcs.xml
 !.idea/misc.xml
-
-!.idea/kafka-consumer.iml
 !.idea/kafka-producer.iml
+!.idea/kafka-consumer.iml
 !.idea/modules.xml
 !.idea/encodings.xml
-/out/
+*/out/
 
 # Generated files
 bin/
@@ -42,3 +41,7 @@ gen/
 # Maven
 log/
 target/
+
+*/BrFlights2.csv
+kafka-consumer/
+kafka-producer/
