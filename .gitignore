@@ -1,0 +1,47 @@
+# MacOS junk files
+[Tt]humbs.db
+*.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+.localized
+
+# IntelliJ configuration
+.idea/*
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles/
+!.idea/compiler.xml
+!.idea/vcs.xml
+!.idea/misc.xml
+!.idea/kafka-producer.iml
+!.idea/kafka-consumer.iml
+!.idea/modules.xml
+!.idea/encodings.xml
+*/out/
+
+# Generated files
+bin/
+gen/
+
+# Java class files
+*.class
+
+# Eclipse
+.classpath
+.settings/
+.metadata/
+.project
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Maven
+log/
+target/
+
+*/BrFlights2.csv
+kafka-consumer/
+kafka-producer/
