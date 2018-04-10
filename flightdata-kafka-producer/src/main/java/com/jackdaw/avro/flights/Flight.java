@@ -15,7 +15,7 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class Flight extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 718310498778752425L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flight_Symbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"International\",\"National\",\"Regional\"]}},{\"name\":\"departureEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of departure\"},{\"name\":\"departureReal\",\"type\":\"string\",\"doc\":\"Real time of departure\"},{\"name\":\"arrivalEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of arrival\"},{\"name\":\"arrivalReal\",\"type\":\"string\",\"doc\":\"Real time of arrival\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originArport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationLongitude\",\"type\":\"float\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"float\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"float\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAtitude\",\"type\":\"float\",\"doc\":\"Latitude coordinate of origin point\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flight_Symbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"International\",\"National\",\"Regional\"]}},{\"name\":\"departureEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of departure\"},{\"name\":\"departureReal\",\"type\":\"string\",\"doc\":\"Real time of departure\"},{\"name\":\"arrivalEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of arrival\"},{\"name\":\"arrivalReal\",\"type\":\"string\",\"doc\":\"Real time of arrival\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originArport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAltitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of origin point\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -81,13 +81,13 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
   /** Country of departure */
   @Deprecated public java.lang.CharSequence destinationCountry;
   /** Longitude coordinate of destination point */
-  @Deprecated public float destinationLongitude;
+  @Deprecated public double destinationLongitude;
   /** Latitude coordinate of destination point */
-  @Deprecated public float destinationLatitude;
+  @Deprecated public double destinationLatitude;
   /** Longitude coordinate of origin point */
-  @Deprecated public float originLongitude;
+  @Deprecated public double originLongitude;
   /** Latitude coordinate of origin point */
-  @Deprecated public float originAtitude;
+  @Deprecated public double originAltitude;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -116,9 +116,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param destinationLongitude Longitude coordinate of destination point
    * @param destinationLatitude Latitude coordinate of destination point
    * @param originLongitude Longitude coordinate of origin point
-   * @param originAtitude Latitude coordinate of origin point
+   * @param originAltitude Latitude coordinate of origin point
    */
-  public Flight(java.lang.CharSequence flight_Symbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, java.lang.CharSequence departureEstimate, java.lang.CharSequence departureReal, java.lang.CharSequence arrivalEstimate, java.lang.CharSequence arrivalReal, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originArport, java.lang.CharSequence originState, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Float destinationLongitude, java.lang.Float destinationLatitude, java.lang.Float originLongitude, java.lang.Float originAtitude) {
+  public Flight(java.lang.CharSequence flight_Symbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, java.lang.CharSequence departureEstimate, java.lang.CharSequence departureReal, java.lang.CharSequence arrivalEstimate, java.lang.CharSequence arrivalReal, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originArport, java.lang.CharSequence originState, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Double destinationLongitude, java.lang.Double destinationLatitude, java.lang.Double originLongitude, java.lang.Double originAltitude) {
     this.flight_Symbol = flight_Symbol;
     this.airline = airline;
     this.flightType = flightType;
@@ -137,7 +137,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     this.destinationLongitude = destinationLongitude;
     this.destinationLatitude = destinationLatitude;
     this.originLongitude = originLongitude;
-    this.originAtitude = originAtitude;
+    this.originAltitude = originAltitude;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -162,7 +162,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 15: return destinationLongitude;
     case 16: return destinationLatitude;
     case 17: return originLongitude;
-    case 18: return originAtitude;
+    case 18: return originAltitude;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -186,10 +186,10 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 12: destinationCity = (java.lang.CharSequence)value$; break;
     case 13: destinationState = (java.lang.CharSequence)value$; break;
     case 14: destinationCountry = (java.lang.CharSequence)value$; break;
-    case 15: destinationLongitude = (java.lang.Float)value$; break;
-    case 16: destinationLatitude = (java.lang.Float)value$; break;
-    case 17: originLongitude = (java.lang.Float)value$; break;
-    case 18: originAtitude = (java.lang.Float)value$; break;
+    case 15: destinationLongitude = (java.lang.Double)value$; break;
+    case 16: destinationLatitude = (java.lang.Double)value$; break;
+    case 17: originLongitude = (java.lang.Double)value$; break;
+    case 18: originAltitude = (java.lang.Double)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -451,7 +451,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Gets the value of the 'destinationLongitude' field.
    * @return Longitude coordinate of destination point
    */
-  public java.lang.Float getDestinationLongitude() {
+  public java.lang.Double getDestinationLongitude() {
     return destinationLongitude;
   }
 
@@ -460,7 +460,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Longitude coordinate of destination point
    * @param value the value to set.
    */
-  public void setDestinationLongitude(java.lang.Float value) {
+  public void setDestinationLongitude(java.lang.Double value) {
     this.destinationLongitude = value;
   }
 
@@ -468,7 +468,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Gets the value of the 'destinationLatitude' field.
    * @return Latitude coordinate of destination point
    */
-  public java.lang.Float getDestinationLatitude() {
+  public java.lang.Double getDestinationLatitude() {
     return destinationLatitude;
   }
 
@@ -477,7 +477,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Latitude coordinate of destination point
    * @param value the value to set.
    */
-  public void setDestinationLatitude(java.lang.Float value) {
+  public void setDestinationLatitude(java.lang.Double value) {
     this.destinationLatitude = value;
   }
 
@@ -485,7 +485,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Gets the value of the 'originLongitude' field.
    * @return Longitude coordinate of origin point
    */
-  public java.lang.Float getOriginLongitude() {
+  public java.lang.Double getOriginLongitude() {
     return originLongitude;
   }
 
@@ -494,25 +494,25 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * Longitude coordinate of origin point
    * @param value the value to set.
    */
-  public void setOriginLongitude(java.lang.Float value) {
+  public void setOriginLongitude(java.lang.Double value) {
     this.originLongitude = value;
   }
 
   /**
-   * Gets the value of the 'originAtitude' field.
+   * Gets the value of the 'originAltitude' field.
    * @return Latitude coordinate of origin point
    */
-  public java.lang.Float getOriginAtitude() {
-    return originAtitude;
+  public java.lang.Double getOriginAtitude() {
+    return originAltitude;
   }
 
   /**
-   * Sets the value of the 'originAtitude' field.
+   * Sets the value of the 'originAltitude' field.
    * Latitude coordinate of origin point
    * @param value the value to set.
    */
-  public void setOriginAtitude(java.lang.Float value) {
-    this.originAtitude = value;
+  public void setOriginAtitude(java.lang.Double value) {
+    this.originAltitude = value;
   }
 
   /**
@@ -576,13 +576,13 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     /** Country of departure */
     private java.lang.CharSequence destinationCountry;
     /** Longitude coordinate of destination point */
-    private float destinationLongitude;
+    private double destinationLongitude;
     /** Latitude coordinate of destination point */
-    private float destinationLatitude;
+    private double destinationLatitude;
     /** Longitude coordinate of origin point */
-    private float originLongitude;
+    private double originLongitude;
     /** Latitude coordinate of origin point */
-    private float originAtitude;
+    private double originAltitude;
 
     /** Creates a new Builder */
     private Builder() {
@@ -667,8 +667,8 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.originLongitude = data().deepCopy(fields()[17].schema(), other.originLongitude);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.originAtitude)) {
-        this.originAtitude = data().deepCopy(fields()[18].schema(), other.originAtitude);
+      if (isValidValue(fields()[18], other.originAltitude)) {
+        this.originAltitude = data().deepCopy(fields()[18].schema(), other.originAltitude);
         fieldSetFlags()[18] = true;
       }
     }
@@ -751,8 +751,8 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.originLongitude = data().deepCopy(fields()[17].schema(), other.originLongitude);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.originAtitude)) {
-        this.originAtitude = data().deepCopy(fields()[18].schema(), other.originAtitude);
+      if (isValidValue(fields()[18], other.originAltitude)) {
+        this.originAltitude = data().deepCopy(fields()[18].schema(), other.originAltitude);
         fieldSetFlags()[18] = true;
       }
     }
@@ -1399,7 +1399,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * Longitude coordinate of destination point
       * @return The value.
       */
-    public java.lang.Float getDestinationLongitude() {
+    public java.lang.Double getDestinationLongitude() {
       return destinationLongitude;
     }
 
@@ -1409,7 +1409,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'destinationLongitude'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setDestinationLongitude(float value) {
+    public com.jackdaw.avro.flights.Flight.Builder setDestinationLongitude(double value) {
       validate(fields()[15], value);
       this.destinationLongitude = value;
       fieldSetFlags()[15] = true;
@@ -1441,7 +1441,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * Latitude coordinate of destination point
       * @return The value.
       */
-    public java.lang.Float getDestinationLatitude() {
+    public java.lang.Double getDestinationLatitude() {
       return destinationLatitude;
     }
 
@@ -1451,7 +1451,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'destinationLatitude'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setDestinationLatitude(float value) {
+    public com.jackdaw.avro.flights.Flight.Builder setDestinationLatitude(double value) {
       validate(fields()[16], value);
       this.destinationLatitude = value;
       fieldSetFlags()[16] = true;
@@ -1483,7 +1483,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * Longitude coordinate of origin point
       * @return The value.
       */
-    public java.lang.Float getOriginLongitude() {
+    public java.lang.Double getOriginLongitude() {
       return originLongitude;
     }
 
@@ -1493,7 +1493,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'originLongitude'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setOriginLongitude(float value) {
+    public com.jackdaw.avro.flights.Flight.Builder setOriginLongitude(double value) {
       validate(fields()[17], value);
       this.originLongitude = value;
       fieldSetFlags()[17] = true;
@@ -1521,31 +1521,31 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     }
 
     /**
-      * Gets the value of the 'originAtitude' field.
+      * Gets the value of the 'originAltitude' field.
       * Latitude coordinate of origin point
       * @return The value.
       */
-    public java.lang.Float getOriginAtitude() {
-      return originAtitude;
+    public java.lang.Double getOriginAtitude() {
+      return originAltitude;
     }
 
     /**
-      * Sets the value of the 'originAtitude' field.
+      * Sets the value of the 'originAltitude' field.
       * Latitude coordinate of origin point
-      * @param value The value of 'originAtitude'.
+      * @param value The value of 'originAltitude'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setOriginAtitude(float value) {
+    public com.jackdaw.avro.flights.Flight.Builder setOriginAtitude(double value) {
       validate(fields()[18], value);
-      this.originAtitude = value;
+      this.originAltitude = value;
       fieldSetFlags()[18] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'originAtitude' field has been set.
+      * Checks whether the 'originAltitude' field has been set.
       * Latitude coordinate of origin point
-      * @return True if the 'originAtitude' field has been set, false otherwise.
+      * @return True if the 'originAltitude' field has been set, false otherwise.
       */
     public boolean hasOriginAtitude() {
       return fieldSetFlags()[18];
@@ -1553,7 +1553,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
 
 
     /**
-      * Clears the value of the 'originAtitude' field.
+      * Clears the value of the 'originAltitude' field.
       * Latitude coordinate of origin point
       * @return This builder.
       */
@@ -1582,10 +1582,10 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         record.destinationCity = fieldSetFlags()[12] ? this.destinationCity : (java.lang.CharSequence) defaultValue(fields()[12]);
         record.destinationState = fieldSetFlags()[13] ? this.destinationState : (java.lang.CharSequence) defaultValue(fields()[13]);
         record.destinationCountry = fieldSetFlags()[14] ? this.destinationCountry : (java.lang.CharSequence) defaultValue(fields()[14]);
-        record.destinationLongitude = fieldSetFlags()[15] ? this.destinationLongitude : (java.lang.Float) defaultValue(fields()[15]);
-        record.destinationLatitude = fieldSetFlags()[16] ? this.destinationLatitude : (java.lang.Float) defaultValue(fields()[16]);
-        record.originLongitude = fieldSetFlags()[17] ? this.originLongitude : (java.lang.Float) defaultValue(fields()[17]);
-        record.originAtitude = fieldSetFlags()[18] ? this.originAtitude : (java.lang.Float) defaultValue(fields()[18]);
+        record.destinationLongitude = fieldSetFlags()[15] ? this.destinationLongitude : (java.lang.Double) defaultValue(fields()[15]);
+        record.destinationLatitude = fieldSetFlags()[16] ? this.destinationLatitude : (java.lang.Double) defaultValue(fields()[16]);
+        record.originLongitude = fieldSetFlags()[17] ? this.originLongitude : (java.lang.Double) defaultValue(fields()[17]);
+        record.originAltitude = fieldSetFlags()[18] ? this.originAltitude : (java.lang.Double) defaultValue(fields()[18]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

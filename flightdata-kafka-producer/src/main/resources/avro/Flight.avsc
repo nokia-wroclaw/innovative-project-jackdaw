@@ -88,22 +88,22 @@
         },
         {
             "name": "destinationLongitude",
-            "type": "float",
+            "type": "double",
             "doc": "Longitude coordinate of destination point"
         },
         {
             "name": "destinationLatitude",
-            "type": "float",
+            "type": "double",
             "doc": "Latitude coordinate of destination point"
         },
         {
             "name": "originLongitude",
-            "type": "float",
+            "type": "double",
             "doc": "Longitude coordinate of origin point"
         },
         {
-            "name": "originAtitude",
-            "type": "float",
+            "name": "originAltitude",
+            "type": "double",
             "doc": "Latitude coordinate of origin point"
         }
 
