@@ -60,8 +60,8 @@ public class FlightDataKafkaProducer  {
     }
 
     private Flight createFlight(String[] splitMessage) {
-        if (splitMessage.length != 18) {
-            throw new IllegalArgumentException("Array size different than 18");
+        if (splitMessage.length != 21) {
+            throw new IllegalArgumentException("Array size different than 21, data is corrupted");
         } else {
             Flight record = new Flight();
             int index = 0;
@@ -70,7 +70,7 @@ public class FlightDataKafkaProducer  {
                     record.put(index, FlightType.valueOf(data));
                 } else if (index == 7) {
                     record.put(index, FlightSituation.valueOf(data));
-                } else if (index >= 15) {
+                } else if (index >= 17) {
                     record.put(index, Double.parseDouble(data));
                 } else {
                     record.put(index, data);
