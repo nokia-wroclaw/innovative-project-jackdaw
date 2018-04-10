@@ -20,8 +20,8 @@ public class Runner {
         final OkHttpClient client = new OkHttpClient();
         final Schema schema = Flight.getClassSchema();
 
-        topicProperties.load(new FileInputStream("/workdir/topic.properties"));
-        schemaProps.load(new FileInputStream("/workdir/flightdata-kafka-producer.properties"));
+        topicProperties.load(new FileInputStream("/volume/topic.properties"));
+        schemaProps.load(new FileInputStream("/volume/flightdata-kafka-producer.properties"));
 
         Request request = new Request.Builder()
                 .post(RequestBody.create(SCHEMA_CONTENT, schema.toString()))
