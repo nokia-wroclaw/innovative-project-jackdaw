@@ -8,7 +8,15 @@
     <artifactId>flightdata-kafka-producer</artifactId>
     <version>1.0</version>
 
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
     <build>
+        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.avro</groupId>
@@ -37,6 +45,9 @@
             </plugin>
         </plugins>
     </build>
+
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -53,6 +64,23 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version> <!-- or use LATEST -->
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version> <!-- or use LATEST -->
+        </dependency>
+
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>3.2.1</version>
         </dependency>
 
     </dependencies>
