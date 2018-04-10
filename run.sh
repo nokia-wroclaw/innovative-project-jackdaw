@@ -1,1 +1,2 @@
-docker-compose up -d --build
+docker-compose build --force-rm
+docker-compose up -d  

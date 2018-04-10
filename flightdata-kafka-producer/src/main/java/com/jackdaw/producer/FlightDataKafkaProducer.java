@@ -21,7 +21,7 @@ public class FlightDataKafkaProducer  {
     private final String fileName;
 
     public FlightDataKafkaProducer(String fileName, String topicName) throws IOException {
-        InputStream input = new FileInputStream("/workdir/flightdata-kafka-producer.properties");
+        InputStream input = new FileInputStream("/volume/flightdata-kafka-producer.properties");
         Properties props = new Properties();
         props.load(input);
         producer = new KafkaProducer<>(props);
@@ -32,7 +32,7 @@ public class FlightDataKafkaProducer  {
     public void runProducer() {
         long lineCount = 0;
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/workdir/"+fileName)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/volume/"+fileName)))) {
 
             br.readLine();
 
