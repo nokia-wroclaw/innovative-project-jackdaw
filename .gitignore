@@ -10,6 +10,7 @@ ehthumbs.db
 # IntelliJ configuration
 */.idea/
 */out/
+*/*.iml
 
 # Generated files
 bin/
