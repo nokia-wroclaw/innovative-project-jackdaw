@@ -8,6 +8,6 @@ FROM anapsix/alpine-java:latest
 WORKDIR /workdir/
 RUN apk update && apk add --update netcat-openbsd
 COPY --from=BUILD /build/target/flightdata-kafka-producer-1.0-jar-with-dependencies.jar .
-ENTRYPOINT while( ! nc -z -v -w5 kafka 9092 ); do sleep 5; echo "waiting for kafka"; done && \
- while( ! nc -z -v -w5 schema-registry 8081 ); do sleep 5; echo "waiting for schema-registry"; done && \
- java -jar ./flightdata-kafka-producer-1.0-jar-with-dependencies.jar
+COPY ./docker-entrypoint.sh /workdir/docker-entrypoint.sh
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["java", "-jar" ,"./flightdata-kafka-producer-1.0-jar-with-dependencies.jar"]
