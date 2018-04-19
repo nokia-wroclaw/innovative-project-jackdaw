@@ -41,9 +41,11 @@
     }).addTo(map);
 
 
-    function onEachFeature(feature, layer) {
+
+    function onEachFeature(feature, layer, dest ){
         var popupContent = "<p> " +
-            feature.properties.companyAerial + "</p>";
+            "Airline: " + feature.properties.companyAerial + "</p>" +
+            "<p> " + "Origin airport:  " + feature.properties.airportOrigin + "</p>";
 
         if (feature.properties && feature.properties.popupContent) {
             popupContent += feature.properties.popupContent;
@@ -52,71 +54,53 @@
         layer.bindPopup(popupContent);
     }
 
+    function pointToLayer(feature, latlng){
+        return L.circleMarker(latlng, {
+            radius: 8,
+            fillColor: feature.properties.color,
+            color: feature.properties.color,
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        });
+
+    }
+
+    function style(feature) {
+        return feature.properties && feature.properties.style;
+    }
+
     L.geoJSON(estimatedDeparture, {
 
-        style: function (feature) {
-            return feature.properties && feature.properties.style;
-        },
+        style: style,
 
         onEachFeature: onEachFeature,
 
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: feature.properties.color,
-                color: feature.properties.color,
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        }
+        pointToLayer: pointToLayer,
+
     }).addTo(map);
 
     L.geoJSON(realDeparture, {
 
-        style: function (feature) {
-            return feature.properties && feature.properties.style;
-        },
+        style: style,
 
         onEachFeature: onEachFeature,
 
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: feature.properties.color,
-                color: feature.properties.color,
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        }
+        pointToLayer: pointToLayer
     }).addTo(map);
 
     L.geoJSON(estimatedArrival, {
 
-        style: function (feature) {
-            return feature.properties && feature.properties.style;
-        },
+        style: style,
 
         onEachFeature: onEachFeature,
 
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: feature.properties.color,
-                color: feature.properties.color,
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        }
+        pointToLayer: pointToLayer
     }).addTo(map);
 
     L.geoJSON(realArrival, {
 
-        style: function (feature) {
-            return feature.properties && feature.properties.style;
-        },
+        style: style,
 
     }).addTo(map);
 
