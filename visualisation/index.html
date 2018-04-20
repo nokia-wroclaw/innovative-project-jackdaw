@@ -20,8 +20,6 @@
             height: 500px;
         }
     </style>
-
-
 </head>
 <body>
 
@@ -42,14 +40,10 @@
 
 
 
-    function onEachFeature(feature, layer, dest ){
+    function onEachFeature(feature, layer){
         var popupContent = "<p> " +
             "Airline: " + feature.properties.companyAerial + "</p>" +
             "<p> " + "Origin airport:  " + feature.properties.airportOrigin + "</p>";
-
-        if (feature.properties && feature.properties.popupContent) {
-            popupContent += feature.properties.popupContent;
-        }
 
         layer.bindPopup(popupContent);
     }
@@ -70,7 +64,7 @@
         return feature.properties && feature.properties.style;
     }
 
-    L.geoJSON(estimatedDeparture, {
+    L.geoJSON([estimatedDeparture,realDeparture, estimatedArrival],{
 
         style: style,
 
@@ -80,34 +74,15 @@
 
     }).addTo(map);
 
-    L.geoJSON(realDeparture, {
-
-        style: style,
-
-        onEachFeature: onEachFeature,
-
-        pointToLayer: pointToLayer
-    }).addTo(map);
-
-    L.geoJSON(estimatedArrival, {
-
-        style: style,
-
-        onEachFeature: onEachFeature,
-
-        pointToLayer: pointToLayer
-    }).addTo(map);
-
     L.geoJSON(realArrival, {
 
-        style: style,
+        style: function style(feature) {
+        return {color: feature.properties.color}
+    ;}
 
     }).addTo(map);
 
 </script>
-
-
-
 </body>
 </html>
 
