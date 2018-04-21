@@ -1,18 +1,20 @@
-var estimatedDeparture =
+const estimatedDeparture =
     {
         "type": "FeatureCollection",
         "features": [
-            { "type": "Feature",
+            {
+                "type": "Feature",
                 "geometry": {
                     "type": "Point",
                     "coordinates": [-51.1753811, -29.9934732]
                 },
                 "properties": {
-                    "color": "#aaaaaa",
+                    "color": "#7a7579",
                     "flights": "AAL - 203",
                     "companyAerial": "AMERICAN AIRLINES INC",
                     "codeTypeLine": "Internacional",
-                    "departureExpected": "2016-01-30T08:58:00Z",
+                    "timeType": "Expected departure",
+                    "time": "2016-01-30T08:58:00Z",
                     "stateFlight": "Realizado",
                     "codeJustification": "NA",
                     "airportOrigin": "Alfonso Pena",
@@ -26,12 +28,13 @@ var estimatedDeparture =
                 }
             },
         ]
-    }
+    };
 
-var realDeparture = {
+const realDeparture = {
     "type": "FeatureCollection",
     "features": [
-        { "type": "Feature",
+        {
+            "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [-51.1753811, -29.9934732]
@@ -41,7 +44,8 @@ var realDeparture = {
                 "flights": "AAL - 203",
                 "companyAerial": "AMERICAN AIRLINES INC",
                 "codeTypeLine": "Internacional",
-                "departureReal": "2016-01-30T08:58:00Z",
+                "timeType": "Real departure",
+                "time": "2016-01-30T08:58:00Z",
                 "stateFlight": "Realizado",
                 "codeJustification": "NA",
                 "airportOrigin": "Alfonso Pena",
@@ -55,12 +59,13 @@ var realDeparture = {
             }
         },
     ]
-}
+};
 
-var estimatedArrival = {
+const estimatedArrival = {
     "type": "FeatureCollection",
     "features": [
-        { "type": "Feature",
+        {
+            "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [-49.1724811, -25.5327132]
@@ -70,7 +75,8 @@ var estimatedArrival = {
                 "flights": "AAL - 203",
                 "companyAerial": "AMERICAN AIRLINES INC",
                 "codeTypeLine": "Internacional",
-                "arrivalExpected": "2016-01-30T10:35:00Z",
+                "timeType": "Expected arrival",
+                "time": "2016-01-30T10:35:00Z",
                 "stateFlight": "Realizado",
                 "codeJustification": "NA",
                 "airportOrigin": "Alfonso Pena",
@@ -84,12 +90,13 @@ var estimatedArrival = {
             }
         },
     ]
-}
+};
 
-var realArrival = {
+const realArrival = {
     "type": "FeatureCollection",
     "features": [
-        { "type": "Feature",
+        {
+            "type": "Feature",
             "geometry": {
                 "type": "LineString",
                 "coordinates": [
@@ -101,7 +108,8 @@ var realArrival = {
                 "flights": "AAL - 203",
                 "companyAerial": "AMERICAN AIRLINES INC",
                 "codeTypeLine": "Internacional",
-                "arrivalReal": "2016-01-30T10:35:00Z",
+                "timeType": "Real arrival",
+                "time": "2016-01-30T10:35:00Z",
                 "stateFlight": "Realizado",
                 "codeJustification": "NA",
                 "airportOrigin": "Alfonso Pena",
@@ -115,4 +123,4 @@ var realArrival = {
             }
         },
     ]
-}
+};
