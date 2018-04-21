@@ -8,19 +8,9 @@ ehthumbs.db
 .localized
 
 # IntelliJ configuration
-.idea/*
-!.idea/codeStyleSettings.xml
-!.idea/inspectionProfiles/
-!.idea/compiler.xml
-!.idea/vcs.xml
-!.idea/misc.xml
-
-!.idea/kafka-consumer.iml
-!.idea/kafka-producer.iml
-!.idea/visualisation.iml
-!.idea/modules.xml
-!.idea/encodings.xml
-/out/
+*/.idea/
+*/out/
+*/*.iml
 
 # Generated files
 bin/
@@ -43,3 +33,7 @@ gen/
 # Maven
 log/
 target/
+
+*/BrFlights2.csv
+kafka-consumer/
+kafka-producer/
