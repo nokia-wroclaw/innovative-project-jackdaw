@@ -1,16 +1,5 @@
 const map = L.map('map').setView([-27.81611, -50.32611], 7);
 
-function addMap() {
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'mapbox.streets'
-    }).addTo(map);
-}
-
-
 function onEachFeature(feature, layer) {
     const popupContent =
         "<p> " + "Airline: " + feature.properties.companyAerial + "</p>" +
@@ -24,12 +13,11 @@ function pointToLayer(feature, latlng) {
     return L.circleMarker(latlng, {
         radius: 8,
         fillColor: feature.properties.color,
-        color: feature.properties.color,
+        color: "#404040",
         weight: 1,
-        opacity: 1,
+        opacity: 0.8,
         fillOpacity: 0.8
     });
-
 }
 
 function style(feature) {
@@ -38,6 +26,13 @@ function style(feature) {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function addMap() {
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        id: 'mapbox.streets'
+    }).addTo(map);
 }
 
 function addEstimatedDeparture() {
@@ -65,21 +60,28 @@ function addEstimatedArrival() {
 }
 
 function addRealArrival() {
-    L.geoJSON(realArrival, {
-        style: feature => ({color: feature.properties.color})
-    }).addTo(map);
+    const feature = realArrival.features[0];
+    L.Polyline.Arc(
+        [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]],
+        [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]], {
+            color: feature.properties.color,
+            weight: 4,
+            opacity: 0.75,
+            vertices: 100,
+        }).addTo(map);
+    //todo popout
 }
 
 
 async function demo() {
     addMap();
-    await sleep(3500);
+    await sleep(1000);
     addEstimatedDeparture();
-    await sleep(3000);
+    await sleep(1000);
     addRealDeparture();
-    await sleep(3000);
+    await sleep(1000);
     addEstimatedArrival();
-    await sleep(3000);
+    await sleep(1000);
     addRealArrival();
 }
 
