@@ -11,3 +11,12 @@ html, body {
     height: 100%;
     overflow: hidden;
 }
+
+p.left {
+    color: #111;
+}
+
+strong {
+    color: #1b1b1b;
+    font-size: 97%;
+}

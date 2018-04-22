@@ -1,34 +1,33 @@
-const estimatedDeparture =
-    {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [-51.1753811, -29.9934732]
-                },
-                "properties": {
-                    "color": "#7a7579",
-                    "flights": "AAL - 203",
-                    "companyAerial": "AMERICAN AIRLINES INC",
-                    "codeTypeLine": "Internacional",
-                    "timeType": "Expected departure",
-                    "time": "2016-01-30T08:58:00Z",
-                    "stateFlight": "Realizado",
-                    "codeJustification": "NA",
-                    "airportOrigin": "Alfonso Pena",
-                    "cityOrigin": "Sao Jose Dos Pinhais",
-                    "stateOrigin": "PR",
-                    "countryOrigin": "Brasil",
-                    "airportDestination": "Salgado Filho",
-                    "cityDestination": "Porto Alegre",
-                    "stateDestination": "RS",
-                    "countryDestination": "Brasil"
-                }
+const estimatedDeparture = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-51.1753811, -29.9934732]
             },
-        ]
-    };
+            "properties": {
+                "color": "#7a7579",
+                "flights": "AAL - 203",
+                "companyAerial": "AMERICAN AIRLINES INC",
+                "codeTypeLine": "Internacional",
+                "timeType": "Expected departure",
+                "time": "2016-01-30T08:58:00Z",
+                "stateFlight": "Realizado",
+                "codeJustification": "NA",
+                "airportOrigin": "Alfonso Pena",
+                "cityOrigin": "Sao Jose Dos Pinhais",
+                "stateOrigin": "PR",
+                "countryOrigin": "Brasil",
+                "airportDestination": "Salgado Filho",
+                "cityDestination": "Porto Alegre",
+                "stateDestination": "RS",
+                "countryDestination": "Brasil"
+            }
+        },
+    ]
+};
 
 const realDeparture = {
     "type": "FeatureCollection",

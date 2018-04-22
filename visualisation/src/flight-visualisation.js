@@ -2,9 +2,9 @@ const map = L.map('map').setView([-27.81611, -50.32611], 7);
 
 function onEachFeature(feature, layer) {
     const popupContent =
-        "<p> " + "Airline: " + feature.properties.companyAerial + "</p>" +
-        "<p> " + "Origin airport:  " + feature.properties.airportOrigin + "</p>" +
-        "<p> " + feature.properties.timeType + ":  " + feature.properties.time + "</p>";
+        "<h3> " + feature.properties.companyAerial + "</h3>" +
+        "<p class='left'> Origin airport: <strong>" + feature.properties.airportOrigin + "</strong></p>" +
+        "<p class='left'> " + feature.properties.timeType + ": <strong>" + feature.properties.time + "</strong></p>";
 
     layer.bindPopup(popupContent);
 }
@@ -28,31 +28,15 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function addMap() {
+function setUpMap() {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
         id: 'mapbox.streets'
     }).addTo(map);
 }
 
-function addEstimatedDeparture() {
-    L.geoJSON(estimatedDeparture, {
-        style: style,
-        onEachFeature: onEachFeature,
-        pointToLayer: pointToLayer,
-    }).addTo(map);
-}
-
-function addRealDeparture() {
-    L.geoJSON(realDeparture, {
-        style: style,
-        onEachFeature: onEachFeature,
-        pointToLayer: pointToLayer,
-    }).addTo(map);
-}
-
-function addEstimatedArrival() {
-    L.geoJSON(estimatedArrival, {
+function addPointToMap(geojson) {
+    L.geoJSON(geojson, {
         style: style,
         onEachFeature: onEachFeature,
         pointToLayer: pointToLayer,
@@ -61,26 +45,29 @@ function addEstimatedArrival() {
 
 function addRealArrival() {
     const feature = realArrival.features[0];
+    const pointA = [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]];
+    const pointB = [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]];
+    const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" + feature.properties.time + "</strong></p>";
     L.Polyline.Arc(
-        [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]],
-        [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]], {
+        pointA, pointB, {
             color: feature.properties.color,
             weight: 4,
             opacity: 0.75,
             vertices: 100,
-        }).addTo(map);
-    //todo popout
+            onEachFeature: onEachFeature,
+        }).addTo(map).bindPopup(popupContent);
+
+    // todo animated line
 }
 
-
 async function demo() {
-    addMap();
+    setUpMap();
     await sleep(1000);
-    addEstimatedDeparture();
+    addPointToMap(estimatedDeparture);
     await sleep(1000);
-    addRealDeparture();
+    addPointToMap(realDeparture);
     await sleep(1000);
-    addEstimatedArrival();
+    addPointToMap(estimatedArrival);
     await sleep(1000);
     addRealArrival();
 }
