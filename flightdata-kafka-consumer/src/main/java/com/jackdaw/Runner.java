@@ -30,7 +30,8 @@ public class Runner {
 
         client.newCall(request).execute();
 
-        FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(topicProperties.get("topicName").toString(),topicProperties.get("fileName").toString());
+        FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(topicProperties.get("topicName").toString(),
+                                                                       topicProperties.get("fileName").toString());
         consumer.run();
     }
 }

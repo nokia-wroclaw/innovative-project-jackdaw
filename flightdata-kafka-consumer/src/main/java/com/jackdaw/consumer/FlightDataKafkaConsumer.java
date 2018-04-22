@@ -20,6 +20,7 @@ public class FlightDataKafkaConsumer {
     private final String topicName;
     private final KafkaConsumer<Long, Flight> consumer;
     private final String fileName;
+    private final JSONSerializer serializer = new JSONSerializer();
 
     public FlightDataKafkaConsumer(String topicName, String fileName) throws IOException {
         InputStream input = new FileInputStream("/volume/flightdata-kafka-consumer.properties");
@@ -43,6 +44,8 @@ public class FlightDataKafkaConsumer {
             for (ConsumerRecord<Long, Flight> record : records) {
                 Long key =  record.key();
                 Flight flight = record.value();
+
+                serializer.write(fileName, flight);
 
                 LOG.info("Recived message: ({}, {})", key, flight);
 

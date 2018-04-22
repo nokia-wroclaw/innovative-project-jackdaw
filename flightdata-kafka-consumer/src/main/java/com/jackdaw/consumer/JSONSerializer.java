@@ -1,0 +1,120 @@
+package com.jackdaw.consumer;
+
+import com.jackdaw.avro.flights.Flight;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class JSONSerializer {
+    private static final String TYPE = "type";
+    private static final String FEATURE_COLLECTION = "FeatureCollection";
+    private static final String FEATURES = "features";
+    private static final String FEATURE = "Feature";
+    private static final String GEOMETRY = "geometry";
+    private static final String POINT = "Point";
+    private static final String LINE_STRING = "LineString";
+    private static final String COORDINATES = "coordinates";
+    private static final String PROPERTIES = "properties";
+    private static final String COLOR = "color";
+    private static final String FLIGHTS = "flights";
+    private static final String COMPANY_AERIAL = "companyAerial";
+    private static final String CODE_TYPE_LINE = "codeTypeLine";
+    private static final String TIME_TYPE = "timeType";
+    private static final String TIME = "time";
+    private static final String STATE_FLIGHT = "stateFlight";
+    private static final String CODE_JUSTIFICATION = "codeJustification";
+    private static final String AIRPORT_ORIGIN = "airportOrigin";
+    private static final String CITY_ORIGIN = "cityOrigin";
+    private static final String STATE_ORIGIN = "stateOrigin";
+    private static final String COUNTRY_ORIGIN = "countryOrigin";
+    private static final String AIRPORT_DESTINATION = "airportDestination";
+    private static final String CITY_DESTINATION = "cityDestination";
+    private static final String STATE_DESTINATION = "stateDestination";
+    private static final String COUNTRY_DESTINATION = "countryDestination";
+
+    public void write(String filename, Flight flight) {
+        JSONObject featureCollection = new JSONObject();
+        JSONArray featureList = new JSONArray();
+        JSONObject feature = new JSONObject();
+        //TODO Generate proper geometry object according to TIME_TYPE
+        JSONObject geometry = getPoint(flight);
+        JSONObject properties = getProperties(flight);
+
+        featureCollection.put(TYPE, FEATURE_COLLECTION);
+        feature.put(TYPE, FEATURE);
+        feature.put(GEOMETRY, geometry);
+        feature.put(PROPERTIES, properties);
+        featureList.put(feature);
+        featureCollection.put(FEATURES, featureList);
+
+        try {
+            FileWriter fw = new FileWriter("/volume/" + filename, true);
+            fw.write(featureCollection.toString(4));
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JSONObject getPoint(Flight flight) {
+        JSONObject point = new JSONObject();
+        JSONArray coordinates = new JSONArray();
+
+        coordinates.put(flight.getOriginAltitude());
+        coordinates.put(flight.getOriginLongitude());
+
+        point.put(TYPE, POINT);
+        point.put(COORDINATES, coordinates);
+
+        return point;
+    }
+
+    private JSONObject getLineString(Flight flight) {
+        JSONObject lineString = new JSONObject();
+        JSONArray coordinatesArray = new JSONArray();
+        JSONArray coordinatesOrigin = new JSONArray();
+        JSONArray coordinatesDest = new JSONArray();
+
+        coordinatesOrigin.put(flight.getOriginAltitude());
+        coordinatesOrigin.put(flight.getOriginLongitude());
+        coordinatesDest.put(flight.getDestinationLatitude());
+        coordinatesDest.put(flight.getDestinationLongitude());
+        coordinatesArray.put(coordinatesOrigin);
+        coordinatesArray.put(coordinatesDest);
+
+        lineString.put(TYPE, LINE_STRING);
+        lineString.put(COORDINATES, coordinatesArray);
+
+        return lineString;
+    }
+
+    private String getColor(Flight flight) {
+        //TODO Return color according to TIME_TYPE
+        return null;
+    }
+
+    private JSONObject getProperties(Flight flight) {
+        JSONObject properties = new JSONObject();
+
+        //TODO Get proper color accoring to TIME_TYPE
+        properties.put(COLOR, "#aaaaaa");
+        properties.put(FLIGHTS, flight.getFlightSymbol());
+        properties.put(COMPANY_AERIAL, flight.getAirline());
+        properties.put(CODE_TYPE_LINE, flight.getFlightType().name());
+        properties.put(TIME, flight.getDepartureEstimate());
+        properties.put(STATE_FLIGHT, flight.getFlightSituation().name());
+        properties.put(CODE_JUSTIFICATION, flight.getCodeJustification());
+        properties.put(AIRPORT_ORIGIN, flight.getOriginArport());
+        properties.put(CITY_ORIGIN, flight.getOriginCity());
+        properties.put(STATE_ORIGIN, flight.getOriginState());
+        properties.put(COUNTRY_ORIGIN, flight.getOriginCountry());
+        properties.put(AIRPORT_DESTINATION, flight.getDestinationAirport());
+        properties.put(CITY_DESTINATION, flight.getDestinationCity());
+        properties.put(STATE_DESTINATION, flight.getDestinationState());
+        properties.put(COUNTRY_DESTINATION, flight.getDestinationCountry());
+
+        return properties;
+    }
+}
