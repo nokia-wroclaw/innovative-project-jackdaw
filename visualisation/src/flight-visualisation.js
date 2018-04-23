@@ -1,4 +1,4 @@
-const map = L.map('map').setView([-27.81611, -50.32611], 7);
+const map = L.map('map').setView([0, 0], 4);
 
 function onEachFeature(feature, layer) {
     const popupContent =
@@ -43,8 +43,8 @@ function addPointToMap(geojson) {
     }).addTo(map);
 }
 
-function addRealArrival() {
-    const feature = realArrival.features[0];
+function addLineToMap(estimatedArrival) {
+    const feature = estimatedArrival.features[0];
     const pointA = [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]];
     const pointB = [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]];
     const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" + feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
@@ -54,7 +54,7 @@ function addRealArrival() {
             weight: 4,
             opacity: 0.75,
             vertices: 100,
-            snakingSpeed: 200,
+            snakingSpeed: 350,
         }).addTo(map)
         .bindPopup(popupContent)
         .snakeIn();
@@ -62,14 +62,14 @@ function addRealArrival() {
 
 async function demo() {
     setUpMap();
-    await sleep(1000);
+    await sleep(1500);
     addPointToMap(estimatedDeparture);
-    await sleep(1000);
+    await sleep(1500);
     addPointToMap(realDeparture);
-    await sleep(1000);
-    addPointToMap(estimatedArrival);
-    await sleep(1000);
-    addRealArrival();
+    await sleep(1500);
+    addLineToMap(estimatedArrival);
+    await sleep(4000);
+    addPointToMap(realArrival);
 }
 
 demo();

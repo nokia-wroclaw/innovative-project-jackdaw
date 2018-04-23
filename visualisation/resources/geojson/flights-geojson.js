@@ -66,11 +66,13 @@ const estimatedArrival = {
         {
             "type": "Feature",
             "geometry": {
-                "type": "Point",
-                "coordinates": [-49.1724811, -25.5327132]
+                "type": "LineString",
+                "coordinates": [
+                    [-51.1753811, -29.9934732], [49.1724811, 25.5327132]
+                ]
             },
             "properties": {
-                "color": "#cc350c",
+                "color": "#ef9115",
                 "flights": "AAL - 203",
                 "companyAerial": "AMERICAN AIRLINES INC",
                 "codeTypeLine": "Internacional",
@@ -97,13 +99,11 @@ const realArrival = {
         {
             "type": "Feature",
             "geometry": {
-                "type": "LineString",
-                "coordinates": [
-                    [-51.1753811, -29.9934732], [-49.1724811, -25.5327132]
-                ]
+                "type": "Point",
+                "coordinates": [49.1724811, 25.5327132]
             },
             "properties": {
-                "color": "#ef9115",
+                "color": "#cc350c",
                 "flights": "AAL - 203",
                 "companyAerial": "AMERICAN AIRLINES INC",
                 "codeTypeLine": "Internacional",
