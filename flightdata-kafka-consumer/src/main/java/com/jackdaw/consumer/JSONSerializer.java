@@ -1,6 +1,7 @@
 package com.jackdaw.consumer;
 
 import com.jackdaw.avro.flights.Flight;
+import com.jackdaw.avro.flights.TimeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,38 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONSerializer {
-    private static final String TYPE = "type";
-    private static final String FEATURE_COLLECTION = "FeatureCollection";
-    private static final String FEATURES = "features";
-    private static final String FEATURE = "Feature";
-    private static final String GEOMETRY = "geometry";
-    private static final String POINT = "Point";
-    private static final String LINE_STRING = "LineString";
-    private static final String COORDINATES = "coordinates";
-    private static final String PROPERTIES = "properties";
-    private static final String COLOR = "color";
-    private static final String FLIGHTS = "flights";
-    private static final String COMPANY_AERIAL = "companyAerial";
-    private static final String CODE_TYPE_LINE = "codeTypeLine";
-    private static final String TIME_TYPE = "timeType";
-    private static final String TIME = "time";
-    private static final String STATE_FLIGHT = "stateFlight";
-    private static final String CODE_JUSTIFICATION = "codeJustification";
-    private static final String AIRPORT_ORIGIN = "airportOrigin";
-    private static final String CITY_ORIGIN = "cityOrigin";
-    private static final String STATE_ORIGIN = "stateOrigin";
-    private static final String COUNTRY_ORIGIN = "countryOrigin";
-    private static final String AIRPORT_DESTINATION = "airportDestination";
-    private static final String CITY_DESTINATION = "cityDestination";
-    private static final String STATE_DESTINATION = "stateDestination";
-    private static final String COUNTRY_DESTINATION = "countryDestination";
-
     public void write(String filename, Flight flight) {
         JSONObject featureCollection = new JSONObject();
         JSONArray featureList = new JSONArray();
         JSONObject feature = new JSONObject();
-        //TODO Generate proper geometry object according to TIME_TYPE
-        JSONObject geometry = getPoint(flight);
+        JSONObject geometry = getCorrectGeometry(flight);
         JSONObject properties = getProperties(flight);
 
         featureCollection.put(TYPE, FEATURE_COLLECTION);
@@ -56,6 +30,13 @@ public class JSONSerializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private JSONObject getCorrectGeometry(Flight flight) {
+        if (flight.getTimeType() == TimeType.arrivalEstimate) {
+            return getLineString(flight);
+        }
+        return getPoint(flight);
     }
 
     private JSONObject getPoint(Flight flight) {
@@ -91,19 +72,52 @@ public class JSONSerializer {
     }
 
     private String getColor(Flight flight) {
-        //TODO Return color according to TIME_TYPE
-        return null;
+        switch (flight.getTimeType()) {
+            case departureEstimate: {
+                return "#7a7579";
+            }
+            case departureReal: {
+                return "#11bb11";
+            }
+            case arrivalEstimate: {
+                return "#ef9115";
+            }
+            case arrivalReal: {
+                return "#cc350c";
+            }
+            default:
+                throw new RuntimeException();
+        }
+    }
+
+    private String getTimeType(Flight flight) {
+        switch (flight.getTimeType()) {
+            case departureEstimate: {
+                return "Expected departure";
+            }
+            case departureReal: {
+                return "Real departure";
+            }
+            case arrivalEstimate: {
+                return "Expected arrival";
+            }
+            case arrivalReal: {
+                return "Real arrival";
+            }
+            default:
+                throw new RuntimeException();
+        }
     }
 
     private JSONObject getProperties(Flight flight) {
         JSONObject properties = new JSONObject();
 
-        //TODO Get proper color accoring to TIME_TYPE
-        properties.put(COLOR, "#aaaaaa");
+        properties.put(COLOR, getColor(flight));
         properties.put(FLIGHTS, flight.getFlightSymbol());
         properties.put(COMPANY_AERIAL, flight.getAirline());
         properties.put(CODE_TYPE_LINE, flight.getFlightType().name());
-        properties.put(TIME, flight.getDepartureEstimate());
+        properties.put(TIME_TYPE, getTimeType(flight));
+        properties.put(TIME, flight.getTime());
         properties.put(STATE_FLIGHT, flight.getFlightSituation().name());
         properties.put(CODE_JUSTIFICATION, flight.getCodeJustification());
         properties.put(AIRPORT_ORIGIN, flight.getOriginArport());
@@ -117,4 +131,30 @@ public class JSONSerializer {
 
         return properties;
     }
+
+    private static final String TYPE = "type";
+    private static final String FEATURE_COLLECTION = "FeatureCollection";
+    private static final String FEATURES = "features";
+    private static final String FEATURE = "Feature";
+    private static final String GEOMETRY = "geometry";
+    private static final String POINT = "Point";
+    private static final String LINE_STRING = "LineString";
+    private static final String COORDINATES = "coordinates";
+    private static final String PROPERTIES = "properties";
+    private static final String COLOR = "color";
+    private static final String FLIGHTS = "flights";
+    private static final String COMPANY_AERIAL = "companyAerial";
+    private static final String CODE_TYPE_LINE = "codeTypeLine";
+    private static final String TIME_TYPE = "timeType";
+    private static final String TIME = "time";
+    private static final String STATE_FLIGHT = "stateFlight";
+    private static final String CODE_JUSTIFICATION = "codeJustification";
+    private static final String AIRPORT_ORIGIN = "airportOrigin";
+    private static final String CITY_ORIGIN = "cityOrigin";
+    private static final String STATE_ORIGIN = "stateOrigin";
+    private static final String COUNTRY_ORIGIN = "countryOrigin";
+    private static final String AIRPORT_DESTINATION = "airportDestination";
+    private static final String CITY_DESTINATION = "cityDestination";
+    private static final String STATE_DESTINATION = "stateDestination";
+    private static final String COUNTRY_DESTINATION = "countryDestination";
 }

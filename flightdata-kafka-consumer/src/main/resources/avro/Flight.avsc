@@ -23,24 +23,18 @@
 			}
         },
         {
-            "name": "departureEstimate",
-            "type": "string",
-            "doc": "Estimated time of departure"
+            "name": "timeType",
+            "type": {
+            "name": "TimeType",
+            "type": "enum",
+            "doc": "Type of time",
+            "symbols" : ["departureEstimate", "departureReal", "arrivalEstimate", "arrivalReal"]
+            }
         },
         {
-            "name": "departureReal",
+            "name": "time",
             "type": "string",
-            "doc": "Real time of departure"
-        },
-        {
-            "name": "arrivalEstimate",
-            "type": "string",
-            "doc": "Estimated time of arrival"
-        },
-        {
-            "name": "arrivalReal",
-            "type": "string",
-            "doc": "Real time of arrival"
+            "doc": "date and time of timeType"
         },
         {
 		    "name": "flightSituation",
