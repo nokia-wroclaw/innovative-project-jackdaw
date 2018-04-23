@@ -3,6 +3,7 @@ package com.jackdaw.producer;
 import com.jackdaw.avro.flights.Flight;
 import com.jackdaw.avro.flights.FlightSituation;
 import com.jackdaw.avro.flights.FlightType;
+import com.jackdaw.avro.flights.TimeType;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import java.io.*;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class FlightDataKafkaProducer  {
+public class FlightDataKafkaProducer {
 
     private static final Logger LOG = LoggerFactory.getLogger(FlightDataKafkaProducer.class);
 
@@ -26,27 +27,30 @@ public class FlightDataKafkaProducer  {
         props.load(input);
         producer = new KafkaProducer<>(props);
         this.fileName = fileName;
-        this.topicName=topicName;
+        this.topicName = topicName;
     }
 
     public void runProducer() {
         long lineCount = 0;
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/volume/"+fileName)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/volume/" + fileName)))) {
 
             br.readLine();
 
             String line;
             while ((line = br.readLine()) != null) {
                 lineCount++;
-                this.sendMessage(lineCount, createFlight(line.split(",")));
+                String[] splitMessage = line.split(",");
+                if (splitMessage[5].equals("Realizado")) {
+                    this.sendMessage(lineCount, createFlight(splitMessage));
+                }
                 Thread.sleep(1000);
             }
 
         } catch (IOException e) {
             LOG.error("Failed to open file {}", fileName, e);
-        } catch (InterruptedException e1){
-            LOG.error("",e1);
+        } catch (InterruptedException e1) {
+            LOG.error("", e1);
         }
     }
 
@@ -60,7 +64,7 @@ public class FlightDataKafkaProducer  {
     }
 
     private Flight createFlight(String[] splitMessage) {
-        if (splitMessage.length != 21) {
+        if (splitMessage.length != 19) {
             throw new IllegalArgumentException("Array size different than 21, data is corrupted");
         } else {
             Flight record = new Flight();
@@ -68,9 +72,11 @@ public class FlightDataKafkaProducer  {
             for (String data : splitMessage) {
                 if (index == 2) {
                     record.put(index, FlightType.valueOf(data));
-                } else if (index == 7) {
+                } else if (index == 3) {
+                    record.put(index, TimeType.valueOf(data));
+                } else if (index == 5) {
                     record.put(index, FlightSituation.valueOf(data));
-                } else if (index >= 17) {
+                } else if (index >= 15) {
                     record.put(index, Double.parseDouble(data));
                 } else {
                     record.put(index, data);

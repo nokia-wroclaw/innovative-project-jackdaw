@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 /** Avro Schema for Flight */
 @org.apache.avro.specific.AvroGenerated
 public class Flight extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3630152727098172104L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flightSymbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"Internacional\",\"Nacional\",\"Regional\"]}},{\"name\":\"departureEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of departure\"},{\"name\":\"departureReal\",\"type\":\"string\",\"doc\":\"Real time of departure\"},{\"name\":\"arrivalEstimate\",\"type\":\"string\",\"doc\":\"Estimated time of arrival\"},{\"name\":\"arrivalReal\",\"type\":\"string\",\"doc\":\"Real time of arrival\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originArport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"originCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of arrival\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of arival\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of arival\"},{\"name\":\"destinationLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAltitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of origin point\"}]}");
+  private static final long serialVersionUID = 2132509877552199120L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flightSymbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"Internacional\",\"Nacional\",\"Regional\"]}},{\"name\":\"timeType\",\"type\":{\"type\":\"enum\",\"name\":\"TimeType\",\"doc\":\"Type of time\",\"symbols\":[\"departureEstimate\",\"departureReal\",\"arrivalEstimate\",\"arrivalReal\"]}},{\"name\":\"time\",\"type\":\"string\",\"doc\":\"date and time of timeType\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originArport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"originCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of arrival\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of arival\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of arival\"},{\"name\":\"destinationLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAltitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of origin point\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -57,14 +57,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
   /** Name of airline */
   @Deprecated public java.lang.CharSequence airline;
   @Deprecated public com.jackdaw.avro.flights.FlightType flightType;
-  /** Estimated time of departure */
-  @Deprecated public java.lang.CharSequence departureEstimate;
-  /** Real time of departure */
-  @Deprecated public java.lang.CharSequence departureReal;
-  /** Estimated time of arrival */
-  @Deprecated public java.lang.CharSequence arrivalEstimate;
-  /** Real time of arrival */
-  @Deprecated public java.lang.CharSequence arrivalReal;
+  @Deprecated public com.jackdaw.avro.flights.TimeType timeType;
+  /** date and time of timeType */
+  @Deprecated public java.lang.CharSequence time;
   @Deprecated public com.jackdaw.avro.flights.FlightSituation flightSituation;
   /** Justification code */
   @Deprecated public java.lang.CharSequence codeJustification;
@@ -105,10 +100,8 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param flightSymbol Symbol of flight
    * @param airline Name of airline
    * @param flightType The new value for flightType
-   * @param departureEstimate Estimated time of departure
-   * @param departureReal Real time of departure
-   * @param arrivalEstimate Estimated time of arrival
-   * @param arrivalReal Real time of arrival
+   * @param timeType The new value for timeType
+   * @param time date and time of timeType
    * @param flightSituation The new value for flightSituation
    * @param codeJustification Justification code
    * @param originArport Airport of departure
@@ -124,14 +117,12 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param originLongitude Longitude coordinate of origin point
    * @param originAltitude Latitude coordinate of origin point
    */
-  public Flight(java.lang.CharSequence flightSymbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, java.lang.CharSequence departureEstimate, java.lang.CharSequence departureReal, java.lang.CharSequence arrivalEstimate, java.lang.CharSequence arrivalReal, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originArport, java.lang.CharSequence originCity, java.lang.CharSequence originState, java.lang.CharSequence originCountry, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Double destinationLongitude, java.lang.Double destinationLatitude, java.lang.Double originLongitude, java.lang.Double originAltitude) {
+  public Flight(java.lang.CharSequence flightSymbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, com.jackdaw.avro.flights.TimeType timeType, java.lang.CharSequence time, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originArport, java.lang.CharSequence originCity, java.lang.CharSequence originState, java.lang.CharSequence originCountry, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Double destinationLongitude, java.lang.Double destinationLatitude, java.lang.Double originLongitude, java.lang.Double originAltitude) {
     this.flightSymbol = flightSymbol;
     this.airline = airline;
     this.flightType = flightType;
-    this.departureEstimate = departureEstimate;
-    this.departureReal = departureReal;
-    this.arrivalEstimate = arrivalEstimate;
-    this.arrivalReal = arrivalReal;
+    this.timeType = timeType;
+    this.time = time;
     this.flightSituation = flightSituation;
     this.codeJustification = codeJustification;
     this.originArport = originArport;
@@ -155,24 +146,22 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 0: return flightSymbol;
     case 1: return airline;
     case 2: return flightType;
-    case 3: return departureEstimate;
-    case 4: return departureReal;
-    case 5: return arrivalEstimate;
-    case 6: return arrivalReal;
-    case 7: return flightSituation;
-    case 8: return codeJustification;
-    case 9: return originArport;
-    case 10: return originCity;
-    case 11: return originState;
-    case 12: return originCountry;
-    case 13: return destinationAirport;
-    case 14: return destinationCity;
-    case 15: return destinationState;
-    case 16: return destinationCountry;
-    case 17: return destinationLongitude;
-    case 18: return destinationLatitude;
-    case 19: return originLongitude;
-    case 20: return originAltitude;
+    case 3: return timeType;
+    case 4: return time;
+    case 5: return flightSituation;
+    case 6: return codeJustification;
+    case 7: return originArport;
+    case 8: return originCity;
+    case 9: return originState;
+    case 10: return originCountry;
+    case 11: return destinationAirport;
+    case 12: return destinationCity;
+    case 13: return destinationState;
+    case 14: return destinationCountry;
+    case 15: return destinationLongitude;
+    case 16: return destinationLatitude;
+    case 17: return originLongitude;
+    case 18: return originAltitude;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -184,24 +173,22 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 0: flightSymbol = (java.lang.CharSequence)value$; break;
     case 1: airline = (java.lang.CharSequence)value$; break;
     case 2: flightType = (com.jackdaw.avro.flights.FlightType)value$; break;
-    case 3: departureEstimate = (java.lang.CharSequence)value$; break;
-    case 4: departureReal = (java.lang.CharSequence)value$; break;
-    case 5: arrivalEstimate = (java.lang.CharSequence)value$; break;
-    case 6: arrivalReal = (java.lang.CharSequence)value$; break;
-    case 7: flightSituation = (com.jackdaw.avro.flights.FlightSituation)value$; break;
-    case 8: codeJustification = (java.lang.CharSequence)value$; break;
-    case 9: originArport = (java.lang.CharSequence)value$; break;
-    case 10: originCity = (java.lang.CharSequence)value$; break;
-    case 11: originState = (java.lang.CharSequence)value$; break;
-    case 12: originCountry = (java.lang.CharSequence)value$; break;
-    case 13: destinationAirport = (java.lang.CharSequence)value$; break;
-    case 14: destinationCity = (java.lang.CharSequence)value$; break;
-    case 15: destinationState = (java.lang.CharSequence)value$; break;
-    case 16: destinationCountry = (java.lang.CharSequence)value$; break;
-    case 17: destinationLongitude = (java.lang.Double)value$; break;
-    case 18: destinationLatitude = (java.lang.Double)value$; break;
-    case 19: originLongitude = (java.lang.Double)value$; break;
-    case 20: originAltitude = (java.lang.Double)value$; break;
+    case 3: timeType = (com.jackdaw.avro.flights.TimeType)value$; break;
+    case 4: time = (java.lang.CharSequence)value$; break;
+    case 5: flightSituation = (com.jackdaw.avro.flights.FlightSituation)value$; break;
+    case 6: codeJustification = (java.lang.CharSequence)value$; break;
+    case 7: originArport = (java.lang.CharSequence)value$; break;
+    case 8: originCity = (java.lang.CharSequence)value$; break;
+    case 9: originState = (java.lang.CharSequence)value$; break;
+    case 10: originCountry = (java.lang.CharSequence)value$; break;
+    case 11: destinationAirport = (java.lang.CharSequence)value$; break;
+    case 12: destinationCity = (java.lang.CharSequence)value$; break;
+    case 13: destinationState = (java.lang.CharSequence)value$; break;
+    case 14: destinationCountry = (java.lang.CharSequence)value$; break;
+    case 15: destinationLongitude = (java.lang.Double)value$; break;
+    case 16: destinationLatitude = (java.lang.Double)value$; break;
+    case 17: originLongitude = (java.lang.Double)value$; break;
+    case 18: originAltitude = (java.lang.Double)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -257,71 +244,36 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
   }
 
   /**
-   * Gets the value of the 'departureEstimate' field.
-   * @return Estimated time of departure
+   * Gets the value of the 'timeType' field.
+   * @return The value of the 'timeType' field.
    */
-  public java.lang.CharSequence getDepartureEstimate() {
-    return departureEstimate;
+  public com.jackdaw.avro.flights.TimeType getTimeType() {
+    return timeType;
   }
 
   /**
-   * Sets the value of the 'departureEstimate' field.
-   * Estimated time of departure
+   * Sets the value of the 'timeType' field.
    * @param value the value to set.
    */
-  public void setDepartureEstimate(java.lang.CharSequence value) {
-    this.departureEstimate = value;
+  public void setTimeType(com.jackdaw.avro.flights.TimeType value) {
+    this.timeType = value;
   }
 
   /**
-   * Gets the value of the 'departureReal' field.
-   * @return Real time of departure
+   * Gets the value of the 'time' field.
+   * @return date and time of timeType
    */
-  public java.lang.CharSequence getDepartureReal() {
-    return departureReal;
+  public java.lang.CharSequence getTime() {
+    return time;
   }
 
   /**
-   * Sets the value of the 'departureReal' field.
-   * Real time of departure
+   * Sets the value of the 'time' field.
+   * date and time of timeType
    * @param value the value to set.
    */
-  public void setDepartureReal(java.lang.CharSequence value) {
-    this.departureReal = value;
-  }
-
-  /**
-   * Gets the value of the 'arrivalEstimate' field.
-   * @return Estimated time of arrival
-   */
-  public java.lang.CharSequence getArrivalEstimate() {
-    return arrivalEstimate;
-  }
-
-  /**
-   * Sets the value of the 'arrivalEstimate' field.
-   * Estimated time of arrival
-   * @param value the value to set.
-   */
-  public void setArrivalEstimate(java.lang.CharSequence value) {
-    this.arrivalEstimate = value;
-  }
-
-  /**
-   * Gets the value of the 'arrivalReal' field.
-   * @return Real time of arrival
-   */
-  public java.lang.CharSequence getArrivalReal() {
-    return arrivalReal;
-  }
-
-  /**
-   * Sets the value of the 'arrivalReal' field.
-   * Real time of arrival
-   * @param value the value to set.
-   */
-  public void setArrivalReal(java.lang.CharSequence value) {
-    this.arrivalReal = value;
+  public void setTime(java.lang.CharSequence value) {
+    this.time = value;
   }
 
   /**
@@ -598,14 +550,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     /** Name of airline */
     private java.lang.CharSequence airline;
     private com.jackdaw.avro.flights.FlightType flightType;
-    /** Estimated time of departure */
-    private java.lang.CharSequence departureEstimate;
-    /** Real time of departure */
-    private java.lang.CharSequence departureReal;
-    /** Estimated time of arrival */
-    private java.lang.CharSequence arrivalEstimate;
-    /** Real time of arrival */
-    private java.lang.CharSequence arrivalReal;
+    private com.jackdaw.avro.flights.TimeType timeType;
+    /** date and time of timeType */
+    private java.lang.CharSequence time;
     private com.jackdaw.avro.flights.FlightSituation flightSituation;
     /** Justification code */
     private java.lang.CharSequence codeJustification;
@@ -657,77 +604,69 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.flightType = data().deepCopy(fields()[2].schema(), other.flightType);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.departureEstimate)) {
-        this.departureEstimate = data().deepCopy(fields()[3].schema(), other.departureEstimate);
+      if (isValidValue(fields()[3], other.timeType)) {
+        this.timeType = data().deepCopy(fields()[3].schema(), other.timeType);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.departureReal)) {
-        this.departureReal = data().deepCopy(fields()[4].schema(), other.departureReal);
+      if (isValidValue(fields()[4], other.time)) {
+        this.time = data().deepCopy(fields()[4].schema(), other.time);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.arrivalEstimate)) {
-        this.arrivalEstimate = data().deepCopy(fields()[5].schema(), other.arrivalEstimate);
+      if (isValidValue(fields()[5], other.flightSituation)) {
+        this.flightSituation = data().deepCopy(fields()[5].schema(), other.flightSituation);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.arrivalReal)) {
-        this.arrivalReal = data().deepCopy(fields()[6].schema(), other.arrivalReal);
+      if (isValidValue(fields()[6], other.codeJustification)) {
+        this.codeJustification = data().deepCopy(fields()[6].schema(), other.codeJustification);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.flightSituation)) {
-        this.flightSituation = data().deepCopy(fields()[7].schema(), other.flightSituation);
+      if (isValidValue(fields()[7], other.originArport)) {
+        this.originArport = data().deepCopy(fields()[7].schema(), other.originArport);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.codeJustification)) {
-        this.codeJustification = data().deepCopy(fields()[8].schema(), other.codeJustification);
+      if (isValidValue(fields()[8], other.originCity)) {
+        this.originCity = data().deepCopy(fields()[8].schema(), other.originCity);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.originArport)) {
-        this.originArport = data().deepCopy(fields()[9].schema(), other.originArport);
+      if (isValidValue(fields()[9], other.originState)) {
+        this.originState = data().deepCopy(fields()[9].schema(), other.originState);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.originCity)) {
-        this.originCity = data().deepCopy(fields()[10].schema(), other.originCity);
+      if (isValidValue(fields()[10], other.originCountry)) {
+        this.originCountry = data().deepCopy(fields()[10].schema(), other.originCountry);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.originState)) {
-        this.originState = data().deepCopy(fields()[11].schema(), other.originState);
+      if (isValidValue(fields()[11], other.destinationAirport)) {
+        this.destinationAirport = data().deepCopy(fields()[11].schema(), other.destinationAirport);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.originCountry)) {
-        this.originCountry = data().deepCopy(fields()[12].schema(), other.originCountry);
+      if (isValidValue(fields()[12], other.destinationCity)) {
+        this.destinationCity = data().deepCopy(fields()[12].schema(), other.destinationCity);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.destinationAirport)) {
-        this.destinationAirport = data().deepCopy(fields()[13].schema(), other.destinationAirport);
+      if (isValidValue(fields()[13], other.destinationState)) {
+        this.destinationState = data().deepCopy(fields()[13].schema(), other.destinationState);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.destinationCity)) {
-        this.destinationCity = data().deepCopy(fields()[14].schema(), other.destinationCity);
+      if (isValidValue(fields()[14], other.destinationCountry)) {
+        this.destinationCountry = data().deepCopy(fields()[14].schema(), other.destinationCountry);
         fieldSetFlags()[14] = true;
       }
-      if (isValidValue(fields()[15], other.destinationState)) {
-        this.destinationState = data().deepCopy(fields()[15].schema(), other.destinationState);
+      if (isValidValue(fields()[15], other.destinationLongitude)) {
+        this.destinationLongitude = data().deepCopy(fields()[15].schema(), other.destinationLongitude);
         fieldSetFlags()[15] = true;
       }
-      if (isValidValue(fields()[16], other.destinationCountry)) {
-        this.destinationCountry = data().deepCopy(fields()[16].schema(), other.destinationCountry);
+      if (isValidValue(fields()[16], other.destinationLatitude)) {
+        this.destinationLatitude = data().deepCopy(fields()[16].schema(), other.destinationLatitude);
         fieldSetFlags()[16] = true;
       }
-      if (isValidValue(fields()[17], other.destinationLongitude)) {
-        this.destinationLongitude = data().deepCopy(fields()[17].schema(), other.destinationLongitude);
+      if (isValidValue(fields()[17], other.originLongitude)) {
+        this.originLongitude = data().deepCopy(fields()[17].schema(), other.originLongitude);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.destinationLatitude)) {
-        this.destinationLatitude = data().deepCopy(fields()[18].schema(), other.destinationLatitude);
+      if (isValidValue(fields()[18], other.originAltitude)) {
+        this.originAltitude = data().deepCopy(fields()[18].schema(), other.originAltitude);
         fieldSetFlags()[18] = true;
-      }
-      if (isValidValue(fields()[19], other.originLongitude)) {
-        this.originLongitude = data().deepCopy(fields()[19].schema(), other.originLongitude);
-        fieldSetFlags()[19] = true;
-      }
-      if (isValidValue(fields()[20], other.originAltitude)) {
-        this.originAltitude = data().deepCopy(fields()[20].schema(), other.originAltitude);
-        fieldSetFlags()[20] = true;
       }
     }
 
@@ -749,77 +688,69 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.flightType = data().deepCopy(fields()[2].schema(), other.flightType);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.departureEstimate)) {
-        this.departureEstimate = data().deepCopy(fields()[3].schema(), other.departureEstimate);
+      if (isValidValue(fields()[3], other.timeType)) {
+        this.timeType = data().deepCopy(fields()[3].schema(), other.timeType);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.departureReal)) {
-        this.departureReal = data().deepCopy(fields()[4].schema(), other.departureReal);
+      if (isValidValue(fields()[4], other.time)) {
+        this.time = data().deepCopy(fields()[4].schema(), other.time);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.arrivalEstimate)) {
-        this.arrivalEstimate = data().deepCopy(fields()[5].schema(), other.arrivalEstimate);
+      if (isValidValue(fields()[5], other.flightSituation)) {
+        this.flightSituation = data().deepCopy(fields()[5].schema(), other.flightSituation);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.arrivalReal)) {
-        this.arrivalReal = data().deepCopy(fields()[6].schema(), other.arrivalReal);
+      if (isValidValue(fields()[6], other.codeJustification)) {
+        this.codeJustification = data().deepCopy(fields()[6].schema(), other.codeJustification);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.flightSituation)) {
-        this.flightSituation = data().deepCopy(fields()[7].schema(), other.flightSituation);
+      if (isValidValue(fields()[7], other.originArport)) {
+        this.originArport = data().deepCopy(fields()[7].schema(), other.originArport);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.codeJustification)) {
-        this.codeJustification = data().deepCopy(fields()[8].schema(), other.codeJustification);
+      if (isValidValue(fields()[8], other.originCity)) {
+        this.originCity = data().deepCopy(fields()[8].schema(), other.originCity);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.originArport)) {
-        this.originArport = data().deepCopy(fields()[9].schema(), other.originArport);
+      if (isValidValue(fields()[9], other.originState)) {
+        this.originState = data().deepCopy(fields()[9].schema(), other.originState);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.originCity)) {
-        this.originCity = data().deepCopy(fields()[10].schema(), other.originCity);
+      if (isValidValue(fields()[10], other.originCountry)) {
+        this.originCountry = data().deepCopy(fields()[10].schema(), other.originCountry);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.originState)) {
-        this.originState = data().deepCopy(fields()[11].schema(), other.originState);
+      if (isValidValue(fields()[11], other.destinationAirport)) {
+        this.destinationAirport = data().deepCopy(fields()[11].schema(), other.destinationAirport);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.originCountry)) {
-        this.originCountry = data().deepCopy(fields()[12].schema(), other.originCountry);
+      if (isValidValue(fields()[12], other.destinationCity)) {
+        this.destinationCity = data().deepCopy(fields()[12].schema(), other.destinationCity);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.destinationAirport)) {
-        this.destinationAirport = data().deepCopy(fields()[13].schema(), other.destinationAirport);
+      if (isValidValue(fields()[13], other.destinationState)) {
+        this.destinationState = data().deepCopy(fields()[13].schema(), other.destinationState);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.destinationCity)) {
-        this.destinationCity = data().deepCopy(fields()[14].schema(), other.destinationCity);
+      if (isValidValue(fields()[14], other.destinationCountry)) {
+        this.destinationCountry = data().deepCopy(fields()[14].schema(), other.destinationCountry);
         fieldSetFlags()[14] = true;
       }
-      if (isValidValue(fields()[15], other.destinationState)) {
-        this.destinationState = data().deepCopy(fields()[15].schema(), other.destinationState);
+      if (isValidValue(fields()[15], other.destinationLongitude)) {
+        this.destinationLongitude = data().deepCopy(fields()[15].schema(), other.destinationLongitude);
         fieldSetFlags()[15] = true;
       }
-      if (isValidValue(fields()[16], other.destinationCountry)) {
-        this.destinationCountry = data().deepCopy(fields()[16].schema(), other.destinationCountry);
+      if (isValidValue(fields()[16], other.destinationLatitude)) {
+        this.destinationLatitude = data().deepCopy(fields()[16].schema(), other.destinationLatitude);
         fieldSetFlags()[16] = true;
       }
-      if (isValidValue(fields()[17], other.destinationLongitude)) {
-        this.destinationLongitude = data().deepCopy(fields()[17].schema(), other.destinationLongitude);
+      if (isValidValue(fields()[17], other.originLongitude)) {
+        this.originLongitude = data().deepCopy(fields()[17].schema(), other.originLongitude);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.destinationLatitude)) {
-        this.destinationLatitude = data().deepCopy(fields()[18].schema(), other.destinationLatitude);
+      if (isValidValue(fields()[18], other.originAltitude)) {
+        this.originAltitude = data().deepCopy(fields()[18].schema(), other.originAltitude);
         fieldSetFlags()[18] = true;
-      }
-      if (isValidValue(fields()[19], other.originLongitude)) {
-        this.originLongitude = data().deepCopy(fields()[19].schema(), other.originLongitude);
-        fieldSetFlags()[19] = true;
-      }
-      if (isValidValue(fields()[20], other.originAltitude)) {
-        this.originAltitude = data().deepCopy(fields()[20].schema(), other.originAltitude);
-        fieldSetFlags()[20] = true;
       }
     }
 
@@ -949,174 +880,84 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     }
 
     /**
-      * Gets the value of the 'departureEstimate' field.
-      * Estimated time of departure
+      * Gets the value of the 'timeType' field.
       * @return The value.
       */
-    public java.lang.CharSequence getDepartureEstimate() {
-      return departureEstimate;
+    public com.jackdaw.avro.flights.TimeType getTimeType() {
+      return timeType;
     }
 
     /**
-      * Sets the value of the 'departureEstimate' field.
-      * Estimated time of departure
-      * @param value The value of 'departureEstimate'.
+      * Sets the value of the 'timeType' field.
+      * @param value The value of 'timeType'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setDepartureEstimate(java.lang.CharSequence value) {
+    public com.jackdaw.avro.flights.Flight.Builder setTimeType(com.jackdaw.avro.flights.TimeType value) {
       validate(fields()[3], value);
-      this.departureEstimate = value;
+      this.timeType = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'departureEstimate' field has been set.
-      * Estimated time of departure
-      * @return True if the 'departureEstimate' field has been set, false otherwise.
+      * Checks whether the 'timeType' field has been set.
+      * @return True if the 'timeType' field has been set, false otherwise.
       */
-    public boolean hasDepartureEstimate() {
+    public boolean hasTimeType() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'departureEstimate' field.
-      * Estimated time of departure
+      * Clears the value of the 'timeType' field.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder clearDepartureEstimate() {
-      departureEstimate = null;
+    public com.jackdaw.avro.flights.Flight.Builder clearTimeType() {
+      timeType = null;
       fieldSetFlags()[3] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'departureReal' field.
-      * Real time of departure
+      * Gets the value of the 'time' field.
+      * date and time of timeType
       * @return The value.
       */
-    public java.lang.CharSequence getDepartureReal() {
-      return departureReal;
+    public java.lang.CharSequence getTime() {
+      return time;
     }
 
     /**
-      * Sets the value of the 'departureReal' field.
-      * Real time of departure
-      * @param value The value of 'departureReal'.
+      * Sets the value of the 'time' field.
+      * date and time of timeType
+      * @param value The value of 'time'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setDepartureReal(java.lang.CharSequence value) {
+    public com.jackdaw.avro.flights.Flight.Builder setTime(java.lang.CharSequence value) {
       validate(fields()[4], value);
-      this.departureReal = value;
+      this.time = value;
       fieldSetFlags()[4] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'departureReal' field has been set.
-      * Real time of departure
-      * @return True if the 'departureReal' field has been set, false otherwise.
+      * Checks whether the 'time' field has been set.
+      * date and time of timeType
+      * @return True if the 'time' field has been set, false otherwise.
       */
-    public boolean hasDepartureReal() {
+    public boolean hasTime() {
       return fieldSetFlags()[4];
     }
 
 
     /**
-      * Clears the value of the 'departureReal' field.
-      * Real time of departure
+      * Clears the value of the 'time' field.
+      * date and time of timeType
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder clearDepartureReal() {
-      departureReal = null;
+    public com.jackdaw.avro.flights.Flight.Builder clearTime() {
+      time = null;
       fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'arrivalEstimate' field.
-      * Estimated time of arrival
-      * @return The value.
-      */
-    public java.lang.CharSequence getArrivalEstimate() {
-      return arrivalEstimate;
-    }
-
-    /**
-      * Sets the value of the 'arrivalEstimate' field.
-      * Estimated time of arrival
-      * @param value The value of 'arrivalEstimate'.
-      * @return This builder.
-      */
-    public com.jackdaw.avro.flights.Flight.Builder setArrivalEstimate(java.lang.CharSequence value) {
-      validate(fields()[5], value);
-      this.arrivalEstimate = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'arrivalEstimate' field has been set.
-      * Estimated time of arrival
-      * @return True if the 'arrivalEstimate' field has been set, false otherwise.
-      */
-    public boolean hasArrivalEstimate() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'arrivalEstimate' field.
-      * Estimated time of arrival
-      * @return This builder.
-      */
-    public com.jackdaw.avro.flights.Flight.Builder clearArrivalEstimate() {
-      arrivalEstimate = null;
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'arrivalReal' field.
-      * Real time of arrival
-      * @return The value.
-      */
-    public java.lang.CharSequence getArrivalReal() {
-      return arrivalReal;
-    }
-
-    /**
-      * Sets the value of the 'arrivalReal' field.
-      * Real time of arrival
-      * @param value The value of 'arrivalReal'.
-      * @return This builder.
-      */
-    public com.jackdaw.avro.flights.Flight.Builder setArrivalReal(java.lang.CharSequence value) {
-      validate(fields()[6], value);
-      this.arrivalReal = value;
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'arrivalReal' field has been set.
-      * Real time of arrival
-      * @return True if the 'arrivalReal' field has been set, false otherwise.
-      */
-    public boolean hasArrivalReal() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'arrivalReal' field.
-      * Real time of arrival
-      * @return This builder.
-      */
-    public com.jackdaw.avro.flights.Flight.Builder clearArrivalReal() {
-      arrivalReal = null;
-      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -1134,9 +975,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setFlightSituation(com.jackdaw.avro.flights.FlightSituation value) {
-      validate(fields()[7], value);
+      validate(fields()[5], value);
       this.flightSituation = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -1145,7 +986,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'flightSituation' field has been set, false otherwise.
       */
     public boolean hasFlightSituation() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[5];
     }
 
 
@@ -1155,7 +996,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearFlightSituation() {
       flightSituation = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -1175,9 +1016,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setCodeJustification(java.lang.CharSequence value) {
-      validate(fields()[8], value);
+      validate(fields()[6], value);
       this.codeJustification = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -1187,7 +1028,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'codeJustification' field has been set, false otherwise.
       */
     public boolean hasCodeJustification() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[6];
     }
 
 
@@ -1198,7 +1039,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearCodeJustification() {
       codeJustification = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -1218,9 +1059,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginArport(java.lang.CharSequence value) {
-      validate(fields()[9], value);
+      validate(fields()[7], value);
       this.originArport = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -1230,7 +1071,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originArport' field has been set, false otherwise.
       */
     public boolean hasOriginArport() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[7];
     }
 
 
@@ -1241,7 +1082,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginArport() {
       originArport = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -1261,9 +1102,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginCity(java.lang.CharSequence value) {
-      validate(fields()[10], value);
+      validate(fields()[8], value);
       this.originCity = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -1273,7 +1114,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originCity' field has been set, false otherwise.
       */
     public boolean hasOriginCity() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[8];
     }
 
 
@@ -1284,7 +1125,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginCity() {
       originCity = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -1304,9 +1145,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginState(java.lang.CharSequence value) {
-      validate(fields()[11], value);
+      validate(fields()[9], value);
       this.originState = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -1316,7 +1157,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originState' field has been set, false otherwise.
       */
     public boolean hasOriginState() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[9];
     }
 
 
@@ -1327,7 +1168,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginState() {
       originState = null;
-      fieldSetFlags()[11] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -1347,9 +1188,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginCountry(java.lang.CharSequence value) {
-      validate(fields()[12], value);
+      validate(fields()[10], value);
       this.originCountry = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -1359,7 +1200,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originCountry' field has been set, false otherwise.
       */
     public boolean hasOriginCountry() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[10];
     }
 
 
@@ -1370,7 +1211,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginCountry() {
       originCountry = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -1390,9 +1231,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationAirport(java.lang.CharSequence value) {
-      validate(fields()[13], value);
+      validate(fields()[11], value);
       this.destinationAirport = value;
-      fieldSetFlags()[13] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -1402,7 +1243,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationAirport' field has been set, false otherwise.
       */
     public boolean hasDestinationAirport() {
-      return fieldSetFlags()[13];
+      return fieldSetFlags()[11];
     }
 
 
@@ -1413,7 +1254,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationAirport() {
       destinationAirport = null;
-      fieldSetFlags()[13] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -1433,9 +1274,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationCity(java.lang.CharSequence value) {
-      validate(fields()[14], value);
+      validate(fields()[12], value);
       this.destinationCity = value;
-      fieldSetFlags()[14] = true;
+      fieldSetFlags()[12] = true;
       return this;
     }
 
@@ -1445,7 +1286,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationCity' field has been set, false otherwise.
       */
     public boolean hasDestinationCity() {
-      return fieldSetFlags()[14];
+      return fieldSetFlags()[12];
     }
 
 
@@ -1456,7 +1297,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationCity() {
       destinationCity = null;
-      fieldSetFlags()[14] = false;
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -1476,9 +1317,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationState(java.lang.CharSequence value) {
-      validate(fields()[15], value);
+      validate(fields()[13], value);
       this.destinationState = value;
-      fieldSetFlags()[15] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -1488,7 +1329,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationState' field has been set, false otherwise.
       */
     public boolean hasDestinationState() {
-      return fieldSetFlags()[15];
+      return fieldSetFlags()[13];
     }
 
 
@@ -1499,7 +1340,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationState() {
       destinationState = null;
-      fieldSetFlags()[15] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -1519,9 +1360,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationCountry(java.lang.CharSequence value) {
-      validate(fields()[16], value);
+      validate(fields()[14], value);
       this.destinationCountry = value;
-      fieldSetFlags()[16] = true;
+      fieldSetFlags()[14] = true;
       return this;
     }
 
@@ -1531,7 +1372,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationCountry' field has been set, false otherwise.
       */
     public boolean hasDestinationCountry() {
-      return fieldSetFlags()[16];
+      return fieldSetFlags()[14];
     }
 
 
@@ -1542,7 +1383,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationCountry() {
       destinationCountry = null;
-      fieldSetFlags()[16] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -1562,9 +1403,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationLongitude(double value) {
-      validate(fields()[17], value);
+      validate(fields()[15], value);
       this.destinationLongitude = value;
-      fieldSetFlags()[17] = true;
+      fieldSetFlags()[15] = true;
       return this;
     }
 
@@ -1574,7 +1415,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationLongitude' field has been set, false otherwise.
       */
     public boolean hasDestinationLongitude() {
-      return fieldSetFlags()[17];
+      return fieldSetFlags()[15];
     }
 
 
@@ -1584,7 +1425,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationLongitude() {
-      fieldSetFlags()[17] = false;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -1604,9 +1445,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setDestinationLatitude(double value) {
-      validate(fields()[18], value);
+      validate(fields()[16], value);
       this.destinationLatitude = value;
-      fieldSetFlags()[18] = true;
+      fieldSetFlags()[16] = true;
       return this;
     }
 
@@ -1616,7 +1457,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'destinationLatitude' field has been set, false otherwise.
       */
     public boolean hasDestinationLatitude() {
-      return fieldSetFlags()[18];
+      return fieldSetFlags()[16];
     }
 
 
@@ -1626,7 +1467,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder clearDestinationLatitude() {
-      fieldSetFlags()[18] = false;
+      fieldSetFlags()[16] = false;
       return this;
     }
 
@@ -1646,9 +1487,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginLongitude(double value) {
-      validate(fields()[19], value);
+      validate(fields()[17], value);
       this.originLongitude = value;
-      fieldSetFlags()[19] = true;
+      fieldSetFlags()[17] = true;
       return this;
     }
 
@@ -1658,7 +1499,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originLongitude' field has been set, false otherwise.
       */
     public boolean hasOriginLongitude() {
-      return fieldSetFlags()[19];
+      return fieldSetFlags()[17];
     }
 
 
@@ -1668,7 +1509,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginLongitude() {
-      fieldSetFlags()[19] = false;
+      fieldSetFlags()[17] = false;
       return this;
     }
 
@@ -1688,9 +1529,9 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder setOriginAltitude(double value) {
-      validate(fields()[20], value);
+      validate(fields()[18], value);
       this.originAltitude = value;
-      fieldSetFlags()[20] = true;
+      fieldSetFlags()[18] = true;
       return this;
     }
 
@@ -1700,7 +1541,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'originAltitude' field has been set, false otherwise.
       */
     public boolean hasOriginAltitude() {
-      return fieldSetFlags()[20];
+      return fieldSetFlags()[18];
     }
 
 
@@ -1710,7 +1551,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.jackdaw.avro.flights.Flight.Builder clearOriginAltitude() {
-      fieldSetFlags()[20] = false;
+      fieldSetFlags()[18] = false;
       return this;
     }
 
@@ -1722,24 +1563,22 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         record.flightSymbol = fieldSetFlags()[0] ? this.flightSymbol : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.airline = fieldSetFlags()[1] ? this.airline : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.flightType = fieldSetFlags()[2] ? this.flightType : (com.jackdaw.avro.flights.FlightType) defaultValue(fields()[2]);
-        record.departureEstimate = fieldSetFlags()[3] ? this.departureEstimate : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.departureReal = fieldSetFlags()[4] ? this.departureReal : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.arrivalEstimate = fieldSetFlags()[5] ? this.arrivalEstimate : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.arrivalReal = fieldSetFlags()[6] ? this.arrivalReal : (java.lang.CharSequence) defaultValue(fields()[6]);
-        record.flightSituation = fieldSetFlags()[7] ? this.flightSituation : (com.jackdaw.avro.flights.FlightSituation) defaultValue(fields()[7]);
-        record.codeJustification = fieldSetFlags()[8] ? this.codeJustification : (java.lang.CharSequence) defaultValue(fields()[8]);
-        record.originArport = fieldSetFlags()[9] ? this.originArport : (java.lang.CharSequence) defaultValue(fields()[9]);
-        record.originCity = fieldSetFlags()[10] ? this.originCity : (java.lang.CharSequence) defaultValue(fields()[10]);
-        record.originState = fieldSetFlags()[11] ? this.originState : (java.lang.CharSequence) defaultValue(fields()[11]);
-        record.originCountry = fieldSetFlags()[12] ? this.originCountry : (java.lang.CharSequence) defaultValue(fields()[12]);
-        record.destinationAirport = fieldSetFlags()[13] ? this.destinationAirport : (java.lang.CharSequence) defaultValue(fields()[13]);
-        record.destinationCity = fieldSetFlags()[14] ? this.destinationCity : (java.lang.CharSequence) defaultValue(fields()[14]);
-        record.destinationState = fieldSetFlags()[15] ? this.destinationState : (java.lang.CharSequence) defaultValue(fields()[15]);
-        record.destinationCountry = fieldSetFlags()[16] ? this.destinationCountry : (java.lang.CharSequence) defaultValue(fields()[16]);
-        record.destinationLongitude = fieldSetFlags()[17] ? this.destinationLongitude : (java.lang.Double) defaultValue(fields()[17]);
-        record.destinationLatitude = fieldSetFlags()[18] ? this.destinationLatitude : (java.lang.Double) defaultValue(fields()[18]);
-        record.originLongitude = fieldSetFlags()[19] ? this.originLongitude : (java.lang.Double) defaultValue(fields()[19]);
-        record.originAltitude = fieldSetFlags()[20] ? this.originAltitude : (java.lang.Double) defaultValue(fields()[20]);
+        record.timeType = fieldSetFlags()[3] ? this.timeType : (com.jackdaw.avro.flights.TimeType) defaultValue(fields()[3]);
+        record.time = fieldSetFlags()[4] ? this.time : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.flightSituation = fieldSetFlags()[5] ? this.flightSituation : (com.jackdaw.avro.flights.FlightSituation) defaultValue(fields()[5]);
+        record.codeJustification = fieldSetFlags()[6] ? this.codeJustification : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.originArport = fieldSetFlags()[7] ? this.originArport : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.originCity = fieldSetFlags()[8] ? this.originCity : (java.lang.CharSequence) defaultValue(fields()[8]);
+        record.originState = fieldSetFlags()[9] ? this.originState : (java.lang.CharSequence) defaultValue(fields()[9]);
+        record.originCountry = fieldSetFlags()[10] ? this.originCountry : (java.lang.CharSequence) defaultValue(fields()[10]);
+        record.destinationAirport = fieldSetFlags()[11] ? this.destinationAirport : (java.lang.CharSequence) defaultValue(fields()[11]);
+        record.destinationCity = fieldSetFlags()[12] ? this.destinationCity : (java.lang.CharSequence) defaultValue(fields()[12]);
+        record.destinationState = fieldSetFlags()[13] ? this.destinationState : (java.lang.CharSequence) defaultValue(fields()[13]);
+        record.destinationCountry = fieldSetFlags()[14] ? this.destinationCountry : (java.lang.CharSequence) defaultValue(fields()[14]);
+        record.destinationLongitude = fieldSetFlags()[15] ? this.destinationLongitude : (java.lang.Double) defaultValue(fields()[15]);
+        record.destinationLatitude = fieldSetFlags()[16] ? this.destinationLatitude : (java.lang.Double) defaultValue(fields()[16]);
+        record.originLongitude = fieldSetFlags()[17] ? this.originLongitude : (java.lang.Double) defaultValue(fields()[17]);
+        record.originAltitude = fieldSetFlags()[18] ? this.originAltitude : (java.lang.Double) defaultValue(fields()[18]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
