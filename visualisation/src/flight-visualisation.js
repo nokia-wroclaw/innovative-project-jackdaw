@@ -4,7 +4,7 @@ function onEachFeature(feature, layer) {
     const popupContent =
         "<h3> " + feature.properties.companyAerial + "</h3>" +
         "<p class='left'> Origin airport: <strong>" + feature.properties.airportOrigin + "</strong></p>" +
-        "<p class='left'> " + feature.properties.timeType + ": <strong>" + feature.properties.time + "</strong></p>";
+        "<p class='left'> " + feature.properties.timeType + ": <strong>" + feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
 
     layer.bindPopup(popupContent);
 }
@@ -47,17 +47,17 @@ function addRealArrival() {
     const feature = realArrival.features[0];
     const pointA = [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]];
     const pointB = [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]];
-    const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" + feature.properties.time + "</strong></p>";
+    const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" + feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
     L.Polyline.Arc(
         pointA, pointB, {
             color: feature.properties.color,
             weight: 4,
             opacity: 0.75,
             vertices: 100,
-            onEachFeature: onEachFeature,
-        }).addTo(map).bindPopup(popupContent);
-
-    // todo animated line
+            snakingSpeed: 200,
+        }).addTo(map)
+        .bindPopup(popupContent)
+        .snakeIn();
 }
 
 async function demo() {
