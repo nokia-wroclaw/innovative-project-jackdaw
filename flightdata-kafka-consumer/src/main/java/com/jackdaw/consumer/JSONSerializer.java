@@ -43,8 +43,13 @@ public class JSONSerializer {
         JSONObject point = new JSONObject();
         JSONArray coordinates = new JSONArray();
 
-        coordinates.put(flight.getOriginAltitude());
-        coordinates.put(flight.getOriginLongitude());
+        if (flight.getTimeType() == TimeType.arrivalReal) {
+            coordinates.put(flight.getDestinationLatitude());
+            coordinates.put(flight.getDestinationLongitude());
+        } else {
+            coordinates.put(flight.getOriginAltitude());
+            coordinates.put(flight.getOriginLongitude());
+        }
 
         point.put(TYPE, POINT);
         point.put(COORDINATES, coordinates);
