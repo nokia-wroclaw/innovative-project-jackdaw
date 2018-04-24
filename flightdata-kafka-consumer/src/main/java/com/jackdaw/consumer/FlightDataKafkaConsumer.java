@@ -36,8 +36,6 @@ public class FlightDataKafkaConsumer {
     public void run() {
         consumer.subscribe(Collections.singletonList(topicName));
 
-        System.out.println("Reading topic:" + topicName);
-
         while(true) {
             ConsumerRecords<Long, Flight> records = consumer.poll(1000);
 
