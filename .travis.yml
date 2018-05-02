@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t consumer ./flightdata-kafka-consumer
+      - docker tag consumer $DOCKER_USERNAME/consumer
+      - docker push $DOCKER_USERNAME/consumer
+      script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t producer ./flightdata-kafka-producer
+      - docker tag producer $DOCKER_USERNAME/producer
+      - docker push $DOCKER_USERNAME/producer
+      script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t visualisation ./visualisation
+      - docker tag visualisation $DOCKER_USERNAME/visualisation
+      - docker push $DOCKER_USERNAME/visualisation
