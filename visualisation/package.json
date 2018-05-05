@@ -1,0 +1,20 @@
+{
+  "name": "visualisation",
+  "version": "0.1.0",
+  "description": "Brazilian flights visualization",
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  },
+  "dependencies": {
+    "avsc": "^5.2.3",
+    "express": "^4.16.3",
+    "kafka-node": "^2.6.1",
+    "npm": "^6.0.0",
+    "node-zookeeper-client": "~0.2.2"
+  },
+  "scripts": {
+    "lint": "eslint src/js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
