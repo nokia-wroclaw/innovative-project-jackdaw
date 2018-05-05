@@ -28,7 +28,7 @@ consumer.on('message', function (message) {
 });
 
 consumer.on('error', function (err) {
-    console.error('Error: ${err.stack || err.message}', err);
+    console.error(`Error: ${err.stack || err.message}`, err);
 });
 
 /*
