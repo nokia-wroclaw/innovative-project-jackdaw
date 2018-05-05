@@ -4,8 +4,8 @@ function onEachFeature(feature, layer) {
     const popupContent =
         "<h3> " + feature.properties.companyAerial + "</h3>" +
         "<p class='left'> Origin airport: <strong>" + feature.properties.airportOrigin + "</strong></p>" +
-        "<p class='left'> " + feature.properties.timeType + ": <strong>" + feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
-
+        "<p class='left'> " + feature.properties.timeType + ": <strong>" +
+        feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
     layer.bindPopup(popupContent);
 }
 
@@ -22,10 +22,6 @@ function pointToLayer(feature, latlng) {
 
 function style(feature) {
     return feature.properties && feature.properties.style;
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function setUpMap() {
@@ -47,7 +43,8 @@ function addLineToMap(estimatedArrival) {
     const feature = estimatedArrival.features[0];
     const pointA = [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]];
     const pointB = [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]];
-    const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" + feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
+    const popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" +
+        feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
     L.Polyline.Arc(
         pointA, pointB, {
             color: feature.properties.color,
@@ -60,16 +57,5 @@ function addLineToMap(estimatedArrival) {
         .snakeIn();
 }
 
-async function demo() {
-    setUpMap();
-    await sleep(1500);
-    addPointToMap(estimatedDeparture);
-    await sleep(1500);
-    addPointToMap(realDeparture);
-    await sleep(1500);
-    addLineToMap(estimatedArrival);
-    await sleep(4000);
-    addPointToMap(realArrival);
-}
+setUpMap();
 
-demo();
