@@ -1,4 +1,4 @@
-const estimatedDeparture = {
+let estimatedDeparture = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -29,7 +29,7 @@ const estimatedDeparture = {
     ]
 };
 
-const realDeparture = {
+let realDeparture = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -60,7 +60,7 @@ const realDeparture = {
     ]
 };
 
-const estimatedArrival = {
+let estimatedArrival = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -93,7 +93,7 @@ const estimatedArrival = {
     ]
 };
 
-const realArrival = {
+let realArrival = {
     "type": "FeatureCollection",
     "features": [
         {

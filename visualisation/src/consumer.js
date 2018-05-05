@@ -1,21 +1,22 @@
 'use strict';
 
-const kafka = require('kafka-node');
-const Consumer = kafka.Consumer;
-const Offset = kafka.Offset;
-const Client = kafka.Client;
-const topic = 'Visualization';
-const consumerGroupName = 'visualization-group';
+let kafka = require('kafka-node');
+let Consumer = kafka.Consumer;
+let Offset = kafka.Offset;
+let Client = kafka.Client;
+let topic = 'Visualization';
+let consumerGroupName = 'visualization-group';
 
-const client = new Client('localhost:2181', consumerGroupName);
-const topics = [{topic: topic, partition: 0}];
-const options = {autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024};
+let client = new Client('localhost:2181', consumerGroupName);
+let topics = [{topic: topic, partition: 1}];
+let options = {autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024};
 
-const consumer = new Consumer(client, topics, options);
-const offset = new Offset(client);
+let consumer = new Consumer(client, topics, options);
+let offset = new Offset(client);
 
-consumer.on('message', message => {
-    console.log(message);
+
+consumer.on('message', function (message) {
+    console.info(message);
     switch (message.properties.timeType) {
         case "Expected arrival":
             addLineToMap(message);
@@ -26,20 +27,20 @@ consumer.on('message', message => {
     }
 });
 
-consumer.on('error', err => {
-    console.error(`Error: ${err.stack || err.message}`, err);
+consumer.on('error', function (err) {
+    console.error('Error: ${err.stack || err.message}', err);
 });
 
 /*
 * If consumer get `offsetOutOfRange` event, fetch data from the smallest(oldest) offset
 */
-consumer.on('offsetOutOfRange', topic => {
+consumer.on('offsetOutOfRange', function (topic) {
     topic.maxNum = 2;
-    offset.fetch([topic], (err, offsets) => {
+    offset.fetch([topic], function (err, offsets) {
         if (err) {
             return console.error(err);
         }
-        const min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
+        let min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
         consumer.setOffset(topic.topic, topic.partition, min);
     });
 });
