@@ -1,6 +1,13 @@
 # visualization
 
+Kafka consumer that visualizes flights in Brazil.
 
-## Run
 
-`node index.js`
+### Run
+
+Start the server: `npm start`.
+
+
+### Configuration
+
+Install all needed dependencies: `npm install`.
