@@ -1,4 +1,4 @@
-let map = L.map('map').setView([0, 0], 4);
+let map = L.map('map').setView([-8.930606, -53.250250], 4);
 
 function onEachFeature(feature, layer) {
     let popupContent =
@@ -58,3 +58,18 @@ function addLineToMap(estimatedArrival) {
 }
 
 setUpMap();
+
+(function ($) {
+    const socket = io.connect('http://localhost:3000', {transports: ['websocket', 'flashsocket']});
+    socket.on('data', function (message) {
+        console.info('New message received');
+        switch (message.properties.timeType) {
+            case "Expected arrival":
+                addLineToMap(message);
+                break;
+            default:
+                addPointToMap(message);
+                break;
+        }
+    });
+})(jQuery);
