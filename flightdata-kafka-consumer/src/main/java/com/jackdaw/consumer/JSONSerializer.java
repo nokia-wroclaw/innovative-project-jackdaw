@@ -9,7 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONSerializer {
-    public void write(String filename, Flight flight) {
+
+    public String getGeoJSON(Flight flight) {
         JSONObject featureCollection = new JSONObject();
         JSONArray featureList = new JSONArray();
         JSONObject feature = new JSONObject();
@@ -23,13 +24,7 @@ public class JSONSerializer {
         featureList.put(feature);
         featureCollection.put(FEATURES, featureList);
 
-        try {
-            FileWriter fw = new FileWriter("/volume/" + filename, true);
-            fw.write(featureCollection.toString(4));
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return featureCollection.toString(4);
     }
 
     private JSONObject getCorrectGeometry(Flight flight) {
