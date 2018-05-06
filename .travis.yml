@@ -1,0 +1,29 @@
+sudo: required
+dist: trusty
+
+
+branches:
+  only:
+  - master
+  - travis-test
+
+bundler_args: "--jobs 4"
+
+jobs:
+  include:
+    - stage: build producer, consumer and visualization
+      script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t consumer ./flightdata-kafka-consumer
+      - docker tag consumer $DOCKER_USERNAME/consumer
+      - docker push $DOCKER_USERNAME/consumer
+    - script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t producer ./flightdata-kafka-producer
+      - docker tag producer $DOCKER_USERNAME/producer
+      - docker push $DOCKER_USERNAME/producer
+    - script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t visualisation ./visualisation
+      - docker tag visualisation $DOCKER_USERNAME/visualisation
+      - docker push $DOCKER_USERNAME/visualisation
