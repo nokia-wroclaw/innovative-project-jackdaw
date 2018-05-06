@@ -16,8 +16,8 @@ public class Runner {
         topicProperties.load(new FileInputStream("/volume/topic.properties"));
         schemaProps.load(new FileInputStream("/volume/flightdata-kafka-consumer.properties"));
 
-        FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(topicProperties.get("topicName").toString(),
-                                                                       topicProperties.get("fileName").toString());
+        FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(topicProperties.get("sourceTopicName").toString(),
+                                                                       topicProperties.get("destinationTopicName").toString());
         consumer.run();
     }
 }
