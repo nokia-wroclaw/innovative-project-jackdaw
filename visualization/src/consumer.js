@@ -1,6 +1,7 @@
 'use strict';
 
 let kafka = require('kafka-node');
+
 let Consumer = kafka.Consumer;
 let Offset = kafka.Offset;
 let Client = kafka.Client;
@@ -17,14 +18,7 @@ let offset = new Offset(client);
 
 consumer.on('message', function (message) {
     console.info(message);
-    switch (message.properties.timeType) {
-        case "Expected arrival":
-            addLineToMap(message);
-            break;
-        default:
-            addPointToMap(message);
-            break;
-    }
+    io.sockets.emit('data', message.value);
 });
 
 consumer.on('error', function (err) {

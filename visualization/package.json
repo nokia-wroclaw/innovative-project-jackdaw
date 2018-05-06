@@ -1,28 +1,18 @@
 {
   "name": "visualization",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "app.js",
   "description": "Brazilian flights visualization",
-  "devDependencies": {
-    "eslint": "^5.0.0-alpha.2",
-    "eslint-config-google": "^0.9.1",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0"
-  },
   "dependencies": {
     "avsc": "^5.2.3",
     "express": "^4.16.3",
     "kafka-node": "^2.6.1",
-    "leaflet": "^1.3.1",
-    "leaflet-arc": "^1.0.2",
-    "leaflet.polyline.snakeanim": "^0.1.1",
     "node-zookeeper-client": "^0.2.2",
-    "npm": "^6.0.0"
+    "npm": "^6.0.0",
+    "socket.io": "^2.1.0"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js && open http://localhost:3000"
   },
   "license": "MIT"
 }
