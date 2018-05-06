@@ -36,5 +36,9 @@ services:
         SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
         SCHEMA_REGISTRY_AVRO_COMPATIBILITY_LEVEL: none
       restart: unless-stopped
+  visualisation:
+      build: ./visualisation/
+      ports:
+      - 8080:80
 
 # sudo docker run --net innovativeprojectjackdaw_default -d --name schema-registry -p 8081:8081 --link innovativeprojectjackdaw_zookeeper_1:zookeeper     --link wurstmeister/kafka:kafka confluent/schema-registry
