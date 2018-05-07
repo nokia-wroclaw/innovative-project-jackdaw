@@ -5,12 +5,13 @@ let kafka = require('kafka-node');
 let Consumer = kafka.Consumer;
 let Offset = kafka.Offset;
 let Client = kafka.Client;
-let topic = 'Visualization';
+let argv = require('optimist').argv;
+let topic = argv.topic || 'Visualization';
 let consumerGroupName = 'visualization-group';
 
-let client = new Client('localhost:2181', consumerGroupName);
-let topics = [{topic: topic, partition: 1}];
-let options = {autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024};
+let client = new Client('kafka:2181', consumerGroupName);
+let topics = [{topic: topic, partition: 0}];
+let options = {autoCommit: true, fetchMaxWaitMs: 60000, fetchMaxBytes: 1000012};
 
 let consumer = new Consumer(client, topics, options);
 let offset = new Offset(client);
@@ -22,7 +23,7 @@ consumer.on('message', function (message) {
 });
 
 consumer.on('error', function (err) {
-    console.error(`Error: ${err.stack || err.message}`, err);
+    console.error(`${err.stack || err.message}`, err);
 });
 
 /*

@@ -23,6 +23,6 @@ jobs:
       - docker push $DOCKER_USERNAME/producer
     - script:
       - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-      - docker build -t visualisation ./visualisation
-      - docker tag visualisation $DOCKER_USERNAME/visualisation
-      - docker push $DOCKER_USERNAME/visualisation
+      - docker build -t visualization ./visualization
+      - docker tag visualization $DOCKER_USERNAME/visualization
+      - docker push $DOCKER_USERNAME/visualization
