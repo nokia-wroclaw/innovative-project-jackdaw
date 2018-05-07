@@ -9,10 +9,11 @@
     "kafka-node": "^2.6.1",
     "node-zookeeper-client": "^0.2.2",
     "npm": "^6.0.0",
+    "optimist": "^0.6.1",
     "socket.io": "^2.1.0"
   },
   "scripts": {
-    "start": "node app.js && open http://localhost:3000"
+    "start": "node app.js"
   },
   "license": "MIT"
 }

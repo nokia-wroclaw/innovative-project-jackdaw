@@ -2,13 +2,10 @@ let express = require("express");
 let fs = require('fs');
 let http = require('http');
 
-let app = express();
-let port = 3000;
-app.set('port', port);
-let server = http.createServer(app);
-server.listen(port);
-let io = require('socket.io').listen(server);
+const app = express();
 
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 app.use(express.static(__dirname + '/public'));
 
@@ -19,7 +16,11 @@ app.get('/', function (req, res) {
     res.sendFile('favicon.ico');
 });
 
+app.set('port', PORT);
+let server = http.createServer(app);
+server.listen(PORT);
+let io = require('socket.io').listen(server);
 
-console.log("Running at port 3000");
+console.log(`Running on http://${HOST}:${PORT}`);
 
 eval(fs.readFileSync('src/consumer.js') + '');
