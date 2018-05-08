@@ -57,18 +57,22 @@ function addLineToMap(estimatedArrival) {
         .snakeIn();
 }
 
+
 setUpMap();
 
-(function ($) {
-    const socket = io.connect('http://localhost:3000', {transports: ['websocket', 'flashsocket']});
-    socket.on('data', function (message) {
+
+(function receiveMessage() {
+    const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
+    socket.on('news', function (message) {
         console.info('New message received');
-        switch (message.properties.timeType) {
+        const flight = JSON.parse(message);
+        console.log(flight);
+        switch (flight.features[0].properties.timeType) {
             case "Expected arrival":
-                addLineToMap(message);
+                addLineToMap(flight);
                 break;
             default:
-                addPointToMap(message);
+                addPointToMap(flight);
                 break;
         }
     });

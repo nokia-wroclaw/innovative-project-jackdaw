@@ -15,5 +15,9 @@
   "scripts": {
     "start": "node app.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nokia-wroclaw/innovative-project-jackdaw.git"
+  }
 }
