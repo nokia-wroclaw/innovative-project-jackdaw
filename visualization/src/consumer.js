@@ -11,16 +11,26 @@ let consumerGroupName = 'visualization-group';
 
 let client = new Client('kafka:2181', consumerGroupName);
 let topics = [{topic: topic, partition: 0}];
-let options = {autoCommit: true, fetchMaxWaitMs: 60000, fetchMaxBytes: 1000012};
+let options = {autoCommit: true, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024};
 
 let consumer = new Consumer(client, topics, options);
 let offset = new Offset(client);
 
 
-consumer.on('message', function (message) {
-    console.info(message);
-    io.sockets.emit('data', message.value);
+client.on('ready', function () {
+    console.log('Client\'s ready!')
 });
+
+
+let io = require('socket.io').listen(server);
+consumer.on('message', function (message) {
+    const messageString = JSON.stringify(message.value);
+    console.log(messageString);
+    io.sockets.on('connection', function (socket) {
+        socket.emit('news', messageString);
+    });
+});
+
 
 consumer.on('error', function (err) {
     console.error(`${err.stack || err.message}`, err);

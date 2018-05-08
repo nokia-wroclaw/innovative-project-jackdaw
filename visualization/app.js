@@ -19,7 +19,6 @@ app.get('/', function (req, res) {
 app.set('port', PORT);
 let server = http.createServer(app);
 server.listen(PORT);
-let io = require('socket.io').listen(server);
 
 console.log(`Running on http://${HOST}:${PORT}`);
 
