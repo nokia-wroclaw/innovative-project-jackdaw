@@ -16,11 +16,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   producer:
-      build: ./flightdata-kafka-producer/
+      image: projectjackdaw/producer
       volumes:
         - ./flightdata-kafka-producer/:/volume/
   consumer:
-      build: ./flightdata-kafka-consumer/
+      image: projectjackdaw/consumer
       volumes:
         - ./flightdata-kafka-consumer/:/volume/
   schema-registry:

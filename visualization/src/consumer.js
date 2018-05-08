@@ -9,7 +9,7 @@ let argv = require('optimist').argv;
 let topic = argv.topic || 'Visualization';
 let consumerGroupName = 'visualization-group';
 
-let client = new Client('kafka:2181', consumerGroupName);
+let client = new Client('zookeeper:2181', consumerGroupName);
 let topics = [{topic: topic, partition: 0}];
 let options = {autoCommit: true, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024};
 
@@ -22,13 +22,16 @@ client.on('ready', function () {
 });
 
 
-let io = require('socket.io').listen(server);
+let io = require('socket.io').listen(server, {transports: ['websocket', 'flashsocket']});
+
+io.sockets.on('connection', function (socket) {
+        console.log('CLIENT CONNECTED');
+    });
+
 consumer.on('message', function (message) {
     const messageString = JSON.stringify(message.value);
-    console.log(messageString);
-    io.sockets.on('connection', function (socket) {
-        socket.emit('news', messageString);
-    });
+    console.log('READ FROM KAFKA');
+    io.sockets.emit('news', messageString);
 });
 
 
