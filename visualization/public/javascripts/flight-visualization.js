@@ -66,14 +66,15 @@ setUpMap();
     const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
     socket.on('news', function (message) {
         console.info('New message received');
-        let flight = JSON.parse(message);
-        console.log(flight);
-        switch (flight.features[0].properties.timeType) {
+        // let flight = JSON.parse(message);
+        let flightJSON = JSON.parse(message);
+        console.log(flightJSON);
+        switch (flightJSON.features[0].properties.timeType) {
             case "Expected arrival":
-                addLineToMap(flight);
+                addLineToMap(flightJSON);
                 break;
             default:
-                addPointToMap(flight);
+                addPointToMap(flightJSON);
                 break;
         }
     });
