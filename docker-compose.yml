@@ -16,11 +16,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   producer:
-      build: ./flightdata-kafka-producer/
+      image: projectjackdaw/producer
       volumes:
         - ./flightdata-kafka-producer/:/volume/
   consumer:
-      build: ./flightdata-kafka-consumer/
+      image: projectjackdaw/consumer
       volumes:
         - ./flightdata-kafka-consumer/:/volume/
   schema-registry:
@@ -37,7 +37,7 @@ services:
         SCHEMA_REGISTRY_AVRO_COMPATIBILITY_LEVEL: none
       restart: unless-stopped
   visualization:
-      build: ./visualization/
+      image: projectjackdaw/visualization
       ports:
       - 3000:3000
 
