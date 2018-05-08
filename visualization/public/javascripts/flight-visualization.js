@@ -9,7 +9,8 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(popupContent);
 }
 
-function pointToLayer(feature, latlng) {
+function pointToLayer(feature) {
+    const latlng = [feature.geometry.coordinates[0], feature.geometry.coordinates[1]];
     return L.circleMarker(latlng, {
         radius: 8,
         fillColor: feature.properties.color,
@@ -41,8 +42,8 @@ function addPointToMap(geojson) {
 
 function addLineToMap(estimatedArrival) {
     let feature = estimatedArrival.features[0];
-    let pointA = [feature.geometry.coordinates[0][1], feature.geometry.coordinates[0][0]];
-    let pointB = [feature.geometry.coordinates[1][1], feature.geometry.coordinates[1][0]];
+    let pointA = [feature.geometry.coordinates[0][0], feature.geometry.coordinates[0][1]];
+    let pointB = [feature.geometry.coordinates[1][0], feature.geometry.coordinates[1][1]];
     let popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" +
         feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
     L.Polyline.Arc(
@@ -65,8 +66,7 @@ setUpMap();
     const socket = io.connect('http://192.168.99.100:3000', {transports: ['websocket', 'flashsocket']});
     socket.on('news', function (message) {
         console.info('New message received');
-        const flight = JSON.parse(message);
-        console.log(flight);
+        var flight = JSON.parse(message);
         switch (flight.features[0].properties.timeType) {
             case "Expected arrival":
                 addLineToMap(flight);

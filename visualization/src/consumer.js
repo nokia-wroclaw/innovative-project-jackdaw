@@ -29,9 +29,8 @@ io.sockets.on('connection', function (socket) {
     });
 
 consumer.on('message', function (message) {
-    const messageString = JSON.stringify(message.value);
-    console.log('READ FROM KAFKA');
-    io.sockets.emit('news', messageString);
+    console.log(message.value);
+    io.sockets.emit('news', message.value);
 });
 
 
