@@ -24,7 +24,7 @@ client.on('ready', function () {
 
 let io = require('socket.io').listen(server);
 consumer.on('message', function (message) {
-    const messageString = message.value; //todo
+    const messageString = message.value;
     console.log(messageString);
     io.sockets.emit('news', messageString);
 });
