@@ -15,7 +15,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-RUN apt update && apt install netcat-openbsd
+RUN apt-get update && apt-get install -y netcat-openbsd
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 EXPOSE 3000

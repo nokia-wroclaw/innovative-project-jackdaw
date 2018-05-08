@@ -14,4 +14,6 @@ do
 	echo "waiting for schema-registry"
 done
 
+sleep 15
+
 exec "$@"

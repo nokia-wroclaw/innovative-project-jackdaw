@@ -22,4 +22,8 @@ server.listen(PORT);
 
 console.log(`Running on http://${HOST}:${PORT}`);
 
+// Read from Kafka:
 eval(fs.readFileSync('src/consumer.js') + '');
+
+// Read static messages (socket test):
+// eval(fs.readFileSync('src/socket-consumer.js') + '');
