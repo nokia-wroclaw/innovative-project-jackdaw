@@ -1,7 +1,7 @@
 FROM node:carbon
 
 # Create app directory
-WORKDIR /usr/src/visualization
+WORKDIR /usr/src/charts
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -18,5 +18,5 @@ COPY . .
 RUN apt-get update && apt-get install -y netcat-openbsd
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
-EXPOSE 3001
+EXPOSE 3000
 CMD [ "npm", "start" ]

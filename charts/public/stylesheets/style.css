@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+#chartContainer {
+    height: 90%;
+    width: 90%;
+}
