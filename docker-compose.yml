@@ -39,6 +39,10 @@ services:
   visualization:
       image: projectjackdaw/visualization
       ports:
+      - 3001:3001
+  charts:
+      image: projectjackdaw/charts
+      ports:
       - 3000:3000
 
 # sudo docker run --net innovativeprojectjackdaw_default -d --name schema-registry -p 8081:8081 --link innovativeprojectjackdaw_zookeeper_1:zookeeper     --link wurstmeister/kafka:kafka confluent/schema-registry
