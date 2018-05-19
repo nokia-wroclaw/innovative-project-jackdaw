@@ -4,7 +4,7 @@ let http = require('http');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 3001;
 const HOST = '0.0.0.0';
 
 app.use(express.static(__dirname + '/public'));
