@@ -26,3 +26,8 @@ jobs:
       - docker build -t visualization ./visualization
       - docker tag visualization $DOCKER_USERNAME/visualization
       - docker push $DOCKER_USERNAME/visualization
+    - script:
+      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - docker build -t charts ./charts
+      - docker tag charts $DOCKER_USERNAME/charts
+      - docker push $DOCKER_USERNAME/charts
