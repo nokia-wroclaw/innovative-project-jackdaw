@@ -6,10 +6,10 @@ const dataPoints = [
     {y: 4.76, label: "Why so late, flight?"}
 ];
 
-const chart = new CanvasJS.Chart("chartContainer", {
+const pieChart = new CanvasJS.Chart("pie", {
     animationEnabled: true,
     title: {
-        text: "Brazilian Flights Delay Chart"
+        text: "Brazilian Flights Delay Pie Chart"
     },
     data: [{
         type: "pie",
@@ -20,8 +20,32 @@ const chart = new CanvasJS.Chart("chartContainer", {
     }]
 });
 
+const barChart = new CanvasJS.Chart("bar", {
+    animationEnabled: true,
+    title: {
+        text: "Brazilian Flights Delay Bar Chart"
+    },
+    axisY: {
+        title: "Minutes",
+        titleFontColor: "#888",
+        titleFontSize: 20
+    },
+    axisX: {
+        title: "Airline",
+        titleFontColor: "#888",
+        titleFontSize: 20,
+        labelFontColor: "dimGrey"
+    },
+    data: [{
+        type: "bar",
+        dataPoints: dataPoints
+    }]
+});
+
+
 window.onload = function () {
-    chart.render();
+    pieChart.render();
+    barChart.render();
 };
 
 // ------
@@ -42,7 +66,6 @@ window.onclick = function () {
         let data = JSON.parse(message);
         console.log(data);
         updateChart(data);
-        chart.render();
     });
 })(jQuery);
 
@@ -63,5 +86,6 @@ function updateChart(data) {
             label: data.value[1]
         });
     }
-    chart.render();
+    barChart.render();
+    pieChart.render();
 }
