@@ -22,13 +22,6 @@ client.on('ready', function () {
     console.log('Client\'s ready!')
 });
 
-consumer.on('message', function (message) {
-    const messageString = message.value;
-    console.log(messageString);
-    io.sockets.emit('delay', messageString);
-});
-
-
 consumer.on('error', function (err) {
     console.error(`${err.stack || err.message}`, err);
 });
@@ -46,3 +39,5 @@ consumer.on('offsetOutOfRange', function (topic) {
         consumer.setOffset(topic.topic, topic.partition, min);
     });
 });
+
+module.exports = consumer;
