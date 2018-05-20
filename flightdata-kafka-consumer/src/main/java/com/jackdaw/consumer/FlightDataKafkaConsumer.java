@@ -1,6 +1,7 @@
 package com.jackdaw.consumer;
 
 import com.jackdaw.avro.flights.Flight;
+import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,10 +17,10 @@ public class FlightDataKafkaConsumer
 {
     private static final Logger LOG = LoggerFactory.getLogger(FlightDataKafkaConsumer.class);
 
-    private final KafkaConsumer<Long, Flight> consumer;
+    private final Consumer<Long, Flight> consumer;
     private final GeoJSONKafkaProducer geojsonProducer;
 
-    public FlightDataKafkaConsumer(KafkaConsumer<Long, Flight> consumer,
+    public FlightDataKafkaConsumer(Consumer <Long, Flight> consumer,
                                    GeoJSONKafkaProducer geojsonProducer)
     {
         this.consumer = consumer;

@@ -1,7 +1,7 @@
 package com.jackdaw.consumer;
 
 import com.jackdaw.avro.flights.Flight;
-import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +13,10 @@ public class GeoJSONKafkaProducer
     private static final Logger LOG = LoggerFactory.getLogger(GeoJSONKafkaProducer.class);
 
     private final String destinationTopicName;
-    private final KafkaProducer<Long, String> producer;
+    private final Producer<Long, String> producer;
     private final JSONSerializer serializer;
 
-    public GeoJSONKafkaProducer(KafkaProducer<Long, String> producer,
+    public GeoJSONKafkaProducer(Producer<Long, String> producer,
                                 JSONSerializer serializer,
                                 String destinationTopicName)
     {
@@ -32,7 +32,7 @@ public class GeoJSONKafkaProducer
             String deserialized = serializer.getGeoJSON(value);
 
             producer.send(new ProducerRecord<>(destinationTopicName, key, deserialized)).get();
-            LOG.info("Sent message: ({}, {})", key, value);
+            LOG.info("Sent message: ({}, {})", key, deserialized);
         }
         catch (InterruptedException | ExecutionException e)
         {
