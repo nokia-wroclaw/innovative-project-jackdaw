@@ -1,45 +1,6 @@
 extends layout
 
 block content
-    //h1= title
     #chartContainer
-    script.
-        var dataPoints = [
-            {y: 10, label: "Example flight"},
-            {y: 5.4, label: "Another flight"},
-            {y: 0.34, label: "Hello flight"},
-            {y: 3.14, label: "Nice to meet you, flight"},
-            {y: 4.76, label: "Why so late, flight?"}
-        ];
+    script(type='text/javascript' src='/javascripts/chart.js')
 
-        window.onload = function () {
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                title: {
-                    text: "Brazilian Flights Delay Chart"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 240,
-                    yValueFormatString: "##0.00\" min\"",
-                    indexLabel: "{label}",
-                    dataPoints: dataPoints
-                }]
-            });
-            chart.render();
-        };
-
-        (function receiveMessage() {
-            const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
-            socket.on('delay', function (message) {
-                console.info('New message received');
-                let data = JSON.parse(message);  // JSON format: { key: 1, value: [10, "flight"] }
-                $.each(data, function (key, value) {
-                    dataPoints.push({
-                        y: parseInt(value[0]),
-                        label: value[1]
-                    });
-                });
-                chart.render();
-            });
-        })(jQuery);  // todo

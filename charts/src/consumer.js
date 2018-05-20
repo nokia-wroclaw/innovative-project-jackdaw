@@ -1,5 +1,6 @@
 'use strict';
 
+const io = require('../bin/www');
 let kafka = require('kafka-node');
 
 let Consumer = kafka.Consumer;
@@ -21,8 +22,6 @@ client.on('ready', function () {
     console.log('Client\'s ready!')
 });
 
-
-let io = require('socket.io').listen(server);
 consumer.on('message', function (message) {
     const messageString = message.value;
     console.log(messageString);
