@@ -1,7 +1,7 @@
 const dataPoints = [
     {y: 10, label: "Example flight"},
     {y: 5.4, label: "Another flight"},
-    {y: 0.34, label: "Hello flight"},
+    {y: 0.84, label: "Hello flight"},
     {y: 3.14, label: "Nice to meet you, flight"},
     {y: 4.76, label: "Why so late, flight?"}
 ];
@@ -27,15 +27,11 @@ window.onload = function () {
 // ------
 // Add new data on click – test
 // todo delete as a real data-source come into existence
-let message = "{ \"key\": \"1\", \"value\": [\"4\", \"I'm new\" ] }";
+let message = "{ \"key\": \"1\", \"value\": [ \"1.34\", \"I'm new\" ] }";
 
 window.onclick = function () {
     let data = JSON.parse(message);
-    dataPoints.push({
-        y: parseInt(data.value[0]),
-        label: data.value[1]
-    });
-    chart.render();
+    updateChart(data);
 };
 // ------
 
@@ -45,10 +41,27 @@ window.onclick = function () {
         console.info('New message received');
         let data = JSON.parse(message);
         console.log(data);
-        dataPoints.push({
-            y: parseInt(data[0]),
-            label: data[1]
-        });
+        updateChart(data);
         chart.render();
     });
-})(jQuery);  // todo
+})(jQuery);
+
+function updateChart(data) {
+    let updatePosition = -1;
+    for (let index in dataPoints) {
+        if (dataPoints[index].label === data.value[1]) {
+            updatePosition = index;
+        }
+    }
+    console.log("UpdatePosition: " + updatePosition);
+    if (updatePosition !== -1) {
+        let newY = parseFloat(dataPoints[updatePosition].y) + parseFloat(data.value[0]);
+        dataPoints[updatePosition] = {y: newY, label: data.value[1]};
+    } else {
+        dataPoints.push({
+            y: parseFloat(data.value[0]),
+            label: data.value[1]
+        });
+    }
+    chart.render();
+}

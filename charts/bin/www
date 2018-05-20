@@ -5,6 +5,7 @@
  */
 
 const app = require('../app');
+const consumer = require('../src/consumer');
 const debug = require('debug')('charts:server');
 const http = require('http');
 
@@ -22,6 +23,20 @@ app.set('port', PORT);
 
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
+
+consumer.on('message', function (message) {
+    console.log(message.value);
+    io.sockets.emit('delay', message);
+});
+
+// ------
+// todo delete as a real data-source come into existence
+setInterval(function () {
+    let message = "{ \"key\": \"1\", \"value\": [ \"0.55\", \"From customer\" ] }";
+    console.log("Sending: " + JSON.parse(message).value);
+    io.sockets.emit('delay', message);
+}, 2000);
+// ------
 
 /**
  * Listen on provided port, on all network interfaces.
