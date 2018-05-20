@@ -5,7 +5,6 @@ html, body {
 
 body {
     margin: 0;
-    padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -13,7 +12,27 @@ a {
     color: #00B7FF;
 }
 
-#chartContainer {
-    height: 90%;
-    width: 90%;
+div {
+    border-radius: 50px;
+}
+
+div.chartContainer {
+    display: inline-block;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+#pie {
+    alignment: center;
+    height: 80%;
+    width: 80%;
+    margin: 10%;
+}
+
+#bar {
+    alignment: center;
+    height: 80%;
+    width: 80%;
+    margin: 10%;
 }
