@@ -40,5 +40,18 @@ services:
       image: projectjackdaw/visualization
       ports:
       - 3000:3000
+  ksql:
+      image: confluentinc/ksql-cli
+      hostname: ksql
+      depends_on:
+        - kafka
+        - schema-registry
+      environment:
+        KSQL_CONFIG_DIR: "/etc/ksql"
+        KSQL_LOG4J_OPTS: "-Dlog4j.configuration=file:/etc/ksql/log4j-rolling.properties"
+        STREAMS_BOOTSTRAP_SERVERS: kafka:29092
+        STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
+        STREAMS_SCHEMA_REGISTRY_PORT: 8081
+      restart: unless-stopped
 
 # sudo docker run --net innovativeprojectjackdaw_default -d --name schema-registry -p 8081:8081 --link innovativeprojectjackdaw_zookeeper_1:zookeeper     --link wurstmeister/kafka:kafka confluent/schema-registry
