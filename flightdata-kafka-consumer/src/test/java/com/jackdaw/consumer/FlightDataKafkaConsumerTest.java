@@ -58,11 +58,11 @@ public class FlightDataKafkaConsumerTest {
         HashMap<TopicPartition, Long> beginningOffsets = new HashMap<>();
         beginningOffsets.put(new TopicPartition("Test", partition), offset);
         mockConsumer.updateBeginningOffsets(beginningOffsets);
-        mockConsumer.addRecord(new ConsumerRecord<>("Test", partition, offset, expectedKey, flight));
 
+        mockConsumer.addRecord(new ConsumerRecord<>("Test", partition, offset, expectedKey, flight));
+        FlightDataKafkaConsumer kafkaConsumer = new FlightDataKafkaConsumer(mockConsumer, mockGeojsonProducer);
         ConsumerRecords<Long, Flight> records = mockConsumer.poll(1000);
 
-        FlightDataKafkaConsumer kafkaConsumer = new FlightDataKafkaConsumer(mockConsumer, mockGeojsonProducer);
         kafkaConsumer.send(records);
 
         verify(mockGeojsonProducer).sendMessage(expectedKey, flight);

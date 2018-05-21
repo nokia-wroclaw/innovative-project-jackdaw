@@ -83,8 +83,8 @@ public class GeoJSONKafkaProducerTest {
                 "}";
 
         when(mockSerializer.getGeoJSON(flight)).thenReturn(expectedValue);
-
         GeoJSONKafkaProducer geojsonProducer = new GeoJSONKafkaProducer(mockProducer, mockSerializer, "Test");
+
         geojsonProducer.sendMessage(expectedKey, flight);
 
         verify(mockSerializer).getGeoJSON(flight);
@@ -94,7 +94,6 @@ public class GeoJSONKafkaProducerTest {
         List<ProducerRecord<Long, String>> history = mockProducer.history();
         List<ProducerRecord<Long, String>> expected = Collections.singletonList(
                 new ProducerRecord<>("Test", expectedKey, expectedValue));
-
         assertEquals("Sent didn't match expected", expected, history);
     }
 }

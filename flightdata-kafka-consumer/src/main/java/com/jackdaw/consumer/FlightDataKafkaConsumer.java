@@ -4,43 +4,28 @@ import com.jackdaw.avro.flights.Flight;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.concurrent.ExecutionException;
-
-public class FlightDataKafkaConsumer
-{
-    private static final Logger LOG = LoggerFactory.getLogger(FlightDataKafkaConsumer.class);
-
+public class FlightDataKafkaConsumer {
     private final Consumer<Long, Flight> consumer;
     private final GeoJSONKafkaProducer geojsonProducer;
+    private boolean isRunning = true;
 
-    public FlightDataKafkaConsumer(Consumer <Long, Flight> consumer,
-                                   GeoJSONKafkaProducer geojsonProducer)
-    {
+    public FlightDataKafkaConsumer(Consumer<Long, Flight> consumer,
+                                   GeoJSONKafkaProducer geojsonProducer) {
         this.consumer = consumer;
         this.geojsonProducer = geojsonProducer;
     }
 
-    public void run()
-    {
-        while (true)
-        {
+    public void run() {
+        while (isRunning) {
             ConsumerRecords<Long, Flight> records = consumer.poll(1000);
 
             send(records);
         }
     }
 
-    void send(ConsumerRecords<Long, Flight> records)
-    {
-        for (ConsumerRecord<Long, Flight> record : records)
-        {
+    void send(ConsumerRecords<Long, Flight> records) {
+        for (ConsumerRecord<Long, Flight> record : records) {
             Long key = record.key();
             Flight flight = record.value();
 
