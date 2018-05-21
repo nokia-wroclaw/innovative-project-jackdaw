@@ -8,35 +8,32 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.MockConsumer;
 import org.apache.kafka.clients.consumer.OffsetResetStrategy;
-import org.apache.kafka.clients.producer.MockProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.TopicPartition;
-import org.apache.kafka.common.serialization.LongSerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class FlightDataKafkaConsumerTest {
-    private MockConsumer<Long, Flight> consumer;
-    private MockProducer<Long, String> producer;
-    private JSONSerializer serializer;
+    private MockConsumer<Long, Flight> mockConsumer;
+    private GeoJSONKafkaProducer mockGeojsonProducer;
 
     @Before
     public void setUp() {
-        consumer = new MockConsumer<>(OffsetResetStrategy.EARLIEST);
-        producer = new MockProducer<>(true, new LongSerializer(), new StringSerializer());
-        serializer = new JSONSerializer();
+        mockConsumer = new MockConsumer<>(OffsetResetStrategy.EARLIEST);
+        mockGeojsonProducer = Mockito.mock(GeoJSONKafkaProducer.class);
     }
 
     @Test
     public void send() {
+        final int partition = 0;
+        final Long offset = 0L;
+
+        final Long expectedKey = 0L;
         final Flight flight = new Flight("test",
                 "test",
                 FlightType.Internacional,
@@ -57,56 +54,19 @@ public class FlightDataKafkaConsumerTest {
                 0.0,
                 0.0);
 
-        final Long expectedKey = 0L;
-        final String expectedValue = "{\n" +
-                "    \"features\": [{\n" +
-                "        \"geometry\": {\n" +
-                "            \"coordinates\": [\n" +
-                "                0,\n" +
-                "                0\n" +
-                "            ],\n" +
-                "            \"type\": \"Point\"\n" +
-                "        },\n" +
-                "        \"type\": \"Feature\",\n" +
-                "        \"properties\": {\n" +
-                "            \"stateOrigin\": \"test\",\n" +
-                "            \"color\": \"#7a7579\",\n" +
-                "            \"stateFlight\": \"Realizado\",\n" +
-                "            \"companyAerial\": \"test\",\n" +
-                "            \"codeTypeLine\": \"Internacional\",\n" +
-                "            \"cityOrigin\": \"test\",\n" +
-                "            \"timeType\": \"Expected departure\",\n" +
-                "            \"codeJustification\": \"test\",\n" +
-                "            \"cityDestination\": \"test\",\n" +
-                "            \"airportOrigin\": \"test\",\n" +
-                "            \"time\": \"test\",\n" +
-                "            \"countryOrigin\": \"test\",\n" +
-                "            \"airportDestination\": \"test\",\n" +
-                "            \"countryDestination\": \"test\",\n" +
-                "            \"flights\": \"test\",\n" +
-                "            \"stateDestination\": \"test\"\n" +
-                "        }\n" +
-                "    }],\n" +
-                "    \"type\": \"FeatureCollection\"\n" +
-                "}";
-
-        GeoJSONKafkaProducer geojsonProducer = new GeoJSONKafkaProducer(producer, serializer, "Test_Producer");
-
-        consumer.assign(Collections.singletonList(new TopicPartition("Test", 0)));
+        mockConsumer.assign(Collections.singletonList(new TopicPartition("Test", 0)));
         HashMap<TopicPartition, Long> beginningOffsets = new HashMap<>();
-        beginningOffsets.put(new TopicPartition("Test", 0), 0L);
-        consumer.updateBeginningOffsets(beginningOffsets);
-        consumer.addRecord(new ConsumerRecord<>("Test", 0, 0L, 0L, flight));
+        beginningOffsets.put(new TopicPartition("Test", partition), offset);
+        mockConsumer.updateBeginningOffsets(beginningOffsets);
+        mockConsumer.addRecord(new ConsumerRecord<>("Test", partition, offset, expectedKey, flight));
 
-        ConsumerRecords<Long, Flight> records = consumer.poll(1000);
+        ConsumerRecords<Long, Flight> records = mockConsumer.poll(1000);
 
-        FlightDataKafkaConsumer cons = new FlightDataKafkaConsumer(consumer, geojsonProducer);
-        cons.send(records);
+        FlightDataKafkaConsumer kafkaConsumer = new FlightDataKafkaConsumer(mockConsumer, mockGeojsonProducer);
+        kafkaConsumer.send(records);
 
-        List<ProducerRecord<Long, String>> history = producer.history();
-        List<ProducerRecord<Long, String>> expected = Collections.singletonList(
-                new ProducerRecord<>("Test_Producer", expectedKey, expectedValue));
-
-        Assert.assertEquals("Sent didn't match expected", expected, history);
+        verify(mockGeojsonProducer).sendMessage(expectedKey, flight);
+        verify(mockGeojsonProducer, times(1)).sendMessage(expectedKey, flight);
+        verifyNoMoreInteractions(mockGeojsonProducer);
     }
 }
