@@ -5,9 +5,6 @@ import com.jackdaw.avro.flights.TimeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class JSONSerializer {
 
     public String getGeoJSON(Flight flight) {
@@ -86,7 +83,7 @@ public class JSONSerializer {
                 return "#cc350c";
             }
             default:
-                throw new RuntimeException();
+                return null;
         }
     }
 
@@ -105,7 +102,7 @@ public class JSONSerializer {
                 return "Real arrival";
             }
             default:
-                throw new RuntimeException();
+                return null;
         }
     }
 
