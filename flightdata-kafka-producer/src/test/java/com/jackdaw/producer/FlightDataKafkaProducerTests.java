@@ -5,6 +5,8 @@ import com.jackdaw.avro.flights.FlightSituation;
 import com.jackdaw.avro.flights.FlightType;
 import com.jackdaw.avro.flights.TimeType;
 import org.apache.kafka.clients.producer.MockProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.LongSerializer;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -13,6 +15,8 @@ import org.mockito.Mockito;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -24,12 +28,13 @@ public class FlightDataKafkaProducerTests {
     private MockProducer<Long, Flight> producer;
     private FlightDataKafkaProducer flightDataProducer;
     private String[] validRecord;
+    private String topic = "";
 
 
     @Before
     public void setUp() throws IOException {
-        producer = new MockProducer<>();
-        flightDataProducer = new FlightDataKafkaProducer("", "", producer);
+        producer = new MockProducer<>(true, new LongSerializer(), null);
+        flightDataProducer = new FlightDataKafkaProducer("", topic, producer);
         validRecord = new String[]{"test", "test", "Internacional", "departureEstimate", "test", "Realizado",
                 "test", "test", "test", "test", "test", "test", "test", "test", "test",
                 "0.0", "0.0", "0.0", "0.0"};
@@ -51,7 +56,7 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result,false);
+        assertEquals(result, false);
     }
 
     @Test
@@ -62,7 +67,7 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result,false);
+        assertEquals(result, false);
     }
 
     @Test
@@ -73,28 +78,28 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result,false);
+        assertEquals(result, false);
     }
 
     @Test
-    public void validRecordPassesDataValidation(){
+    public void validRecordPassesDataValidation() {
         //given
         //when
         boolean result = flightDataProducer.isDataValid(validRecord);
         //then
-        assertEquals(result,true);
+        assertEquals(result, true);
     }
 
     @Test
-    public void flightObjectIsConstructedCorrectly(){
+    public void flightObjectIsConstructedCorrectly() {
         //given
-        Flight flight = new Flight("test","test",FlightType.Internacional,TimeType.departureEstimate,"test",
-                FlightSituation.Realizado,"test","test","test","test","test","test","test","test","test",
-               0.0,0.0,0.0,0.0);
+        Flight flight = new Flight("test", "test", FlightType.Internacional, TimeType.departureEstimate, "test",
+                FlightSituation.Realizado, "test", "test", "test", "test", "test", "test", "test", "test", "test",
+                0.0, 0.0, 0.0, 0.0);
         //when
         Flight result = flightDataProducer.createFlight(validRecord);
         //then
-        assertEquals(flight,result);
+        assertEquals(flight, result);
     }
 
     @Test
@@ -102,11 +107,25 @@ public class FlightDataKafkaProducerTests {
         //given
         BufferedReader br = Mockito.mock(BufferedReader.class);
         when(br.readLine()).thenReturn(",,Internacional,departureEstimate,,Realizado,,,,,,,,,0.0,0.0,0.0,0.0")
-        .thenReturn(null);
+                .thenReturn(null);
         //when
         flightDataProducer.runProducer(br);
         //expect
         verify(br, times(2)).readLine();
+    }
+
+    @Test
+    public void validRecordIsSentCorrectly() throws IOException {
+        //given
+        Flight flight = flightDataProducer.createFlight(validRecord);
+        Long index = 1L;
+        List<ProducerRecord<Long, Flight>> expected = Arrays.asList(
+                new ProducerRecord<>(topic, index, flight));
+        //when
+        flightDataProducer.sendMessage(index,flight);
+        List<ProducerRecord<Long, Flight>> history = producer.history();
+        //then
+        assertEquals("Sent didn't match expected", expected, history);
     }
 
 }
