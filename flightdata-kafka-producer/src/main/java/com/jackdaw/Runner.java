@@ -30,7 +30,7 @@ public class Runner {
 
         Request request = new Request.Builder()
                 .post(RequestBody.create(SCHEMA_CONTENT, schema.toString()))
-                .url(schemaProps.getProperty("schema.registry.url").toString() + "/subjects/Flight/versions")
+                .url(schemaProps.getProperty("schema.registry.url") + "/subjects/Flight/versions")
                 .build();
 
         client.newCall(request).execute();
@@ -40,7 +40,7 @@ public class Runner {
 
         FlightDataKafkaProducer producer = new FlightDataKafkaProducer(topicProperties.get("fileName").toString(),
                 topicProperties.get("topicName").toString(),
-                new KafkaProducer<Long, Flight>(props));
+                new KafkaProducer<>(props));
         producer.runProducer();
     }
 }

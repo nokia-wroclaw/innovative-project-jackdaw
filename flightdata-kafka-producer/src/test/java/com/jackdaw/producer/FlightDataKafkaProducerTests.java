@@ -16,9 +16,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -43,7 +46,7 @@ public class FlightDataKafkaProducerTests {
     @Test(expected = IllegalArgumentException.class)
     public void ThrowsExceptionWhenStringArrayIsEmpty() {
         //given
-        String[] emptyArray = (String[]) Array.newInstance(String.class, 0);
+        String[] emptyArray = new String[0];
         // when
         flightDataProducer.createFlight(emptyArray);
     }
@@ -56,7 +59,7 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result, false);
+        assertFalse(result);
     }
 
     @Test
@@ -67,7 +70,7 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result, false);
+        assertFalse(result);
     }
 
     @Test
@@ -78,16 +81,15 @@ public class FlightDataKafkaProducerTests {
         //when
         boolean result = flightDataProducer.isDataValid(invalidRecord);
         //then
-        assertEquals(result, false);
+        assertFalse(result);
     }
 
     @Test
     public void validRecordPassesDataValidation() {
-        //given
         //when
         boolean result = flightDataProducer.isDataValid(validRecord);
         //then
-        assertEquals(result, true);
+        assertTrue(result);
     }
 
     @Test
@@ -115,11 +117,11 @@ public class FlightDataKafkaProducerTests {
     }
 
     @Test
-    public void validRecordIsSentCorrectly() throws IOException {
+    public void validRecordIsSentCorrectly() {
         //given
         Flight flight = flightDataProducer.createFlight(validRecord);
         Long index = 1L;
-        List<ProducerRecord<Long, Flight>> expected = Arrays.asList(
+        List<ProducerRecord<Long, Flight>> expected = Collections.singletonList(
                 new ProducerRecord<>(topic, index, flight));
         //when
         flightDataProducer.sendMessage(index,flight);
