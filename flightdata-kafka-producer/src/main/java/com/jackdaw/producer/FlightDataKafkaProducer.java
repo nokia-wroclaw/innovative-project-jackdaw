@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 public class FlightDataKafkaProducer {
@@ -40,23 +41,28 @@ public class FlightDataKafkaProducer {
     void runProducer(BufferedReader br) {
         long lineCount = 0;
         try {
+            //Omit first line
             br.readLine();
 
             String line;
             while ((line = br.readLine()) != null) {
                 lineCount++;
                 String[] splitMessage = line.split(",");
-                if (splitMessage[5].equals("Realizado")) {
+                if (isDataValid(splitMessage) && flightHappened(splitMessage[5])) {
                     this.sendMessage(lineCount, createFlight(splitMessage));
                 }
                 Thread.sleep(1000);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | InterruptedException e) {
+            LOG.error("", e);
         }
 
+    }
+
+    boolean isDataValid(String[] splitMessage) {
+        return isFlightTypeValid(splitMessage[2]) &
+                isTimeTypeValid(splitMessage[3]) &
+                isFlightSituationValid(splitMessage[5]);
     }
 
     void sendMessage(Long key, Flight value) {
@@ -70,7 +76,7 @@ public class FlightDataKafkaProducer {
 
     Flight createFlight(String[] splitMessage) {
         if (splitMessage.length != 19) {
-            throw new IllegalArgumentException("Array size different than 21, data is corrupted");
+            throw new IllegalArgumentException("Array size different than 19, data is corrupted");
         } else {
             Flight record = new Flight();
             int index = 0;
@@ -90,6 +96,25 @@ public class FlightDataKafkaProducer {
             }
             return record;
         }
+    }
+
+    private boolean isFlightSituationValid(String situation) {
+        String[] validFlightSitationStrings = {"Realizado", "Cancelado"};
+        return Arrays.asList(validFlightSitationStrings).contains(situation);
+    }
+
+    private boolean isFlightTypeValid(String flightType) {
+        String[] flightTypeStrings = {"Internacional", "Nacional", "Regional"};
+        return Arrays.asList(flightTypeStrings).contains(flightType);
+    }
+
+    private boolean isTimeTypeValid(String timeType) {
+        String[] validTimeTypeStrings = {"departureEstimate", "departureReal", "arrivalEstimate", "arrivalReal"};
+        return Arrays.asList(validTimeTypeStrings).contains(timeType);
+    }
+
+    private boolean flightHappened(String flightSituation) {
+        return flightSituation.equals("Realizado");
     }
 
 
