@@ -62,9 +62,9 @@ window.onclick = function () {
 (function receiveMessage() {
     const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
     socket.on('delay', function (message) {
-        console.info('New message received');
+        console.debug('New message received');
         let data = JSON.parse(message);
-        console.log(data);
+        console.debug(data);
         updateChart(data);
     });
 })(jQuery);

@@ -23,14 +23,7 @@ div.chartContainer {
     width: 100%;
 }
 
-#pie {
-    alignment: center;
-    height: 80%;
-    width: 80%;
-    margin: 10%;
-}
-
-#bar {
+#pie, #bar {
     alignment: center;
     height: 80%;
     width: 80%;
