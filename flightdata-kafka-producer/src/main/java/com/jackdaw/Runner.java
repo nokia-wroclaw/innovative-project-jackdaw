@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Runner {
-    private final static MediaType SCHEMA_CONTENT =
+    private static final MediaType SCHEMA_CONTENT =
             MediaType.parse("application/vnd.schemaregistry.v1+json");
 
     public static void main(String[] args) throws IOException {

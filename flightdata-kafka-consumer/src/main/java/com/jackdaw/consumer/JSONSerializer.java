@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class JSONSerializer {
 
-    public String getGeoJSON(Flight flight) {
+    String getGeoJSON(Flight flight) {
         JSONObject featureCollection = new JSONObject();
         JSONArray featureList = new JSONArray();
         JSONObject feature = new JSONObject();
@@ -70,18 +70,14 @@ public class JSONSerializer {
 
     private String getColor(Flight flight) {
         switch (flight.getTimeType()) {
-            case departureEstimate: {
+            case departureEstimate:
                 return "#7a7579";
-            }
-            case departureReal: {
+            case departureReal:
                 return "#11bb11";
-            }
-            case arrivalEstimate: {
+            case arrivalEstimate:
                 return "#ef9115";
-            }
-            case arrivalReal: {
+            case arrivalReal:
                 return "#cc350c";
-            }
             default:
                 return null;
         }
@@ -89,18 +85,14 @@ public class JSONSerializer {
 
     private String getTimeType(Flight flight) {
         switch (flight.getTimeType()) {
-            case departureEstimate: {
+            case departureEstimate:
                 return "Expected departure";
-            }
-            case departureReal: {
+            case departureReal:
                 return "Real departure";
-            }
-            case arrivalEstimate: {
+            case arrivalEstimate:
                 return "Expected arrival";
-            }
-            case arrivalReal: {
+            case arrivalReal:
                 return "Real arrival";
-            }
             default:
                 return null;
         }

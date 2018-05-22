@@ -23,7 +23,7 @@ public class GeoJSONKafkaProducer {
         this.destinationTopicName = destinationTopicName;
     }
 
-    public void sendMessage(Long key, Flight value) {
+    void sendMessage(Long key, Flight value) {
         try {
             String deserialized = serializer.getGeoJSON(value);
 

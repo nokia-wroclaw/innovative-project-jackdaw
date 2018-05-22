@@ -24,7 +24,7 @@ public class FlightDataKafkaProducer {
     private final Producer<Long, Flight> producer;
     private final String inputFileName;
 
-    public FlightDataKafkaProducer(String inputFileName, String topicName, Producer<Long, Flight> producer) throws IOException {
+    public FlightDataKafkaProducer(String inputFileName, String topicName, Producer<Long, Flight> producer) {
         this.producer = producer;
         this.inputFileName = inputFileName;
         this.topicName = topicName;
@@ -60,8 +60,8 @@ public class FlightDataKafkaProducer {
     }
 
     boolean isDataValid(String[] splitMessage) {
-        return isFlightTypeValid(splitMessage[2]) &
-                isTimeTypeValid(splitMessage[3]) &
+        return isFlightTypeValid(splitMessage[2]) &&
+                isTimeTypeValid(splitMessage[3]) &&
                 isFlightSituationValid(splitMessage[5]);
     }
 
@@ -116,6 +116,5 @@ public class FlightDataKafkaProducer {
     private boolean flightHappened(String flightSituation) {
         return flightSituation.equals("Realizado");
     }
-
 
 }

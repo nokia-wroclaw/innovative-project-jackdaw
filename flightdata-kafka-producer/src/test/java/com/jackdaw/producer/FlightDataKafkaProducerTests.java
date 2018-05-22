@@ -14,14 +14,10 @@ import org.mockito.Mockito;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -33,9 +29,8 @@ public class FlightDataKafkaProducerTests {
     private String[] validRecord;
     private String topic = "";
 
-
     @Before
-    public void setUp() throws IOException {
+    public void setUp() {
         producer = new MockProducer<>(true, new LongSerializer(), null);
         flightDataProducer = new FlightDataKafkaProducer("", topic, producer);
         validRecord = new String[]{"test", "test", "Internacional", "departureEstimate", "test", "Realizado",
@@ -44,10 +39,10 @@ public class FlightDataKafkaProducerTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ThrowsExceptionWhenStringArrayIsEmpty() {
+    public void throwsExceptionWhenStringArrayIsEmpty() {
         //given
         String[] emptyArray = new String[0];
-        // when
+        //when
         flightDataProducer.createFlight(emptyArray);
     }
 
@@ -124,7 +119,7 @@ public class FlightDataKafkaProducerTests {
         List<ProducerRecord<Long, Flight>> expected = Collections.singletonList(
                 new ProducerRecord<>(topic, index, flight));
         //when
-        flightDataProducer.sendMessage(index,flight);
+        flightDataProducer.sendMessage(index, flight);
         List<ProducerRecord<Long, Flight>> history = producer.history();
         //then
         assertEquals("Sent didn't match expected", expected, history);
