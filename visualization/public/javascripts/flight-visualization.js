@@ -42,8 +42,8 @@ function addPointToMap(geojson) {
 
 function addLineToMap(estimatedArrival) {
     let feature = estimatedArrival.features[0];
-    let pointA = [feature.geometry.coordinates[0][0], feature.geometry.coordinates[0][1]];
-    let pointB = [feature.geometry.coordinates[1][0], feature.geometry.coordinates[1][1]];
+    let pointA = feature.geometry.coordinates[0];
+    let pointB = feature.geometry.coordinates[1];
     let popupContent = "<p class='left'>" + feature.properties.timeType + ": <strong>" +
         feature.properties.time.replace("Z", "").replace("T", " ") + "</strong></p>";
     L.Polyline.Arc(
@@ -52,10 +52,10 @@ function addLineToMap(estimatedArrival) {
             weight: 4,
             opacity: 0.75,
             vertices: 100,
-            snakingSpeed: 350,
+            snakingSpeed: 250,
         }).addTo(map)
         .bindPopup(popupContent)
-        .snakeIn();
+        .snakeIn();   // fixme rarely snakeIn() throws an error that (NaN, NaN) for LatLng were provided
 }
 
 
@@ -63,17 +63,22 @@ setUpMap();
 
 
 (function receiveMessage() {
-    const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
+    const socket = io.connect('http://0.0.0.0:3001', {transports: ['websocket', 'flashsocket']});
     socket.on('news', function (message) {
-        console.info('New message received');
+        console.debug('New message received');
         let flight = JSON.parse(message);
-        console.log(flight);
+        console.debug(flight);
         switch (flight.features[0].properties.timeType) {
+            case "Expected departure":
+            case "Real departure":
+            case "Real arrival":
+                addPointToMap(flight);
+                break;
             case "Expected arrival":
                 addLineToMap(flight);
                 break;
             default:
-                addPointToMap(flight);
+                console.error("Received an empty JSON!");
                 break;
         }
     });
