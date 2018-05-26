@@ -1,5 +1,6 @@
 sudo: required
 dist: trusty
+language: java
 
 
 branches:
@@ -12,11 +13,15 @@ jobs:
   include:
     - stage: build producer, consumer and visualization
       script:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn verify
       - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - docker build -t consumer ./flightdata-kafka-consumer
       - docker tag consumer $DOCKER_USERNAME/consumer
       - docker push $DOCKER_USERNAME/consumer
     - script:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn verify
       - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - docker build -t producer ./flightdata-kafka-producer
       - docker tag producer $DOCKER_USERNAME/producer
