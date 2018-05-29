@@ -4,6 +4,7 @@ import com.jackdaw.avro.flights.Flight;
 import com.jackdaw.avro.flights.FlightSituation;
 import com.jackdaw.avro.flights.FlightType;
 import com.jackdaw.avro.flights.TimeType;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
@@ -105,22 +106,15 @@ public class FlightDataKafkaProducer {
     }
 
     private boolean isFlightSituationValid(String situation) {
-        ArrayList<String> validFlightSituationStrings = new ArrayList<>();
-        for(FlightSituation x : FlightSituation.values())
-            validFlightSituationStrings.add(x.toString());
-        return validFlightSituationStrings.contains(situation);
+        return EnumUtils.isValidEnum(FlightSituation.class, situation);
     }
 
     private boolean isFlightTypeValid(String flightType) {
-        ArrayList<String> validFlightSituationStrings = new ArrayList<>();
-        for(FlightSituation x : FlightSituation.values())
-            validFlightSituationStrings.add(x.toString());
-        return validFlightSituationStrings.contains(flightType);
+        return EnumUtils.isValidEnum(FlightType.class, flightType);
     }
 
     private boolean isTimeTypeValid(String timeType) {
-        String[] validTimeTypeStrings = {"departureEstimate", "departureReal", "arrivalEstimate", "arrivalReal"};
-        return Arrays.asList(validTimeTypeStrings).contains(timeType);
+        return EnumUtils.isValidEnum(TimeType.class,timeType);
     }
 
     private boolean flightHappened(String flightSituation) {
