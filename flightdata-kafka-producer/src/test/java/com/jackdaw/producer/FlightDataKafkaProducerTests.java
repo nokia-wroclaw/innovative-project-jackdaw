@@ -26,78 +26,14 @@ public class FlightDataKafkaProducerTests {
     @Mock
     private MockProducer<Long, Flight> producer;
     private FlightDataKafkaProducer flightDataProducer;
-    private String[] validRecord;
     private String topic = "";
 
     @Before
     public void setUp() {
         producer = new MockProducer<>(true, new LongSerializer(), null);
         flightDataProducer = new FlightDataKafkaProducer("", topic, producer);
-        validRecord = new String[]{"test", "test", "Internacional", "departureEstimate", "test", "Realizado",
-                "test", "test", "test", "test", "test", "test", "test", "test", "test",
-                "0.0", "0.0", "0.0", "0.0"};
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwsExceptionWhenStringArrayIsEmpty() {
-        //given
-        String[] emptyArray = new String[0];
-        //when
-        flightDataProducer.createFlight(emptyArray);
-    }
-
-    @Test
-    public void recordFailsToPassDataValidationWithInvalidFlightType() {
-        //given
-        String[] invalidRecord = validRecord;
-        invalidRecord[2] = "Invalid";
-        //when
-        boolean result = flightDataProducer.isDataValid(invalidRecord);
-        //then
-        assertFalse(result);
-    }
-
-    @Test
-    public void recordFailsToPassDataValidationWithInvalidTimeType() {
-        //given
-        String[] invalidRecord = validRecord;
-        invalidRecord[3] = "Invalid";
-        //when
-        boolean result = flightDataProducer.isDataValid(invalidRecord);
-        //then
-        assertFalse(result);
-    }
-
-    @Test
-    public void recordFailsToPassDataValidationWithInvalidFlightSituation() {
-        //given
-        String[] invalidRecord = validRecord;
-        invalidRecord[5] = "Invalid";
-        //when
-        boolean result = flightDataProducer.isDataValid(invalidRecord);
-        //then
-        assertFalse(result);
-    }
-
-    @Test
-    public void validRecordPassesDataValidation() {
-        //when
-        boolean result = flightDataProducer.isDataValid(validRecord);
-        //then
-        assertTrue(result);
-    }
-
-    @Test
-    public void flightObjectIsConstructedCorrectly() {
-        //given
-        Flight flight = new Flight("test", "test", FlightType.Internacional, TimeType.departureEstimate, "test",
-                FlightSituation.Realizado, "test", "test", "test", "test", "test", "test", "test", "test", "test",
-                0.0, 0.0, 0.0, 0.0);
-        //when
-        Flight result = flightDataProducer.createFlight(validRecord);
-        //then
-        assertEquals(flight, result);
-    }
 
     @Test
     public void consumerStopsWhenBufferedReaderReturnsNull() throws IOException {
@@ -114,7 +50,12 @@ public class FlightDataKafkaProducerTests {
     @Test
     public void validRecordIsSentCorrectly() {
         //given
-        Flight flight = flightDataProducer.createFlight(validRecord);
+        Flight flight = new Flight("test", "test", FlightType.Internacional,
+                TimeType.departureEstimate, "test", FlightSituation.Realizado,
+                "test", "test", "test",
+                "test", "test", "test",
+                "test", "test", "test",
+                0.0, 0.0, 0.0, 0.0);
         Long index = 1L;
         List<ProducerRecord<Long, Flight>> expected = Collections.singletonList(
                 new ProducerRecord<>(topic, index, flight));
