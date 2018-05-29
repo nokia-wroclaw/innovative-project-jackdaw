@@ -9,25 +9,25 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Optional;
 
 class FlightCreator {
-    private static final int flightSymbolIndex = 0;
-    private static final int airlineIndex = 1;
-    private static final int flightTypeIndex = 2;
-    private static final int timeTypeIndex = 3;
-    private static final int timeIndex = 4;
-    private static final int flightSituationIndex = 5;
-    private static final int codeJustificationIndex = 6;
-    private static final int originAirportIndex = 7;
-    private static final int originCityIndex = 8;
-    private static final int originStateIndex = 9;
-    private static final int originCountryIndex = 10;
-    private static final int destinationAirportIndex = 11;
-    private static final int destinationCityIndex = 12;
-    private static final int destinationStateIndex = 13;
-    private static final int destinationCountryIndex = 14;
-    private static final int destinationLongitudeIndex = 15;
-    private static final int destinationLatitudeIndex = 16;
-    private static final int originLongitudeIndex = 17;
-    private static final int originAltitudeIndex = 18;
+    private static final int FLIGHT_SYMBOL_INDEX = 0;
+    private static final int AIRLINE_INDEX = 1;
+    private static final int FLIGHT_TYPE_INDEX = 2;
+    private static final int TIME_TYPE_INDEX = 3;
+    private static final int TIME_INDEX = 4;
+    private static final int FLIGHT_SITUATION_INDEX = 5;
+    private static final int CODE_JUSTIFICATION_INDEX = 6;
+    private static final int ORIGIN_AIRPORT_INDEX = 7;
+    private static final int ORIGIN_CITY_INDEX = 8;
+    private static final int ORIGIN_STATE_INDEX = 9;
+    private static final int ORIGIN_COUNTRY_INDEX = 10;
+    private static final int DESTINATION_AIRPORT_INDEX = 11;
+    private static final int DESTINATION_CITY_INDEX = 12;
+    private static final int DESTINATION_STATE_INDEX = 13;
+    private static final int DESTINATION_COUNTRY_INDEX = 14;
+    private static final int DESTINATION_LONGITUDE_INDEX = 15;
+    private static final int DESTINATION_LATITUDE_INDEX = 16;
+    private static final int ORIGIN_LONGITUDE_INDEX = 17;
+    private static final int ORIGIN_ALTITUDE_INDEX = 18;
 
 
     Optional<Flight> createFlight(String[] splitMessage) {
@@ -36,25 +36,25 @@ class FlightCreator {
         if (splitMessage.length != expectedArraySize) {
             return Optional.empty();
         } else {
-            builder.setFlightSymbol(splitMessage[flightSymbolIndex]);
-            builder.setAirline(splitMessage[airlineIndex]);
-            builder.setFlightType(FlightType.valueOf(splitMessage[flightTypeIndex]));
-            builder.setTimeType(TimeType.valueOf(splitMessage[timeTypeIndex]));
-            builder.setTime(splitMessage[timeIndex]);
-            builder.setFlightSituation(FlightSituation.valueOf(splitMessage[flightSituationIndex]));
-            builder.setCodeJustification(splitMessage[codeJustificationIndex]);
-            builder.setOriginAirport(splitMessage[originAirportIndex]);
-            builder.setOriginCity(splitMessage[originCityIndex]);
-            builder.setOriginState(splitMessage[originStateIndex]);
-            builder.setOriginCountry(splitMessage[originCountryIndex]);
-            builder.setDestinationAirport(splitMessage[destinationAirportIndex]);
-            builder.setDestinationCity(splitMessage[destinationCityIndex]);
-            builder.setDestinationState(splitMessage[destinationStateIndex]);
-            builder.setDestinationCountry(splitMessage[destinationCountryIndex]);
-            builder.setDestinationLongitude(NumberUtils.createDouble(splitMessage[destinationLongitudeIndex]));
-            builder.setDestinationLatitude(NumberUtils.createDouble(splitMessage[destinationLatitudeIndex]));
-            builder.setOriginLongitude(NumberUtils.createDouble(splitMessage[originLongitudeIndex]));
-            builder.setOriginAltitude(NumberUtils.createDouble(splitMessage[originAltitudeIndex]));
+            builder.setFlightSymbol(splitMessage[FLIGHT_SYMBOL_INDEX]);
+            builder.setAirline(splitMessage[AIRLINE_INDEX]);
+            builder.setFlightType(FlightType.valueOf(splitMessage[FLIGHT_TYPE_INDEX]));
+            builder.setTimeType(TimeType.valueOf(splitMessage[TIME_TYPE_INDEX]));
+            builder.setTime(splitMessage[TIME_INDEX]);
+            builder.setFlightSituation(FlightSituation.valueOf(splitMessage[FLIGHT_SITUATION_INDEX]));
+            builder.setCodeJustification(splitMessage[CODE_JUSTIFICATION_INDEX]);
+            builder.setOriginAirport(splitMessage[ORIGIN_AIRPORT_INDEX]);
+            builder.setOriginCity(splitMessage[ORIGIN_CITY_INDEX]);
+            builder.setOriginState(splitMessage[ORIGIN_STATE_INDEX]);
+            builder.setOriginCountry(splitMessage[ORIGIN_COUNTRY_INDEX]);
+            builder.setDestinationAirport(splitMessage[DESTINATION_AIRPORT_INDEX]);
+            builder.setDestinationCity(splitMessage[DESTINATION_CITY_INDEX]);
+            builder.setDestinationState(splitMessage[DESTINATION_STATE_INDEX]);
+            builder.setDestinationCountry(splitMessage[DESTINATION_COUNTRY_INDEX]);
+            builder.setDestinationLongitude(NumberUtils.createDouble(splitMessage[DESTINATION_LONGITUDE_INDEX]));
+            builder.setDestinationLatitude(NumberUtils.createDouble(splitMessage[DESTINATION_LATITUDE_INDEX]));
+            builder.setOriginLongitude(NumberUtils.createDouble(splitMessage[ORIGIN_LONGITUDE_INDEX]));
+            builder.setOriginAltitude(NumberUtils.createDouble(splitMessage[ORIGIN_ALTITUDE_INDEX]));
         }
         return Optional.of(builder.build());
     }
