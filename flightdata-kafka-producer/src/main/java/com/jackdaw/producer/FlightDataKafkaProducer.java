@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
@@ -23,6 +24,9 @@ public class FlightDataKafkaProducer {
     private final String topicName;
     private final Producer<Long, Flight> producer;
     private final String inputFileName;
+    private static final int flightTypeStringPosition = 2;
+    private static final int timeTypeStringPosition = 3;
+    private static final int flightSituationStringPosition = 5;
 
     public FlightDataKafkaProducer(String inputFileName, String topicName, Producer<Long, Flight> producer) {
         this.producer = producer;
@@ -60,9 +64,9 @@ public class FlightDataKafkaProducer {
     }
 
     boolean isDataValid(String[] splitMessage) {
-        return isFlightTypeValid(splitMessage[2]) &&
-                isTimeTypeValid(splitMessage[3]) &&
-                isFlightSituationValid(splitMessage[5]);
+        return isFlightTypeValid(splitMessage[flightTypeStringPosition]) &&
+                isTimeTypeValid(splitMessage[timeTypeStringPosition]) &&
+                isFlightSituationValid(splitMessage[flightSituationStringPosition]);
     }
 
     void sendMessage(Long key, Flight value) {
@@ -75,19 +79,21 @@ public class FlightDataKafkaProducer {
     }
 
     Flight createFlight(String[] splitMessage) {
-        if (splitMessage.length != 19) {
+        final int expectedArraySize = 19;
+        final int coordinatesStartIndex = 15;
+        if (splitMessage.length != expectedArraySize) {
             throw new IllegalArgumentException("Array size different than 19, data is corrupted");
         } else {
             Flight record = new Flight();
             int index = 0;
             for (String data : splitMessage) {
-                if (index == 2) {
+                if (index == flightTypeStringPosition) {
                     record.put(index, FlightType.valueOf(data));
-                } else if (index == 3) {
+                } else if (index == timeTypeStringPosition) {
                     record.put(index, TimeType.valueOf(data));
-                } else if (index == 5) {
+                } else if (index == flightSituationStringPosition) {
                     record.put(index, FlightSituation.valueOf(data));
-                } else if (index >= 15) {
+                } else if (index >= coordinatesStartIndex) {
                     record.put(index, Double.parseDouble(data));
                 } else {
                     record.put(index, data);
@@ -99,13 +105,17 @@ public class FlightDataKafkaProducer {
     }
 
     private boolean isFlightSituationValid(String situation) {
-        String[] validFlightSitationStrings = {"Realizado", "Cancelado"};
-        return Arrays.asList(validFlightSitationStrings).contains(situation);
+        ArrayList<String> validFlightSituationStrings = new ArrayList<>();
+        for(FlightSituation x : FlightSituation.values())
+            validFlightSituationStrings.add(x.toString());
+        return validFlightSituationStrings.contains(situation);
     }
 
     private boolean isFlightTypeValid(String flightType) {
-        String[] flightTypeStrings = {"Internacional", "Nacional", "Regional"};
-        return Arrays.asList(flightTypeStrings).contains(flightType);
+        ArrayList<String> validFlightSituationStrings = new ArrayList<>();
+        for(FlightSituation x : FlightSituation.values())
+            validFlightSituationStrings.add(x.toString());
+        return validFlightSituationStrings.contains(flightType);
     }
 
     private boolean isTimeTypeValid(String timeType) {
