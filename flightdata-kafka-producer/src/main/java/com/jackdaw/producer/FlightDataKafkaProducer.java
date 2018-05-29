@@ -1,9 +1,6 @@
 package com.jackdaw.producer;
 
 import com.jackdaw.avro.flights.Flight;
-import com.jackdaw.avro.flights.FlightSituation;
-import com.jackdaw.avro.flights.FlightType;
-import com.jackdaw.avro.flights.TimeType;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
@@ -13,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 public class FlightDataKafkaProducer {
@@ -23,11 +20,15 @@ public class FlightDataKafkaProducer {
     private final String topicName;
     private final Producer<Long, Flight> producer;
     private final String inputFileName;
+    private final FlightCreator flightCreator;
+    private final DataValidator dataValidator;
 
     public FlightDataKafkaProducer(String inputFileName, String topicName, Producer<Long, Flight> producer) {
         this.producer = producer;
         this.inputFileName = inputFileName;
         this.topicName = topicName;
+        this.dataValidator = new DataValidator();
+        this.flightCreator = new FlightCreator();
     }
 
     public void runProducer() {
@@ -48,8 +49,11 @@ public class FlightDataKafkaProducer {
             while ((line = br.readLine()) != null) {
                 lineCount++;
                 String[] splitMessage = line.split(",");
-                if (isDataValid(splitMessage) && flightHappened(splitMessage[5])) {
-                    this.sendMessage(lineCount, createFlight(splitMessage));
+                if (dataValidator.isDataValid(splitMessage) && dataValidator.flightHappened(splitMessage[5])) {
+                    Optional<Flight> record = flightCreator.createFlight(splitMessage);
+                    if (record.isPresent()) {
+                        this.sendMessage(lineCount, record.get());
+                    }
                 }
                 Thread.sleep(1000);
             }
@@ -57,12 +61,6 @@ public class FlightDataKafkaProducer {
             LOG.error("", e);
         }
 
-    }
-
-    boolean isDataValid(String[] splitMessage) {
-        return isFlightTypeValid(splitMessage[2]) &&
-                isTimeTypeValid(splitMessage[3]) &&
-                isFlightSituationValid(splitMessage[5]);
     }
 
     void sendMessage(Long key, Flight value) {
@@ -74,47 +72,5 @@ public class FlightDataKafkaProducer {
         }
     }
 
-    Flight createFlight(String[] splitMessage) {
-        if (splitMessage.length != 19) {
-            throw new IllegalArgumentException("Array size different than 19, data is corrupted");
-        } else {
-            Flight record = new Flight();
-            int index = 0;
-            for (String data : splitMessage) {
-                if (index == 2) {
-                    record.put(index, FlightType.valueOf(data));
-                } else if (index == 3) {
-                    record.put(index, TimeType.valueOf(data));
-                } else if (index == 5) {
-                    record.put(index, FlightSituation.valueOf(data));
-                } else if (index >= 15) {
-                    record.put(index, Double.parseDouble(data));
-                } else {
-                    record.put(index, data);
-                }
-                ++index;
-            }
-            return record;
-        }
-    }
-
-    private boolean isFlightSituationValid(String situation) {
-        String[] validFlightSitationStrings = {"Realizado", "Cancelado"};
-        return Arrays.asList(validFlightSitationStrings).contains(situation);
-    }
-
-    private boolean isFlightTypeValid(String flightType) {
-        String[] flightTypeStrings = {"Internacional", "Nacional", "Regional"};
-        return Arrays.asList(flightTypeStrings).contains(flightType);
-    }
-
-    private boolean isTimeTypeValid(String timeType) {
-        String[] validTimeTypeStrings = {"departureEstimate", "departureReal", "arrivalEstimate", "arrivalReal"};
-        return Arrays.asList(validTimeTypeStrings).contains(timeType);
-    }
-
-    private boolean flightHappened(String flightSituation) {
-        return flightSituation.equals("Realizado");
-    }
 
 }
