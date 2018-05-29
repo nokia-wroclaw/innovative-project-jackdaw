@@ -15,7 +15,7 @@ jobs:
       script:
       - cd flightdata-kafka-consumer       
       - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-      - mvn verify
+      - mvn test
       - cd ..
       - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - docker build -t consumer ./flightdata-kafka-consumer
@@ -24,7 +24,7 @@ jobs:
     - script:
       - cd flightdata-kafka-producer
       - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-      - mvn verify
+      - mvn test
       - cd ..
       - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - docker build -t producer ./flightdata-kafka-producer

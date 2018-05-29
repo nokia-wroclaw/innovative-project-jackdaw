@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DataValidatorTests {
+public class DataValidatorTest {
 
     private DataValidator dataValidator;
     private String[] validRecord;

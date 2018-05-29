@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-public class FlightDataKafkaProducerTests {
+public class FlightDataKafkaProducerTest {
     @Mock
     private MockProducer<Long, Flight> producer;
     private FlightDataKafkaProducer flightDataProducer;

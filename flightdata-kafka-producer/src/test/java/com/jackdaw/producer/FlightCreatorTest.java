@@ -12,7 +12,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class FlightCreatorTests {
+public class FlightCreatorTest {
 
     private FlightCreator flightCreator;
     private String[] validRecord;
