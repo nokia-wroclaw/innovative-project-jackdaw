@@ -109,7 +109,7 @@ public class JSONSerializer {
         properties.put(TIME, flight.getTime());
         properties.put(STATE_FLIGHT, flight.getFlightSituation().name());
         properties.put(CODE_JUSTIFICATION, flight.getCodeJustification());
-        properties.put(AIRPORT_ORIGIN, flight.getOriginArport());
+        properties.put(AIRPORT_ORIGIN, flight.getOriginAirport());
         properties.put(CITY_ORIGIN, flight.getOriginCity());
         properties.put(STATE_ORIGIN, flight.getOriginState());
         properties.put(COUNTRY_ORIGIN, flight.getOriginCountry());

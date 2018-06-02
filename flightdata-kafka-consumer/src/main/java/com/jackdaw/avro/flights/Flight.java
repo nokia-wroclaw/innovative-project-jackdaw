@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 /** Avro Schema for Flight */
 @org.apache.avro.specific.AvroGenerated
 public class Flight extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2132509877552199120L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flightSymbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"Internacional\",\"Nacional\",\"Regional\"]}},{\"name\":\"timeType\",\"type\":{\"type\":\"enum\",\"name\":\"TimeType\",\"doc\":\"Type of time\",\"symbols\":[\"departureEstimate\",\"departureReal\",\"arrivalEstimate\",\"arrivalReal\"]}},{\"name\":\"time\",\"type\":\"string\",\"doc\":\"date and time of timeType\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originArport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"originCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of arrival\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of arival\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of arival\"},{\"name\":\"destinationLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAltitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of origin point\"}]}");
+  private static final long serialVersionUID = -4385518134550802148L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Flight\",\"namespace\":\"com.jackdaw.avro.flights\",\"doc\":\"Avro Schema for Flight\",\"fields\":[{\"name\":\"flightSymbol\",\"type\":\"string\",\"doc\":\"Symbol of flight\"},{\"name\":\"airline\",\"type\":\"string\",\"doc\":\"Name of airline\"},{\"name\":\"flightType\",\"type\":{\"type\":\"enum\",\"name\":\"FlightType\",\"doc\":\"Type of flight\",\"symbols\":[\"Internacional\",\"Nacional\",\"Regional\"]}},{\"name\":\"timeType\",\"type\":{\"type\":\"enum\",\"name\":\"TimeType\",\"doc\":\"Type of time\",\"symbols\":[\"departureEstimate\",\"departureReal\",\"arrivalEstimate\",\"arrivalReal\"]}},{\"name\":\"time\",\"type\":\"string\",\"doc\":\"date and time of timeType\"},{\"name\":\"flightSituation\",\"type\":{\"type\":\"enum\",\"name\":\"FlightSituation\",\"doc\":\"Indicator of whether this flight was cancelled, or completed\",\"symbols\":[\"Realizado\",\"Cancelado\"]}},{\"name\":\"codeJustification\",\"type\":\"string\",\"doc\":\"Justification code\"},{\"name\":\"originAirport\",\"type\":\"string\",\"doc\":\"Airport of departure\"},{\"name\":\"originCity\",\"type\":\"string\",\"doc\":\"City of departure\"},{\"name\":\"originState\",\"type\":\"string\",\"doc\":\"State of departure\"},{\"name\":\"originCountry\",\"type\":\"string\",\"doc\":\"Country of departure\"},{\"name\":\"destinationAirport\",\"type\":\"string\",\"doc\":\"Airport of arrival\"},{\"name\":\"destinationCity\",\"type\":\"string\",\"doc\":\"City of arrival\"},{\"name\":\"destinationState\",\"type\":\"string\",\"doc\":\"State of arival\"},{\"name\":\"destinationCountry\",\"type\":\"string\",\"doc\":\"Country of arival\"},{\"name\":\"destinationLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of destination point\"},{\"name\":\"destinationLatitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of destination point\"},{\"name\":\"originLongitude\",\"type\":\"double\",\"doc\":\"Longitude coordinate of origin point\"},{\"name\":\"originAltitude\",\"type\":\"double\",\"doc\":\"Latitude coordinate of origin point\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -64,7 +64,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
   /** Justification code */
   @Deprecated public java.lang.CharSequence codeJustification;
   /** Airport of departure */
-  @Deprecated public java.lang.CharSequence originArport;
+  @Deprecated public java.lang.CharSequence originAirport;
   /** City of departure */
   @Deprecated public java.lang.CharSequence originCity;
   /** State of departure */
@@ -104,7 +104,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param time date and time of timeType
    * @param flightSituation The new value for flightSituation
    * @param codeJustification Justification code
-   * @param originArport Airport of departure
+   * @param originAirport Airport of departure
    * @param originCity City of departure
    * @param originState State of departure
    * @param originCountry Country of departure
@@ -117,7 +117,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
    * @param originLongitude Longitude coordinate of origin point
    * @param originAltitude Latitude coordinate of origin point
    */
-  public Flight(java.lang.CharSequence flightSymbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, com.jackdaw.avro.flights.TimeType timeType, java.lang.CharSequence time, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originArport, java.lang.CharSequence originCity, java.lang.CharSequence originState, java.lang.CharSequence originCountry, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Double destinationLongitude, java.lang.Double destinationLatitude, java.lang.Double originLongitude, java.lang.Double originAltitude) {
+  public Flight(java.lang.CharSequence flightSymbol, java.lang.CharSequence airline, com.jackdaw.avro.flights.FlightType flightType, com.jackdaw.avro.flights.TimeType timeType, java.lang.CharSequence time, com.jackdaw.avro.flights.FlightSituation flightSituation, java.lang.CharSequence codeJustification, java.lang.CharSequence originAirport, java.lang.CharSequence originCity, java.lang.CharSequence originState, java.lang.CharSequence originCountry, java.lang.CharSequence destinationAirport, java.lang.CharSequence destinationCity, java.lang.CharSequence destinationState, java.lang.CharSequence destinationCountry, java.lang.Double destinationLongitude, java.lang.Double destinationLatitude, java.lang.Double originLongitude, java.lang.Double originAltitude) {
     this.flightSymbol = flightSymbol;
     this.airline = airline;
     this.flightType = flightType;
@@ -125,7 +125,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     this.time = time;
     this.flightSituation = flightSituation;
     this.codeJustification = codeJustification;
-    this.originArport = originArport;
+    this.originAirport = originAirport;
     this.originCity = originCity;
     this.originState = originState;
     this.originCountry = originCountry;
@@ -150,7 +150,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 4: return time;
     case 5: return flightSituation;
     case 6: return codeJustification;
-    case 7: return originArport;
+    case 7: return originAirport;
     case 8: return originCity;
     case 9: return originState;
     case 10: return originCountry;
@@ -177,7 +177,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     case 4: time = (java.lang.CharSequence)value$; break;
     case 5: flightSituation = (com.jackdaw.avro.flights.FlightSituation)value$; break;
     case 6: codeJustification = (java.lang.CharSequence)value$; break;
-    case 7: originArport = (java.lang.CharSequence)value$; break;
+    case 7: originAirport = (java.lang.CharSequence)value$; break;
     case 8: originCity = (java.lang.CharSequence)value$; break;
     case 9: originState = (java.lang.CharSequence)value$; break;
     case 10: originCountry = (java.lang.CharSequence)value$; break;
@@ -310,20 +310,20 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
   }
 
   /**
-   * Gets the value of the 'originArport' field.
+   * Gets the value of the 'originAirport' field.
    * @return Airport of departure
    */
-  public java.lang.CharSequence getOriginArport() {
-    return originArport;
+  public java.lang.CharSequence getOriginAirport() {
+    return originAirport;
   }
 
   /**
-   * Sets the value of the 'originArport' field.
+   * Sets the value of the 'originAirport' field.
    * Airport of departure
    * @param value the value to set.
    */
-  public void setOriginArport(java.lang.CharSequence value) {
-    this.originArport = value;
+  public void setOriginAirport(java.lang.CharSequence value) {
+    this.originAirport = value;
   }
 
   /**
@@ -557,7 +557,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     /** Justification code */
     private java.lang.CharSequence codeJustification;
     /** Airport of departure */
-    private java.lang.CharSequence originArport;
+    private java.lang.CharSequence originAirport;
     /** City of departure */
     private java.lang.CharSequence originCity;
     /** State of departure */
@@ -620,8 +620,8 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.codeJustification = data().deepCopy(fields()[6].schema(), other.codeJustification);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.originArport)) {
-        this.originArport = data().deepCopy(fields()[7].schema(), other.originArport);
+      if (isValidValue(fields()[7], other.originAirport)) {
+        this.originAirport = data().deepCopy(fields()[7].schema(), other.originAirport);
         fieldSetFlags()[7] = true;
       }
       if (isValidValue(fields()[8], other.originCity)) {
@@ -704,8 +704,8 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         this.codeJustification = data().deepCopy(fields()[6].schema(), other.codeJustification);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.originArport)) {
-        this.originArport = data().deepCopy(fields()[7].schema(), other.originArport);
+      if (isValidValue(fields()[7], other.originAirport)) {
+        this.originAirport = data().deepCopy(fields()[7].schema(), other.originAirport);
         fieldSetFlags()[7] = true;
       }
       if (isValidValue(fields()[8], other.originCity)) {
@@ -1044,44 +1044,44 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
     }
 
     /**
-      * Gets the value of the 'originArport' field.
+      * Gets the value of the 'originAirport' field.
       * Airport of departure
       * @return The value.
       */
-    public java.lang.CharSequence getOriginArport() {
-      return originArport;
+    public java.lang.CharSequence getOriginAirport() {
+      return originAirport;
     }
 
     /**
-      * Sets the value of the 'originArport' field.
+      * Sets the value of the 'originAirport' field.
       * Airport of departure
-      * @param value The value of 'originArport'.
+      * @param value The value of 'originAirport'.
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder setOriginArport(java.lang.CharSequence value) {
+    public com.jackdaw.avro.flights.Flight.Builder setOriginAirport(java.lang.CharSequence value) {
       validate(fields()[7], value);
-      this.originArport = value;
+      this.originAirport = value;
       fieldSetFlags()[7] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'originArport' field has been set.
+      * Checks whether the 'originAirport' field has been set.
       * Airport of departure
-      * @return True if the 'originArport' field has been set, false otherwise.
+      * @return True if the 'originAirport' field has been set, false otherwise.
       */
-    public boolean hasOriginArport() {
+    public boolean hasOriginAirport() {
       return fieldSetFlags()[7];
     }
 
 
     /**
-      * Clears the value of the 'originArport' field.
+      * Clears the value of the 'originAirport' field.
       * Airport of departure
       * @return This builder.
       */
-    public com.jackdaw.avro.flights.Flight.Builder clearOriginArport() {
-      originArport = null;
+    public com.jackdaw.avro.flights.Flight.Builder clearOriginAirport() {
+      originAirport = null;
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -1567,7 +1567,7 @@ public class Flight extends org.apache.avro.specific.SpecificRecordBase implemen
         record.time = fieldSetFlags()[4] ? this.time : (java.lang.CharSequence) defaultValue(fields()[4]);
         record.flightSituation = fieldSetFlags()[5] ? this.flightSituation : (com.jackdaw.avro.flights.FlightSituation) defaultValue(fields()[5]);
         record.codeJustification = fieldSetFlags()[6] ? this.codeJustification : (java.lang.CharSequence) defaultValue(fields()[6]);
-        record.originArport = fieldSetFlags()[7] ? this.originArport : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.originAirport = fieldSetFlags()[7] ? this.originAirport : (java.lang.CharSequence) defaultValue(fields()[7]);
         record.originCity = fieldSetFlags()[8] ? this.originCity : (java.lang.CharSequence) defaultValue(fields()[8]);
         record.originState = fieldSetFlags()[9] ? this.originState : (java.lang.CharSequence) defaultValue(fields()[9]);
         record.originCountry = fieldSetFlags()[10] ? this.originCountry : (java.lang.CharSequence) defaultValue(fields()[10]);

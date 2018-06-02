@@ -51,7 +51,7 @@
             "doc": "Justification code"
         },
          {
-            "name": "originArport",
+            "name": "originAirport",
             "type": "string",
             "doc": "Airport of departure"
         },
