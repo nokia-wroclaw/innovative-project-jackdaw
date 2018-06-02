@@ -40,7 +40,7 @@ This project consist of three main modules:
 
 ## 4. Installation
 ### Preperaing Docker environment
-First you have to have Docker installed on your system - https://docs.docker.com/install/
+First you have to have Docker installed on your system - https://docs.docker.com/install  
 Then run docker or create and start docker machine.
 
 ### Clone repository
@@ -58,9 +58,9 @@ or
 ```
 ./run.sh
 ```
-All needed dependencies will be installed automatically through docker-compose.
+All needed dependencies will be installed automatically with docker-compose.
 
-## Stop
+### Stop
 ```
 docker-compose down
 ```
@@ -73,7 +73,7 @@ or in order to clear Jackdaw images:
 
 If everything went right you can access:
 * map visualization at localhost:3001
-* pie charts visualization at localhost:3000
+* chats visualization at localhost:3000
 
 
 ## 5. Contributing
