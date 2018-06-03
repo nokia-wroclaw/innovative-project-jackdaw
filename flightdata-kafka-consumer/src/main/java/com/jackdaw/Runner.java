@@ -26,9 +26,10 @@ public class Runner {
         kafkaConsumer.subscribe(Collections.singletonList(topicProperties.get("sourceTopicName").toString()));
 
         KafkaProducer<Long, String> kafkaProducer = new KafkaProducer<>(schemaProps);
-        GeoJSONKafkaProducer geojsonProducer = new GeoJSONKafkaProducer(kafkaProducer,
-                new JSONSerializer(),
-                topicProperties.get("destinationTopicName").toString());
+        GeoJSONKafkaProducer geojsonProducer =
+            new GeoJSONKafkaProducer(kafkaProducer,
+                                     new JSONSerializer(),
+                                     topicProperties.get("destinationTopicName").toString());
 
         FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(kafkaConsumer, geojsonProducer);
         consumer.run();
