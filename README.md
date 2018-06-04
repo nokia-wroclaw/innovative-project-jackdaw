@@ -12,7 +12,7 @@
 
 
 ## 1. Project goals
-The goal is to create PoC for platform for streaming calculation using Kafka and Docker in microservices architecture. This platform will allow to perform Big Data Calculation in Streaming mode. For the final product a web application responsible for data visualization will be created.
+The goal is to create PoC for platform performing streaming calculation using Kafka and Docker in microservices architecture. This platform will allow to perform Big Data Calculation in Streaming mode. For the final product a web application responsible for data visualization will be created.
 
 We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) representing flights from and to Brasil as an example.
 
@@ -32,14 +32,14 @@ We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) repre
 
 
 ## 3. Functionality of modules
-This project consist of three main modules:
+This project consists of three main modules:
 * Producer
    * reads data from file
    * sends messages using `KafkaAvroSerializer` to the `FlightData` topic on Kafka
 * Consumer
    * reads data from `FlightData` topic
    * uses `KafkaAvroDeserializer`
-   * then converts data into a geoJSON
+   * converts data into a geoJSON
    * sends it to `Visualization` topic on Kafka
 * Visualization
    * consumer - reads data from `Visualization` topic and constantly sends data with socket
@@ -55,8 +55,8 @@ Docker-compose allows to build and run all the services together.
 This solution provides containers with all required dependencies installed.
 
 ## 4. Installation
-### Prepering Docker environment
-First you have to have [Docker installed on your system](https://docs.docker.com/install)   
+### Preparing Docker environment
+First you need to have [Docker installed on your system](https://docs.docker.com/install)   
 Then run docker or create and start docker machine.
 
 ### Clone repository
