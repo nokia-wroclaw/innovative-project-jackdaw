@@ -1,0 +1,10 @@
+version: '3'
+services:
+  slideshow:
+    image: danidemi/docker-reveal.js
+    volumes:
+      - ./slideshow:/slides:ro
+    ports:
+      - "8000:8000"
+    container_name: "jackdaw_presentation"
+    restart: "unless-stopped"

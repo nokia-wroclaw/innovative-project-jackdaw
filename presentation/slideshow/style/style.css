@@ -1,0 +1,63 @@
+body
+{
+    background-color: rgb(18,65,145);
+}
+
+.reveal
+{
+    background-color: rgb(18,65,145);
+}
+
+
+.reveal .slides {
+    /*bottom: unset;*/
+    bottom: 10%;
+}
+
+.reveal .controls div.navigate-right.enabled {
+    border-left-color: rgb(255,255,255);
+}
+
+.reveal .controls div.navigate-left.enabled {
+    border-right-color: rgb(255,255,255);
+}
+
+.reveal .controls div.navigate-up.enabled {
+    border-bottom-color: rgb(255,255,255);
+}
+
+.reveal .controls div.navigate-down.enabled {
+    border-top-color: rgb(255,255,255);
+}
+
+.reveal .slide-number {
+    color: rgb(255,255,255);
+}
+
+.reveal .progress span {
+    background: rgb(255,255,255);
+}
+
+a:link,
+a:hover,
+a:active,
+a:visited
+{
+  color: white;
+}
+
+.reveal pre code {
+    font-size: 1.2em;
+    line-height: 1.2;
+    max-height: 800px;
+    background: rgb(255,255,255);
+    color:rgb(18,65,145);
+}
+
+#LogoCompany {
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    width: 200px;
+    height: 100px;
+}

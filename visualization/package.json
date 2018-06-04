@@ -4,8 +4,11 @@
   "main": "app.js",
   "description": "Brazilian flights visualization",
   "dependencies": {
+    "avsc": "^5.2.3",
     "express": "^4.16.3",
     "kafka-node": "^2.6.1",
+    "node-zookeeper-client": "^0.2.2",
+    "npm": "^6.1.0",
     "optimist": "^0.6.1",
     "socket.io": "^2.1.1"
   },
