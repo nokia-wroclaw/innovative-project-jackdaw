@@ -19,6 +19,7 @@ We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) repre
 
 ## 2. Technologies
   * Java
+    * [Maven](http://maven.apache.org)
   * [Docker](https://www.docker.com)
   * JavaScript
     * [Leaflet](https://leafletjs.com)
@@ -27,7 +28,6 @@ We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) repre
     * [node.js](https://nodejs.org)
   * [Kafka](https://kafka.apache.org)
     * [Confluent Schemat Registry](https://docs.confluent.io)
-  * [Maven](http://maven.apache.org)
   * [Travis Cl](https://travis-ci.org)
 
 
