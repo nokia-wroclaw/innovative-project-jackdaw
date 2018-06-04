@@ -57,6 +57,14 @@ to the `FlightData` topic on Kafka
 
 -----------
 
+![column chart](image/column_chart.png)
+
+-----------
+
+![pie chart](image/pie_chart.png)
+
+-----------
+
 Every module has its definied environment – a seperate docker image defined in Dockerfile, which creates container. 
 
 -----------
