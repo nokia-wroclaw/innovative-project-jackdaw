@@ -18,16 +18,16 @@ We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) repre
 
 
 ## 2. Technologies
-  * Java
-    * [Maven](http://maven.apache.org)
   * [Docker](https://www.docker.com)
+  * [Kafka](https://kafka.apache.org)
+    * [Confluent Schemat Registry](https://docs.confluent.io)
+  * Java 8
   * JavaScript
     * [Leaflet](https://leafletjs.com)
     * [jQuery](https://jquery.com)
     * [socket.io](https://socket.io)
     * [node.js](https://nodejs.org)
-  * [Kafka](https://kafka.apache.org)
-    * [Confluent Schemat Registry](https://docs.confluent.io)
+  * [Maven](http://maven.apache.org)
   * [Travis Cl](https://travis-ci.org)
 
 
@@ -35,7 +35,7 @@ We used a [dataset](https://www.kaggle.com/ramirobentes/flights-in-brazil) repre
 This project consists of three main modules:
 * Producer
    * reads data from file
-   * sends messages using `KafkaAvroSerializer` to the `FlightData` topic on Kafka
+   * sends messages serialized by `KafkaAvroSerializer` to the `FlightData` topic on Kafka
 * Consumer
    * reads data from `FlightData` topic
    * uses `KafkaAvroDeserializer`
@@ -61,9 +61,9 @@ Then run docker or create and start docker machine.
 
 ### Clone repository
 Open a command prompt and use the following commands to clone repository and navigate to project directory:
-```
-git clone https://github.com/nokia-wroclaw/innovative-project-jackdaw.git
-cd innovative-project-jackdaw
+```bash
+$ git clone https://github.com/nokia-wroclaw/innovative-project-jackdaw.git
+$ cd innovative-project-jackdaw
 ```
 ### Run
 Run docker-compose
