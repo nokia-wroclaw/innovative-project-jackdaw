@@ -2,7 +2,7 @@
 
 -----------
 
-### Project consist of 3 components
+### Project consists of 3 components
 
 * Producer
 
@@ -27,7 +27,7 @@ to the `FlightData` topic on Kafka
 
 * uses `KafkaAvroDeserializer`
 
-* then converts data into a GeoJSON
+* converts data into a GeoJSON
 
 * sends it to `Visualizaion` topic on Kafka
 
@@ -36,18 +36,18 @@ to the `FlightData` topic on Kafka
 ## Visualization
 
 * **consumer** - reads data from `Visualization` topic
- and sends data to browser with socket
+ and sends data to browser through socket
    
 * **flight visualization** - recives data from socket
  and provides live visualization on map
 
 -----------
 
-![flights map](images/map_screen.png)
+![flights map](image/map_screen.png)
 
 -----------
 
-![flights details](images/map_details_screen.png)
+![flights details](image/map_details_screen.png)
 
 -----------
 
@@ -57,7 +57,7 @@ to the `FlightData` topic on Kafka
 
 -----------
 
-Every module has its definied environment - a seperate docker image defined with Dockerfile, which creates container. 
+Every module has its definied environment – a seperate docker image defined in Dockerfile, which creates container. 
 
 -----------
 

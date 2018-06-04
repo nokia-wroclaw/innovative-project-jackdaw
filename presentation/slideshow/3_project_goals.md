@@ -2,7 +2,7 @@
 
 ---------
 
-The goal is to create PoC of a platform for streaming calculation using **Kafka** and **Docker** in microservices architecture. 
+The goal is to create PoC for platform performing streaming calculation using **Kafka** and **Docker** in microservices architecture. 
 
 ---------
 

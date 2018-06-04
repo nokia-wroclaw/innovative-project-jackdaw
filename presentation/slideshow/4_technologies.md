@@ -2,21 +2,22 @@
 
 ----------
 
-  * Java 8
+* Java 8
 
-  * Docker
+* Docker
 
-  * JavaScript
+* JavaScript
 
-  	* [Leaflet](https://leafletjs.com)
-  	* [jQuery](https://jquery.com)
-  	* [socket.io](https://socket.io)
-    * [node.js](https://nodejs.org)
+   * [Leaflet](https://leafletjs.com)
+   * [jQuery](https://jquery.com)
+   * [socket.io](https://socket.io)
+   * [node.js](https://nodejs.org)
   
-  * Kafka
-  	* [Confluent Schemat Registry](https://docs.confluent.io)
+* Kafka
+   
+   * [Confluent Schema Registry](https://docs.confluent.io)
 
-  * [Maven](http://maven.apache.org)
+* [Maven](http://maven.apache.org)
  
-  * [Travis Cl](https://travis-ci.org)
+* [Travis Cl](https://travis-ci.org)
   	
