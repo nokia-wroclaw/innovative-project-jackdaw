@@ -1,9 +1,11 @@
+// Add new data on click – test
+// todo delete as a real data-source come into existence
 const dataPoints = [
-    {y: 10, label: "Example flight"},
-    {y: 5.4, label: "Another flight"},
-    {y: 0.84, label: "Hello flight"},
-    {y: 3.14, label: "Nice to meet you, flight"},
-    {y: 4.76, label: "Why so late, flight?"}
+    {y: 10, label: "AZUL"},
+    {y: 5.4, label: "GOL"},
+    {y: 0.84, label: "UNITED AIRLINES"},
+    {y: 3.14, label: "KOREAN AIRLINES"},
+    {y: 4.76, label: "KLM ROYAL DUTCH AIRLINES"}
 ];
 
 const pieChart = new CanvasJS.Chart("pie", {
@@ -51,7 +53,7 @@ window.onload = function () {
 // ------
 // Add new data on click – test
 // todo delete as a real data-source come into existence
-let message = "{ \"key\": \"1\", \"value\": [ \"1.34\", \"I'm new\" ] }";
+let message = "{ \"key\": \"1\", \"value\": [ \"1.34\", \"DELTA AIRLINES\" ] }";
 
 window.onclick = function () {
     let data = JSON.parse(message);

@@ -32,7 +32,7 @@ consumer.on('message', function (message) {
 // ------
 // todo delete as a real data-source come into existence
 setInterval(function () {
-    let message = "{ \"key\": \"1\", \"value\": [ \"0.55\", \"From customer\" ] }";
+    let message = "{ \"key\": \"1\", \"value\": [ \"0.55\", \"AVIANCA\" ] }";
     console.log("Sending: " + JSON.parse(message).value);
     io.sockets.emit('delay', message);
 }, 2000);
