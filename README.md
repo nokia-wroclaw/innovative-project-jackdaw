@@ -19,6 +19,7 @@ As an example of dataset we used one that represents Flights in Brasil from www.
 
 ## 2. Technologies
   * Java
+    * [Maven](http://maven.apache.org)
   * [Docker](https://www.docker.com)
   * JavaScript
     * [Leaflet](https://leafletjs.com)
@@ -27,7 +28,6 @@ As an example of dataset we used one that represents Flights in Brasil from www.
     * [node.js](https://nodejs.org)
   * [Kafka](https://kafka.apache.org)
     * [Confluent Schemat Registry](https://docs.confluent.io)
-  * [Maven](http://maven.apache.org)
   * [Travis Cl](https://travis-ci.org)
 
 
@@ -77,11 +77,11 @@ or in order to clear Jackdaw images:
 If everything went right you can access map visualization at localhost:3001
 
 <p align="center">
-  <img src="figures/map_screen.png" alt="Brazilian Flights map" height="250px">
+  <img src="figures/map_screen.png" alt="Brazilian Flights map" height="500px">
 </p>
 
 <p align="center">
-  <img src="figures/map_details_screen.png" alt="Brazilian Flight's details" height="250px">
+  <img src="figures/map_details_screen.png" alt="Brazilian Flight's details" height="500px">
 </p>
 
 
