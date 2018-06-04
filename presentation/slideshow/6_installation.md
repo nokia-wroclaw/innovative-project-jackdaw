@@ -4,13 +4,13 @@
 
 ## Preparing Docker environment
 
-First you have to have [Docker](https://docs.docker.com/install) installed on your system.  
+First you need to have [Docker](https://docs.docker.com/install) installed on your system.  
 
 Then run docker or create and start docker machine.
 
 --------------
 
-## Clone repository
+## Clone the repository
 
 Open a command prompt and use the following commands to clone repository and navigate to project directory:
 
