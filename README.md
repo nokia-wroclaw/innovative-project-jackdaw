@@ -42,7 +42,7 @@ This project consist of three main modules:
    * then converts data into a geoJSON
    * sends it to `Visualization` topic on Kafka
 * Visualization
-   * consumer - reads data from 'Visualization' topic and constantly sends data with socket
+   * consumer - reads data from `Visualization` topic and constantly sends data with socket
    * flight visualization - recives data with socket and provides live visualization on map
 
 ![Brazilian Flights map](figures/map_screen.png)
@@ -67,23 +67,23 @@ cd innovative-project-jackdaw
 ```
 ### Run
 Run docker-compose
-```
-docker-compose up
+```bash
+$ docker-compose up
 ```
 or 
-```
-./run.sh
+```bash
+$ ./run.sh
 ```
 
 ### Stop
-```
-docker-compose down
+```bash
+$ docker-compose down
 ```
 
 or in order to clear Jackdaw images:
 
-```
-./clear.sh
+```bash
+$ ./clear.sh
 ```
 
 If everything went right, you should be able to access the visualization at localhost:3001.
