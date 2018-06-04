@@ -19,13 +19,16 @@ As an example of dataset we used one that represents Flights in Brasil from www.
 
 ## 2. Technologies
   * Java
-  * Docker
+  * [Docker](https://www.docker.com)
   * JavaScript
-  	* Leaflet - https://leafletjs.com
-  	* jQuery - https://jquery.com
-  	* socket.io - https://socket.io
-  * Kafka
-  	* Confluent Schemat Registry - https://docs.confluent.io
+    * [Leaflet](https://leafletjs.com)
+    * [jQuery](https://jquery.com)
+    * [socket.io](https://socket.io)
+    * [node.js](https://nodejs.org)
+  * [Kafka](https://kafka.apache.org)
+    * [Confluent Schemat Registry](https://docs.confluent.io)
+  * [Maven](http://maven.apache.org)
+  * [Travis Cl](https://travis-ci.org)
 
 
 ## 3. Functionality of modules
@@ -35,12 +38,13 @@ This project consist of three main modules:
 * Visualization
 	* consumer - reads data from 'Visualization' topic and constantly sends data with socket
 	* flight visualization - recives data with socket and provides live visualization on map
-* Charts - visualizes flights' delay for airlines
 
+Every module has definied its environment - an seperated docker image defined by Dockerfile, which generates container. Docker-compose allows to build and run all of the services (containters) together.
+This solution provides containers with all required dependencies installed.
 
 ## 4. Installation
 ### Preperaing Docker environment
-First you have to have Docker installed on your system - https://docs.docker.com/install  
+First you have to have [Docker installed on your system](https://docs.docker.com/install)   
 Then run docker or create and start docker machine.
 
 ### Clone repository
@@ -58,7 +62,6 @@ or
 ```
 ./run.sh
 ```
-All needed dependencies will be installed automatically with docker-compose.
 
 ### Stop
 ```
@@ -71,9 +74,11 @@ or in order to clear Jackdaw images:
 ./clear.sh
 ```
 
-If everything went right you can access:
-* map visualization at localhost:3001
-* chats visualization at localhost:3000
+If everything went right you can access map visualization at localhost:3001
+
+<p align="center">
+  <img src="" alt="Brazilian Flights map" height="250px">
+</p>
 
 
 ## 5. Contributing
