@@ -77,7 +77,11 @@ or in order to clear Jackdaw images:
 If everything went right you can access map visualization at localhost:3001
 
 <p align="center">
-  <img src="" alt="Brazilian Flights map" height="250px">
+  <img src="figures/map_screen.png" alt="Brazilian Flights map" height="250px">
+</p>
+
+<p align="center">
+  <img src="figures/map_details_screen.png" alt="Brazilian Flight's details" height="250px">
 </p>
 
 
