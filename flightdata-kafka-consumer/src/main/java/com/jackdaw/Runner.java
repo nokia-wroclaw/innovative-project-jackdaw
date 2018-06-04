@@ -23,13 +23,13 @@ public class Runner {
         schemaProps.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
 
         KafkaConsumer<Long, Flight> kafkaConsumer = new KafkaConsumer<>(schemaProps);
-        kafkaConsumer.subscribe(Collections.singletonList(topicProperties.get("sourceTopicName").toString()));
+        kafkaConsumer.subscribe(Collections.singletonList(topicProperties.getProperty("sourceTopicName")));
 
         KafkaProducer<Long, String> kafkaProducer = new KafkaProducer<>(schemaProps);
         GeoJSONKafkaProducer geojsonProducer =
             new GeoJSONKafkaProducer(kafkaProducer,
                                      new JSONSerializer(),
-                                     topicProperties.get("destinationTopicName").toString());
+                                     topicProperties.getProperty("destinationTopicName"));
 
         FlightDataKafkaConsumer consumer = new FlightDataKafkaConsumer(kafkaConsumer, geojsonProducer);
         consumer.run();
