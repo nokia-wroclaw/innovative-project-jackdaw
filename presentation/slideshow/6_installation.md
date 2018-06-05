@@ -1,10 +1,12 @@
 # Installation
 
+![sweet whale](image/docker.png)
+
 --------------
 
 ## Preparing Docker environment
 
-First you need to have [Docker](https://docs.docker.com/install) installed on your system.  
+First you need to have [Docker](https://docs.docker.com/install) installed on your system.
 
 Then run docker or create and start docker machine.
 

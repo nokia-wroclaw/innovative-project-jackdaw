@@ -8,10 +8,9 @@ body
     background-color: rgb(18,65,145);
 }
 
-
 .reveal .slides {
-    /*bottom: unset;*/
-    bottom: 10%;
+    bottom: unset;
+    /*bottom: 10%;*/
 }
 
 .reveal .controls div.navigate-right.enabled {
@@ -49,7 +48,7 @@ a:visited
 .reveal pre code {
     font-size: 1.2em;
     line-height: 1.2;
-    max-height: 800px;
+    max-height: 900px;
     background: rgb(255,255,255);
     color:rgb(18,65,145);
 }
@@ -58,6 +57,6 @@ a:visited
     position: absolute;
     bottom: 0px;
     left: 20px;
-    width: 200px;
-    height: 100px;
+    width: 150px;
+    height: 75px;
 }
