@@ -16,7 +16,7 @@
 
 * reads data from file
 
-* sends messages using `KafkaAvroSerializer` 
+* sends messages serialized by  `KafkaAvroSerializer` 
 to the `FlightData` topic on Kafka
 
 -----------
