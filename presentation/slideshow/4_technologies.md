@@ -24,9 +24,9 @@
    * [node.js](https://nodejs.org)
 
 ----------
-  
+
 ## Apache Kafka
-   
+ 
 ![kafka](image/kafka.png)
 
 * [Confluent Schema Registry](https://docs.confluent.io)

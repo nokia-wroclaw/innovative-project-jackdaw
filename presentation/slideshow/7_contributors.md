@@ -1,4 +1,4 @@
-# Contributing
+# Contributors
 
 ---------
 
@@ -23,5 +23,3 @@ Nokia Supervisors:
 * Dawid Rutowicz
 
 * Damian Czaja
-
-* Ewa Kaczmarek

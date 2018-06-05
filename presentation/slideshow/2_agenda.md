@@ -10,4 +10,4 @@
 
 4. Installation
 
-5. Contributing
+5. Contributors
