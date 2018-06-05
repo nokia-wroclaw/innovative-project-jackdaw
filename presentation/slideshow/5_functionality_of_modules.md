@@ -35,11 +35,13 @@ to the `FlightData` topic on Kafka
 
 ## Visualization
 
-* **consumer** - reads data from `Visualization` topic
- and sends data to browser through socket
+* **consumer**
+   * reads data from `Visualization` topic
+   * sends data to browser through socket
 
-* **flight visualization** - receives data from socket
- and provides live visualization on map
+* **flight visualization**
+   * reads data from socket
+   * provides live visualization on map
 
 -----------
 

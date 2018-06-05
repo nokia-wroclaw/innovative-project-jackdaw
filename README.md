@@ -59,8 +59,13 @@ This project consists of three main modules:
    * sends it to `Visualization` topic on Kafka
 
 * Visualization
-   * **consumer** - reads data from `Visualization` topic and constantly sends data with socket
-   * **flight visualization** - receives data with socket and provides live visualization on map
+   * **consumer**
+      * reads data from `Visualization` topic
+      * sends data to browser through socket
+
+   * **flight visualization**
+      * reads data from socket
+      * provides live visualization on map
 
 ![Brazilian flights map](figures/map_screen.png)
 
