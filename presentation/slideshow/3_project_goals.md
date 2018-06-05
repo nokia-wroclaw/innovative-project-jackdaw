@@ -6,7 +6,7 @@ The goal was to create PoC for platform performing streaming calculation using *
 
 ---------
 
-This platform allow to perform Big Data Calculation in Streaming mode. 
+This platform allows to perform Big Data Calculation in Streaming mode. 
 
 For the final product a web application responsible for data visualization has been created.
 
