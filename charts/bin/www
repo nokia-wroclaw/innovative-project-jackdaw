@@ -29,14 +29,26 @@ consumer.on('message', function (message) {
     io.sockets.emit('delay', message);
 });
 
-// ------
-// todo delete as a real data-source come into existence
+/**
+ * Mocking data from KSQL.
+ *
+ * Every 2 seconds one of the of airlines from `labels` delay in range [0.1, 10.1] min is sent to charts.
+ */
+const labels = ["AEROLINEAS ARGENTINAS", "AIR CANADA", "AIR CHINA", "AIR EUROPA S/A", "AIR FRANCE", "AIR ITALY SPA",
+    "AIRES - LAN COLOMBIA", "ALITALIA", "AMERICAN AIRLINES INC", "AUSTRAL LINEAS AEREAS CIELOS DEL SUR S.A",
+    "AVIANCA", "AZUL", "BOLIVIANA DE AVIACION", "BRITISH AIRWAYS PLC", "CONDOR FLUGDINST",
+    "COPA -COMPANIA PANAMENA DE AVIACION", "DELTA AIRLINES", "EMIRATES", "ETHIOPIAN", "ETIHAD", "GOL", "IBERIA",
+    "INSELAIR", "KLM ROYAL DUTCH AIRLINES", "KOREAN AIRLINES", "LAN ARGENTINA S/A", "LUFTHANSA", "MAP LINHAS AEREAS",
+    "MERIDIANA", "PASSAREDO", "ROYAL AIR MAROC", "SETE", "SINGAPORE AIRLINES", "SOUTH _FRICAN AIRWAYS",
+    "SURINAM AIRWAYS", "TAAG LINHAS AEREAS DE ANGOLA", "TAM", "UNITED AIRLINES", "US AIRWAYS INC."];
+
 setInterval(function () {
-    let message = "{ \"key\": \"1\", \"value\": [ \"0.55\", \"AVIANCA\" ] }";
+    let delay = Math.round((Math.random() * 1000)) / 100 + 0.1;
+    let label = labels[Math.floor(Math.random() * labels.length)];
+    let message = `{ \"key\": \"1\", \"value\": [ \"${delay}", \"${label}\" ] }`;
     console.log("Sending: " + JSON.parse(message).value);
     io.sockets.emit('delay', message);
 }, 2000);
-// ------
 
 /**
  * Listen on provided port, on all network interfaces.
