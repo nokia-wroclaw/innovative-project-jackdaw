@@ -32,7 +32,7 @@ consumer.on('message', function (message) {
 /**
  * Mocking data from KSQL.
  *
- * Every 2 seconds one of the of airlines from `labels` delay in range [0.1, 10.1] min is sent to charts.
+ * Every 3 seconds one of the of airlines from `labels` delay in range [0.1, 10.1] min is sent to charts.
  */
 const labels = ["AEROLINEAS ARGENTINAS", "AIR CANADA", "AIR CHINA", "AIR EUROPA S/A", "AIR FRANCE", "AIR ITALY SPA",
     "AIRES - LAN COLOMBIA", "ALITALIA", "AMERICAN AIRLINES INC", "AUSTRAL LINEAS AEREAS CIELOS DEL SUR S.A",
@@ -48,7 +48,7 @@ setInterval(function () {
     let message = `{ \"key\": \"1\", \"value\": [ \"${delay}", \"${label}\" ] }`;
     console.log("Sending: " + JSON.parse(message).value);
     io.sockets.emit('delay', message);
-}, 2000);
+}, 3000);
 
 /**
  * Listen on provided port, on all network interfaces.

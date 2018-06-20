@@ -42,17 +42,6 @@ window.onload = function () {
     barChart.render();
 };
 
-// ------
-// Add new data on click – test
-// todo delete as a real data-source come into existence
-// let message = "{ \"key\": \"1\", \"value\": [ \"1.34\", \"DELTA AIRLINES\" ] }";
-//
-// window.onclick = function () {
-//     let data = JSON.parse(message);
-//     updateChart(data);
-// };
-// ------
-
 (function receiveMessage() {
     const socket = io.connect('http://0.0.0.0:3000', {transports: ['websocket', 'flashsocket']});
     socket.on('delay', function (message) {
